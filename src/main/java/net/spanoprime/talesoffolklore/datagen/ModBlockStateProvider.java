@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
@@ -18,6 +19,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(ModBlocks.VIRGINIA_PINE_PLANKS);
+        blockWithItem(ModBlocks.VIRGINIA_PINE_STAIRS);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject)

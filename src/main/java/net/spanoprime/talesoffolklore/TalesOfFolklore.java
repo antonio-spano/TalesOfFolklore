@@ -65,6 +65,7 @@ public class TalesOfFolklore
         if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
         {
             event.accept(ModBlocks.VIRGINIA_PINE_PLANKS);
+            event.accept(ModBlocks.VIRGINIA_PINE_STAIRS);
         }
     }
 

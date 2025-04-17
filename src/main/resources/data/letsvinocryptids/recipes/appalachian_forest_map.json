@@ -7,14 +7,14 @@
   ],
   "key": {
     "A": {
-      "item": "letsvinocryptids:appalachian_map_piece"
+      "item": "talesoffolklore:appalachian_map_piece"
     },
     "B": {
-      "item": "letsvinocryptids:tales_of_folklore"
+      "item": "talesoffolklore:tales_of_folklore"
     }
   },
   "result": {
-    "item": "letsvinocryptids:appalachian_forest_map",
+    "item": "talesoffolklore:appalachian_forest_map",
     "count": 1
   }
 }

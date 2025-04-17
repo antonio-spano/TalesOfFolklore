@@ -1,6 +1,5 @@
-package net.spanoprime.letsvinocryptids.block;
+package net.spanoprime.talesoffolklore.block;
 
-import com.google.common.eventbus.EventBus;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -10,14 +9,14 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.spanoprime.letsvinocryptids.LetsVinoCryptids;
-import net.spanoprime.letsvinocryptids.item.ModItems;
+import net.spanoprime.talesoffolklore.TalesOfFolklore;
+import net.spanoprime.talesoffolklore.item.ModItems;
 
 import java.util.function.Supplier;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
-            DeferredRegister.create(ForgeRegistries.BLOCKS, LetsVinoCryptids.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.BLOCKS, TalesOfFolklore.MOD_ID);
 
     public static final RegistryObject<Block> VIRGINIA_PINE_PLANKS = registerBlock("virginia_pine_planks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));

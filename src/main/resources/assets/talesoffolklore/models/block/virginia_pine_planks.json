@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "letsvinocryptids:block/virginia_pine_planks"
+    "all": "talesoffolklore:block/virginia_pine_planks"
   }
 }

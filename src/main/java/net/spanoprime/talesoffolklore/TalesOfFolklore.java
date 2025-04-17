@@ -1,7 +1,6 @@
-package net.spanoprime.letsvinocryptids;
+package net.spanoprime.talesoffolklore;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -14,20 +13,20 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.spanoprime.letsvinocryptids.block.ModBlocks;
-import net.spanoprime.letsvinocryptids.item.ModItems;
+import net.spanoprime.talesoffolklore.block.ModBlocks;
+import net.spanoprime.talesoffolklore.item.ModItems;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(LetsVinoCryptids.MOD_ID)
-public class LetsVinoCryptids
+@Mod(TalesOfFolklore.MOD_ID)
+public class TalesOfFolklore
 {
     // Define mod id in a common place for everything to reference
-    public static final String MOD_ID = "letsvinocryptids";
+    public static final String MOD_ID = "talesoffolklore";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public LetsVinoCryptids(FMLJavaModLoadingContext context)
+    public TalesOfFolklore(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();
 

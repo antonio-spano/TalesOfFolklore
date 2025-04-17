@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right",
+  "textures": {
+    "bottom": "talesoffolklore:block/virginia_pine_door_bottom",
+    "top": "talesoffolklore:block/virginia_pine_door_top"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "talesoffolklore:block/virginia_pine_planks",
+    "side": "talesoffolklore:block/virginia_pine_planks",
+    "top": "talesoffolklore:block/virginia_pine_planks"
+  }
+}

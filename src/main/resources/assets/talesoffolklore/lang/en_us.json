@@ -6,5 +6,9 @@
   "block.talesoffolklore.virginia_pine_planks": "Virginia Pine Planks",
   "block.talesoffolklore.virginia_pine_stairs": "Virginia Pine Stairs",
   "item.talesoffolklore.tales_of_folklore": "Tales Of Folklore",
-  "item.talesoffolklore.tales_of_folklore_r": "Tales Of Folklore COPY"
+  "item.talesoffolklore.tales_of_folklore_r": "Tales Of Folklore",
+  "block.talesoffolklore.virginia_pine_door": "Virginia Pine Door",
+  "block.talesoffolklore.virginia_pine_trapdoor": "Virginia Pine Trapdoor",
+  "block.talesoffolklore.virginia_pine_slab": "Virginia Pine Slab",
+  "block.talesoffolklore.virginia_pine_fence": "Virginia Pine Fence"
 }

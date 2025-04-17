@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "talesoffolklore:block/virginia_pine_slab"
+    },
+    "type=double": {
+      "model": "talesoffolklore:block/virginia_pine_planks"
+    },
+    "type=top": {
+      "model": "talesoffolklore:block/virginia_pine_slab_top"
+    }
+  }
+}

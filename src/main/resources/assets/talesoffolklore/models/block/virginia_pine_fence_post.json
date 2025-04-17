@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "talesoffolklore:block/virginia_pine_planks"
+  }
+}

@@ -1,6 +1,8 @@
 package net.spanoprime.talesoffolklore;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -66,6 +68,12 @@ public class TalesOfFolklore
         {
             event.accept(ModBlocks.VIRGINIA_PINE_PLANKS);
             event.accept(ModBlocks.VIRGINIA_PINE_STAIRS);
+            event.accept(ModBlocks.VIRGINIA_PINE_DOOR);
+            event.accept(ModBlocks.VIRGINIA_PINE_TRAPDOOR);
+            event.accept(ModBlocks.VIRGINIA_PINE_SLAB);
+            event.accept(ModBlocks.VIRGINIA_PINE_FENCE);
+            //event.accept(ModBlocks.VIRGINIA_PINE_FENCE_GATE);
+            //event.accept(ModBlocks.VIRGINIA_PINE_BUTTON);
         }
     }
 
@@ -82,6 +90,9 @@ public class TalesOfFolklore
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            event.enqueueWork(() -> {
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.VIRGINIA_PINE_DOOR.get(), RenderType.cutout());
+            });
         }
     }
 }

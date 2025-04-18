@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "talesoffolklore:block/stripped_virginia_pine_log_top",
+    "side": "talesoffolklore:block/stripped_virginia_pine_log"
+  }
+}

@@ -88,9 +88,13 @@ public class TalesOfFolklore
             event.accept(ModBlocks.VIRGINIA_PINE_FENCE_GATE);
             event.accept(ModBlocks.VIRGINIA_PINE_BUTTON);
             event.accept(ModBlocks.VIRGINIA_PINE_PRESSURE_PLATE);
-            //event.accept(ModBlocks.VIRGINIA_PINE_BOAT);
             event.accept(ModBlocks.VIRGINIA_PINE_SIGN);
             event.accept(ModBlocks.VIRGINIA_PINE_HANGING_SIGN);
+            event.accept(ModBlocks.VIRGINIA_PINE_LOG);
+            event.accept(ModBlocks.VIRGINIA_PINE_WOOD);
+            event.accept(ModBlocks.VIRGINIA_PINE_LEAVES);
+            event.accept(ModBlocks.STRIPPED_VIRGINIA_PINE_WOOD);
+            event.accept(ModBlocks.STRIPPED_VIRGINIA_PINE_LOG);
         }
     }
 

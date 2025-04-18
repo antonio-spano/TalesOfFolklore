@@ -8,6 +8,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockCollisions;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -66,14 +67,6 @@ public class ModBlocks {
                     BlockBehaviour.Properties.copy(Blocks.ACACIA_PRESSURE_PLATE),
                     BlockSetType.ACACIA));
 
-    /*public static final RegistryObject<Block> VIRGINIA_PINE_SIGN = registerBlock("virginia_pine_sign",
-            () -> new SignBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_SIGN), WoodType.ACACIA) {
-                @Override
-                public float getYRotationDegrees(BlockState pState) {
-                    return 0;
-                }
-            }); */
-
     public static final RegistryObject<Block> VIRGINIA_PINE_SIGN = BLOCKS.register("virginia_pine_sign",
             () -> new ModStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_SIGN), ModWoodTypes.VIRGINIA_PINE));
 
@@ -86,7 +79,20 @@ public class ModBlocks {
     public static final RegistryObject<Block> VIRGINIA_PINE_WALL_HANGING_SIGN = BLOCKS.register("virginia_pine_wall_hanging_sign",
             () -> new ModWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_WALL_HANGING_SIGN), ModWoodTypes.VIRGINIA_PINE));
 
+    public static final RegistryObject<Block> VIRGINIA_PINE_LEAVES = registerBlock("virginia_pine_leaves",
+            () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_LEAVES)));
 
+    public static final RegistryObject<Block> VIRGINIA_PINE_LOG = registerBlock("virginia_pine_log",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_LOG)));
+
+    public static final RegistryObject<Block> VIRGINIA_PINE_WOOD = registerBlock("virginia_pine_wood",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_WOOD)));
+
+    public static final RegistryObject<Block> STRIPPED_VIRGINIA_PINE_WOOD = registerBlock("stripped_virginia_pine_wood",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_ACACIA_WOOD)));
+
+    public static final RegistryObject<Block> STRIPPED_VIRGINIA_PINE_LOG = registerBlock("stripped_virginia_pine_log",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_ACACIA_LOG)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {

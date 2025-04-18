@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "talesoffolklore:block/virginia_pine_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "talesoffolklore:block/virginia_pine_wood"
+    },
+    "axis=z": {
+      "model": "talesoffolklore:block/virginia_pine_wood",
+      "x": 90
+    }
+  }
+}

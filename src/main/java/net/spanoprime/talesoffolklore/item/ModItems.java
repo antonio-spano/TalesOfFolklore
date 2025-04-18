@@ -1,16 +1,16 @@
 package net.spanoprime.talesoffolklore.item;
 
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.world.item.HangingSignItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SignItem;
+import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
+import net.spanoprime.talesoffolklore.entity.ModBoatEntity;
+import net.spanoprime.talesoffolklore.item.custom.ModBoatItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -42,6 +42,13 @@ public class ModItems {
     public static final RegistryObject<Item> VIRGINIA_PINE_HANGING_SIGN = ITEMS.register("virginia_pine_hanging_sign",
             () -> new HangingSignItem(ModBlocks.VIRGINIA_PINE_HANGING_SIGN.get(), ModBlocks.VIRGINIA_PINE_WALL_HANGING_SIGN.get(),
                     new Item.Properties().stacksTo(16)));
+
+    //BOATS
+    public static final RegistryObject<Item> VIRGINIA_PINE_BOAT = ITEMS.register("virginia_pine_boat",
+            () -> new ModBoatItem(false, ModBoatEntity.Type.VIRGINIA_PINE, new Item.Properties()));
+
+    public static final RegistryObject<Item> VIRGINIA_PINE_CHEST_BOAT = ITEMS.register("virginia_pine_chest_boat",
+            () -> new ModBoatItem(true, ModBoatEntity.Type.VIRGINIA_PINE, new Item.Properties()));
 
     public static void register(IEventBus eventBus)
     {

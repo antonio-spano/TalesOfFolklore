@@ -4,6 +4,8 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,6 +20,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 import net.spanoprime.talesoffolklore.entity.ModBlockEntities;
+import net.spanoprime.talesoffolklore.entity.ModEntities;
+import net.spanoprime.talesoffolklore.entity.client.ModBoatRenderer;
 import net.spanoprime.talesoffolklore.item.ModItems;
 import net.spanoprime.talesoffolklore.util.ModWoodTypes;
 import org.slf4j.Logger;
@@ -38,6 +42,7 @@ public class TalesOfFolklore
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModEntities.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -66,6 +71,8 @@ public class TalesOfFolklore
             event.accept(ModItems.APPALACHIAN_FOREST_MAP);
             event.accept(ModItems.SPIRITS_FOREST_MAP);
             event.accept(ModItems.TALES_OF_FOLKLORE);
+            event.accept(ModItems.VIRGINIA_PINE_BOAT);
+            event.accept(ModItems.VIRGINIA_PINE_CHEST_BOAT);
         }
 
         if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
@@ -98,6 +105,8 @@ public class TalesOfFolklore
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            EntityRenderers.register(ModEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer(pContext, false));
+            EntityRenderers.register(ModEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer(pContext, true));
             Sheets.addWoodType(ModWoodTypes.VIRGINIA_PINE);
             event.enqueueWork(() -> {
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.VIRGINIA_PINE_DOOR.get(), RenderType.cutout());

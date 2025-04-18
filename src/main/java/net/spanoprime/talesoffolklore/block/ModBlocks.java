@@ -86,6 +86,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> VIRGINIA_PINE_WALL_HANGING_SIGN = BLOCKS.register("virginia_pine_wall_hanging_sign",
             () -> new ModWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_WALL_HANGING_SIGN), ModWoodTypes.VIRGINIA_PINE));
 
+
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

@@ -3,6 +3,7 @@ package net.spanoprime.talesoffolklore;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,7 +17,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
+import net.spanoprime.talesoffolklore.entity.ModBlockEntities;
 import net.spanoprime.talesoffolklore.item.ModItems;
+import net.spanoprime.talesoffolklore.util.ModWoodTypes;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -34,6 +37,7 @@ public class TalesOfFolklore
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -72,8 +76,12 @@ public class TalesOfFolklore
             event.accept(ModBlocks.VIRGINIA_PINE_TRAPDOOR);
             event.accept(ModBlocks.VIRGINIA_PINE_SLAB);
             event.accept(ModBlocks.VIRGINIA_PINE_FENCE);
-            //event.accept(ModBlocks.VIRGINIA_PINE_FENCE_GATE);
-            //event.accept(ModBlocks.VIRGINIA_PINE_BUTTON);
+            event.accept(ModBlocks.VIRGINIA_PINE_FENCE_GATE);
+            event.accept(ModBlocks.VIRGINIA_PINE_BUTTON);
+            event.accept(ModBlocks.VIRGINIA_PINE_PRESSURE_PLATE);
+            //event.accept(ModBlocks.VIRGINIA_PINE_BOAT);
+            event.accept(ModBlocks.VIRGINIA_PINE_SIGN);
+            event.accept(ModBlocks.VIRGINIA_PINE_HANGING_SIGN);
         }
     }
 
@@ -90,6 +98,7 @@ public class TalesOfFolklore
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            Sheets.addWoodType(ModWoodTypes.VIRGINIA_PINE);
             event.enqueueWork(() -> {
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.VIRGINIA_PINE_DOOR.get(), RenderType.cutout());
             });

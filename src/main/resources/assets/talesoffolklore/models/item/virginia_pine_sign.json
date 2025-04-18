@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "talesoffolklore:item/virginia_pine_sign"
+  }
+}

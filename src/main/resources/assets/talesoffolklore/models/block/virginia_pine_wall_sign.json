@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/wall_sign",
+  "textures": {
+    "particle": "talesoffolklore:block/virginia_pine_planks",
+    "texture": "talesoffolklore:block/virginia_pine_sign"
+  }
+}

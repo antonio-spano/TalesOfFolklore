@@ -10,5 +10,8 @@
   "block.talesoffolklore.virginia_pine_door": "Virginia Pine Door",
   "block.talesoffolklore.virginia_pine_trapdoor": "Virginia Pine Trapdoor",
   "block.talesoffolklore.virginia_pine_slab": "Virginia Pine Slab",
-  "block.talesoffolklore.virginia_pine_fence": "Virginia Pine Fence"
+  "block.talesoffolklore.virginia_pine_fence": "Virginia Pine Fence",
+  "block.talesoffolklore.virginia_pine_fence_gate": "Virginia Pine Fence Gate",
+  "block.talesoffolklore.virginia_pine_button": "Virginia Pine Button",
+  "block.talesoffolklore.virginia_pine_pressure_plate": "Virginia Pine Pressure Plate"
 }

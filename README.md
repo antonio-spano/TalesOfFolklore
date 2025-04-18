@@ -1,9 +1,10 @@
-# Let's Vino Cryptids - Development Specifications
+# Tales Of Folklore - Development Specifications
 
 ## 📝 Coding Standards
 
-- **Variables**: Use **snake_case** (e.g. `lets_vino`) for variable names, except for `mod_id`, paths, and similar cases.
-- **Class Names**: Use **CamelCase** (e.g. `LetsVino`).
+- **Variables**: Use **snake_case** (e.g. `tales_of_folklore`) for variable names, except for `MOD_ID`, paths, and similar cases.
+- **Class Names**: Use **PascalCase** (e.g. `TalesOfFolklore`).
+- **Function Names**: Use **camelCase** (e.g. `talesOfFolklore`).
 
 ## 💻 Software Used
 

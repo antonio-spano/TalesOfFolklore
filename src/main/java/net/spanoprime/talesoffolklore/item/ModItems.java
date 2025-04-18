@@ -45,10 +45,10 @@ public class ModItems {
 
     //BOATS
     public static final RegistryObject<Item> VIRGINIA_PINE_BOAT = ITEMS.register("virginia_pine_boat",
-            () -> new ModBoatItem(false, ModBoatEntity.Type.VIRGINIA_PINE, new Item.Properties()));
+            () -> new ModBoatItem(false, ModBoatEntity.Type.VIRGINIA_PINE, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> VIRGINIA_PINE_CHEST_BOAT = ITEMS.register("virginia_pine_chest_boat",
-            () -> new ModBoatItem(true, ModBoatEntity.Type.VIRGINIA_PINE, new Item.Properties()));
+            () -> new ModBoatItem(true, ModBoatEntity.Type.VIRGINIA_PINE, new Item.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus)
     {

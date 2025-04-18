@@ -32,6 +32,8 @@ public class ModBoatEntity extends Boat
         this.xo = pX;
         this.yo = pY;
         this.zo = pZ;
+        this.setVariant(ModBoatEntity.Type.VIRGINIA_PINE);
+        System.out.println("VAFFANCULO");
     }
 
     @Override

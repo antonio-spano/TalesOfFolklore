@@ -1,5 +1,6 @@
 package net.spanoprime.talesoffolklore.entity.client;
 
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.ListModel;
@@ -28,6 +29,7 @@ public class ModBoatRenderer extends BoatRenderer {
 
         for (ModBoatEntity.Type type : ModBoatEntity.Type.values()) {
             ResourceLocation texture = new ResourceLocation(TalesOfFolklore.MOD_ID, getTextureLocation(type, pChestBoat));
+            System.out.println("GODO " + texture);
             ListModel<Boat> model = createBoatModel(pContext, type, pChestBoat);
             boatResources.put(type, new ResourceModelPair(texture, model));
         }
@@ -60,16 +62,19 @@ public class ModBoatRenderer extends BoatRenderer {
         return new ModelLayerLocation(new ResourceLocation(TalesOfFolklore.MOD_ID, path), model);
     }
 
-    // Niente @Override qui!
-    public ResourceModelPair getModModelWithLocation(Boat boat) {
+    @Override
+    public Pair<ResourceLocation, ListModel<Boat>> getModelWithLocation(Boat boat) {
         if (boat instanceof ModBoatEntity modBoat) {
-            return this.boatResources.get(modBoat.getModVariant());
-        } else if (boat instanceof ModChestBoatEntity modChestBoatEntity) {
-            return this.boatResources.get(modChestBoatEntity.getModVariant());
+            ResourceModelPair pair = this.boatResources.get(modBoat.getModVariant());
+            return Pair.of(pair.texture(), pair.model());
+        } else if (boat instanceof ModChestBoatEntity modChestBoat) {
+            ResourceModelPair pair = this.boatResources.get(modChestBoat.getModVariant());
+            return Pair.of(pair.texture(), pair.model());
         } else {
-            return null;
+            return super.getModelWithLocation(boat); // fallback in caso strano
         }
     }
+
 
 
     // Semplice sostituto di Pair<ResourceLocation, ListModel<Boat>>

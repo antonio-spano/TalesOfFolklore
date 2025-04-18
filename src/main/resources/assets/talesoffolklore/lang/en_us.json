@@ -16,6 +16,8 @@
   "block.talesoffolklore.virginia_pine_pressure_plate": "Virginia Pine Pressure Plate",
   "item.talesoffolklore.virginia_pine_boat": "Virginia Pine Boat",
   "item.talesoffolklore.virginia_pine_chest_boat": "Virginia Pine Chest Boat",
+  "block.talesoffolklore.virginia_pine_hanging_sign": "Virginia Pine Hanging Sign",
+  "block.talesoffolklore.virginia_pine_sign": "Virginia Pine Sign",
 
   "entity.talesoffolklore.mod_chest_boat": "Boat With Chest"
 }

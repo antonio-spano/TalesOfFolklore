@@ -33,32 +33,32 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, TalesOfFolklore.MOD_ID);
 
     public static final RegistryObject<Block> VIRGINIA_PINE_PLANKS = registerBlock("virginia_pine_planks",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).requiresCorrectToolForDrops()));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.ACACIA_PLANKS)));
 
     public static final RegistryObject<Block> VIRGINIA_PINE_STAIRS = registerBlock("virginia_pine_stairs",
             () -> new StairBlock(() -> ModBlocks.VIRGINIA_PINE_PLANKS.get().defaultBlockState(),
-                    BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS).requiresCorrectToolForDrops()));
+                    BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS)));
 
     public static final RegistryObject<Block> VIRGINIA_PINE_DOOR = registerBlock("virginia_pine_door",
-            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_DOOR).requiresCorrectToolForDrops(),
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_DOOR),
                     BlockSetType.ACACIA));
 
     public static final RegistryObject<Block> VIRGINIA_PINE_TRAPDOOR = registerBlock("virginia_pine_trapdoor",
-            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_TRAPDOOR).requiresCorrectToolForDrops(),
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_TRAPDOOR),
                     BlockSetType.ACACIA));
 
     public static final RegistryObject<Block> VIRGINIA_PINE_SLAB = registerBlock("virginia_pine_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_SLAB).requiresCorrectToolForDrops()));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_SLAB)));
 
     public static final RegistryObject<Block> VIRGINIA_PINE_FENCE = registerBlock("virginia_pine_fence",
-            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_FENCE).requiresCorrectToolForDrops()));
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_FENCE)));
 
     public static final RegistryObject<Block> VIRGINIA_PINE_FENCE_GATE = registerBlock("virginia_pine_fence_gate",
-            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_FENCE_GATE).requiresCorrectToolForDrops(),
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_FENCE_GATE),
                     WoodType.ACACIA));
 
     public static final RegistryObject<Block> VIRGINIA_PINE_BUTTON = registerBlock("virginia_pine_button",
-            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_BUTTON).requiresCorrectToolForDrops(),
+            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_BUTTON),
                     BlockSetType.ACACIA, 30, true));
 
     public static final RegistryObject<Block> VIRGINIA_PINE_PRESSURE_PLATE = registerBlock("virginia_pine_pressure_plate",

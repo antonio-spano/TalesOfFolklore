@@ -23,6 +23,7 @@ import net.spanoprime.talesoffolklore.entity.ModBlockEntities;
 import net.spanoprime.talesoffolklore.entity.ModEntities;
 import net.spanoprime.talesoffolklore.entity.client.ModBoatRenderer;
 import net.spanoprime.talesoffolklore.item.ModItems;
+import net.spanoprime.talesoffolklore.loot.ModLootTables;
 import net.spanoprime.talesoffolklore.util.ModWoodTypes;
 import org.slf4j.Logger;
 
@@ -43,6 +44,7 @@ public class TalesOfFolklore
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModEntities.register(modEventBus);
+        MinecraftForge.EVENT_BUS.register(ModLootTables.class);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);

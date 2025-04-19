@@ -94,6 +94,7 @@ public class TalesOfFolklore
             event.accept(ModBlocks.VIRGINIA_PINE_LEAVES);
             event.accept(ModBlocks.STRIPPED_VIRGINIA_PINE_WOOD);
             event.accept(ModBlocks.STRIPPED_VIRGINIA_PINE_LOG);
+            event.accept(ModBlocks.VIRGINIA_PINE_LADDER);
         }
     }
 

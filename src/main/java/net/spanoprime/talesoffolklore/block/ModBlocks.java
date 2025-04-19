@@ -96,7 +96,7 @@ public class ModBlocks {
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_ACACIA_LOG)));
 
     //CUSTOM BLOCK
-    public static final RegistryObject<Block> PIOLI_LADDER = registerBlock("pioli_ladder",
+    public static final RegistryObject<Block> VIRGINIA_PINE_LADDER = registerBlock("virginia_pine_ladder",
             () -> new ModLadderBlock(BlockBehaviour.Properties.copy(Blocks.LADDER))); //metti LADDER
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)

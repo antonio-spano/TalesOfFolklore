@@ -1,0 +1,8 @@
+{
+    "variants": {
+      "facing=north": { "model": "talesoffolklore:block/virginia_pine_ladder" },
+      "facing=south": { "model": "talesoffolklore:block/virginia_pine_ladder", "y": 180 },
+      "facing=west":  { "model": "talesoffolklore:block/virginia_pine_ladder", "y": 270 },
+      "facing=east":  { "model": "talesoffolklore:block/virginia_pine_ladder", "y": 90 }
+    }
+}

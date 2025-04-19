@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "A": {
+      "item": "talesoffolklore:virginia_pine_planks"
+    }
+  },
+  "pattern": [
+    "# #",
+    "#A#",
+    "# #"
+  ],
+  "result": {
+    "count": 3,
+    "item": "talesoffolklore:virginia_pine_ladder"
+  },
+  "show_notification": true
+}

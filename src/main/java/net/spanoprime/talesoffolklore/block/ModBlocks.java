@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.client.model.obj.ObjMaterialLibrary;
@@ -24,6 +25,7 @@ import net.spanoprime.talesoffolklore.block.custom.*;
 import net.spanoprime.talesoffolklore.item.ModItems;
 import net.spanoprime.talesoffolklore.item.custom.FuelBlockItem;
 import net.spanoprime.talesoffolklore.util.ModWoodTypes;
+import net.spanoprime.talesoffolklore.worldgen.tree.VirginiaPineTreeGrower;
 
 import java.util.function.Supplier;
 
@@ -79,6 +81,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> VIRGINIA_PINE_WALL_HANGING_SIGN = BLOCKS.register("virginia_pine_wall_hanging_sign",
             () -> new ModWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_WALL_HANGING_SIGN), ModWoodTypes.VIRGINIA_PINE));
+/*
+    public static final RegistryObject<Block> VIRGINIA_PINE_LEAVES = registerBlock("virginia_pine_leaves",
+            () -> new ModLeavesBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LEAVES).randomTicks())); */
 
     public static final RegistryObject<Block> VIRGINIA_PINE_LEAVES = registerBlock("virginia_pine_leaves",
             () -> new ModLeavesBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_LEAVES)));
@@ -95,9 +100,13 @@ public class ModBlocks {
     public static final RegistryObject<Block> STRIPPED_VIRGINIA_PINE_LOG = registerBlock("stripped_virginia_pine_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_ACACIA_LOG)));
 
-    //CUSTOM BLOCK
+    //CUSTOM LADDER
     public static final RegistryObject<Block> VIRGINIA_PINE_LADDER = registerBlock("virginia_pine_ladder",
             () -> new ModLadderBlock(BlockBehaviour.Properties.copy(Blocks.LADDER))); //metti LADDER
+
+    //SAPLING TODO: (ADD TO POT)
+    public static final RegistryObject<Block> VIRGINIA_PINE_SAPLING = registerBlock("virginia_pine_sapling",
+            () -> new SaplingBlock(new VirginiaPineTreeGrower(), BlockBehaviour.Properties.copy(Blocks.ACACIA_SAPLING)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {

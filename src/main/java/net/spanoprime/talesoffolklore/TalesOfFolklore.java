@@ -24,6 +24,7 @@ import net.spanoprime.talesoffolklore.entity.client.ModBoatRenderer;
 import net.spanoprime.talesoffolklore.item.ModItems;
 import net.spanoprime.talesoffolklore.loot.ModLootTables;
 import net.spanoprime.talesoffolklore.util.ModWoodTypes;
+import net.spanoprime.talesoffolklore.worldgen.ModConfiguredFeatures;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -94,7 +95,16 @@ public class TalesOfFolklore
             event.accept(ModBlocks.VIRGINIA_PINE_LEAVES);
             event.accept(ModBlocks.STRIPPED_VIRGINIA_PINE_WOOD);
             event.accept(ModBlocks.STRIPPED_VIRGINIA_PINE_LOG);
+        }
+
+        if(event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS)
+        {
             event.accept(ModBlocks.VIRGINIA_PINE_LADDER);
+        }
+
+        if(event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS)
+        {
+            event.accept(ModBlocks.VIRGINIA_PINE_SAPLING);
         }
     }
 
@@ -117,6 +127,7 @@ public class TalesOfFolklore
 
             event.enqueueWork(() -> {
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.VIRGINIA_PINE_DOOR.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.VIRGINIA_PINE_SAPLING.get(), RenderType.cutout());
             });
         }
     }

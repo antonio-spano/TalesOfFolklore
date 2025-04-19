@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "talesoffolklore:virginia_pine_ladder"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "talesoffolklore:blocks/virginia_pine_ladder"
+}

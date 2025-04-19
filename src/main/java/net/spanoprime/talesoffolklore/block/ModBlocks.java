@@ -20,21 +20,22 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
-import net.spanoprime.talesoffolklore.block.custom.ModHangingSignBlock;
-import net.spanoprime.talesoffolklore.block.custom.ModStandingSignBlock;
-import net.spanoprime.talesoffolklore.block.custom.ModWallHangingSignBlock;
-import net.spanoprime.talesoffolklore.block.custom.ModWallSignBlock;
+import net.spanoprime.talesoffolklore.block.custom.*;
 import net.spanoprime.talesoffolklore.item.ModItems;
+import net.spanoprime.talesoffolklore.item.custom.FuelBlockItem;
 import net.spanoprime.talesoffolklore.util.ModWoodTypes;
 
 import java.util.function.Supplier;
 
 public class ModBlocks {
+    public static final String virginia_pine_type = "virginia_pine";
+    public static final String silver_pine_type = "silver_pine";
+
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, TalesOfFolklore.MOD_ID);
 
     public static final RegistryObject<Block> VIRGINIA_PINE_PLANKS = registerBlock("virginia_pine_planks",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.ACACIA_PLANKS)));
+            () -> new ModPlanksBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_PLANKS)));
 
     public static final RegistryObject<Block> VIRGINIA_PINE_STAIRS = registerBlock("virginia_pine_stairs",
             () -> new StairBlock(() -> ModBlocks.VIRGINIA_PINE_PLANKS.get().defaultBlockState(),
@@ -80,19 +81,19 @@ public class ModBlocks {
             () -> new ModWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_WALL_HANGING_SIGN), ModWoodTypes.VIRGINIA_PINE));
 
     public static final RegistryObject<Block> VIRGINIA_PINE_LEAVES = registerBlock("virginia_pine_leaves",
-            () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_LEAVES)));
+            () -> new ModLeavesBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_LEAVES)));
 
     public static final RegistryObject<Block> VIRGINIA_PINE_LOG = registerBlock("virginia_pine_log",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_LOG)));
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_LOG)));
 
     public static final RegistryObject<Block> VIRGINIA_PINE_WOOD = registerBlock("virginia_pine_wood",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_WOOD)));
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_WOOD)));
 
     public static final RegistryObject<Block> STRIPPED_VIRGINIA_PINE_WOOD = registerBlock("stripped_virginia_pine_wood",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_ACACIA_WOOD)));
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_ACACIA_WOOD)));
 
     public static final RegistryObject<Block> STRIPPED_VIRGINIA_PINE_LOG = registerBlock("stripped_virginia_pine_log",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_ACACIA_LOG)));
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_ACACIA_LOG)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {
@@ -104,7 +105,14 @@ public class ModBlocks {
 
     private static <T extends Block>RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block)
     {
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        if (name.contains(virginia_pine_type) && !name.contains("leaves"))
+        {
+            return ModItems.ITEMS.register(name, () -> new FuelBlockItem(block.get(), new Item.Properties(), 300));
+        }
+        else
+        {
+            return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        }
     }
 
     public static void register(IEventBus eventBus)

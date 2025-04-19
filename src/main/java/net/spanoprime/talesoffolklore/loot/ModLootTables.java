@@ -24,7 +24,6 @@ public class ModLootTables {
 
     // Usa un Set per un accesso più rapido ai nomi delle loot table
     private static final Set<ResourceLocation> LOOT_TABLES = new HashSet<>();
-
     static {
         LOOT_TABLES.add(new ResourceLocation("minecraft", "chests/abandoned_mineshaft"));
         LOOT_TABLES.add(new ResourceLocation("minecraft", "chests/buried_treasure"));

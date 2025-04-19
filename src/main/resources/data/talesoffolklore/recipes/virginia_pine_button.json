@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "talesoffolklore:virginia_pine_planks"
+    }
+  ],
+  "result": {
+    "item": "talesoffolklore:virginia_pine_button"
+  }
+}

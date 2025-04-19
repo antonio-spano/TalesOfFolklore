@@ -3,10 +3,13 @@
   "item.talesoffolklore.spirits_map_piece": "Spirits Map Piece",
   "item.talesoffolklore.appalachian_forest_map": "Appalachian Forest Map",
   "item.talesoffolklore.spirits_forest_map": "Spirits Forest Map",
-  "block.talesoffolklore.virginia_pine_planks": "Virginia Pine Planks",
-  "block.talesoffolklore.virginia_pine_stairs": "Virginia Pine Stairs",
   "item.talesoffolklore.tales_of_folklore": "Tales Of Folklore",
   "item.talesoffolklore.tales_of_folklore_r": "Tales Of Folklore",
+  "item.talesoffolklore.virginia_pine_boat": "Virginia Pine Boat",
+  "item.talesoffolklore.virginia_pine_chest_boat": "Virginia Pine Chest Boat",
+
+  "block.talesoffolklore.virginia_pine_planks": "Virginia Pine Planks",
+  "block.talesoffolklore.virginia_pine_stairs": "Virginia Pine Stairs",
   "block.talesoffolklore.virginia_pine_door": "Virginia Pine Door",
   "block.talesoffolklore.virginia_pine_trapdoor": "Virginia Pine Trapdoor",
   "block.talesoffolklore.virginia_pine_slab": "Virginia Pine Slab",
@@ -14,10 +17,13 @@
   "block.talesoffolklore.virginia_pine_fence_gate": "Virginia Pine Fence Gate",
   "block.talesoffolklore.virginia_pine_button": "Virginia Pine Button",
   "block.talesoffolklore.virginia_pine_pressure_plate": "Virginia Pine Pressure Plate",
-  "item.talesoffolklore.virginia_pine_boat": "Virginia Pine Boat",
-  "item.talesoffolklore.virginia_pine_chest_boat": "Virginia Pine Chest Boat",
   "block.talesoffolklore.virginia_pine_hanging_sign": "Virginia Pine Hanging Sign",
   "block.talesoffolklore.virginia_pine_sign": "Virginia Pine Sign",
+  "block.talesoffolklore.virginia_pine_log": "Virginia Pine Log",
+  "block.talesoffolklore.virginia_pine_wood": "Virginia Pine Wood",
+  "block.talesoffolklore.stripped_virginia_pine_log": "Stripped Virginia Pine Log",
+  "block.talesoffolklore.stripped_virginia_pine_wood": "Stripped Virginia Pine Wood",
+  "block.talesoffolklore.virginia_pine_leaves": "Virginia Pine Leaves",
 
   "entity.talesoffolklore.mod_chest_boat": "Boat With Chest"
 }

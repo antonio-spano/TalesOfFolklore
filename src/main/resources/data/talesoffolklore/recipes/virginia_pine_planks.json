@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "category": "building",
+  "ingredients": [
+    {
+      "tag": "talesoffolklore:virginia_pine_logs"
+    }
+  ],
+  "result": {
+    "item": "talesoffolklore:virginia_pine_planks",
+    "count": 4
+  }
+}

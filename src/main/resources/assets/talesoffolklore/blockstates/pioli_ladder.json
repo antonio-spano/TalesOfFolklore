@@ -1,0 +1,9 @@
+{
+    "variants": {
+      "facing=north": { "model": "talesoffolklore:block/pioli_ladder" },
+      "facing=south": { "model": "talesoffolklore:block/pioli_ladder", "y": 180 },
+      "facing=west":  { "model": "talesoffolklore:block/pioli_ladder", "y": 270 },
+      "facing=east":  { "model": "talesoffolklore:block/pioli_ladder", "y": 90 }
+    }
+  }
+}

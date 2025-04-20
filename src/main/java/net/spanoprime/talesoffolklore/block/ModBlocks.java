@@ -27,6 +27,8 @@ import net.spanoprime.talesoffolklore.item.custom.FuelBlockItem;
 import net.spanoprime.talesoffolklore.util.ModWoodTypes;
 import net.spanoprime.talesoffolklore.worldgen.tree.VirginiaPineTreeGrower;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -107,6 +109,15 @@ public class ModBlocks {
     //SAPLING TODO: (ADD TO POT)
     public static final RegistryObject<Block> VIRGINIA_PINE_SAPLING = registerBlock("virginia_pine_sapling",
             () -> new SaplingBlock(new VirginiaPineTreeGrower(), BlockBehaviour.Properties.copy(Blocks.ACACIA_SAPLING)));
+
+    public static final RegistryObject<Block> VIRGINIA_PINE_SCAFFOLDING = registerBlock("virginia_pine_scaffolding",
+            () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD)));
+
+    public static final RegistryObject<Block> WALL_MOSS = registerBlock("wall_moss",
+            () -> new WallMossBlock(BlockBehaviour.Properties.copy(Blocks.MOSS_CARPET)
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.MOSS_CARPET)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {

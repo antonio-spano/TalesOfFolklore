@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LS",
+    "SL"
+  ],
+  "key": {
+    "L": {
+      "item": "talesoffolklore:virginia_pine_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "talesoffolklore:virginia_pine_scaffolding",
+    "count": 4
+  }
+}

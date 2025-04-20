@@ -25,6 +25,8 @@ import net.spanoprime.talesoffolklore.item.ModItems;
 import net.spanoprime.talesoffolklore.loot.ModLootTables;
 import net.spanoprime.talesoffolklore.util.ModWoodTypes;
 import net.spanoprime.talesoffolklore.worldgen.ModConfiguredFeatures;
+import net.spanoprime.talesoffolklore.worldgen.decorators.ModTreeDecoratorTypes;
+import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallMossDecorator;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -45,6 +47,8 @@ public class TalesOfFolklore
         ModBlockEntities.register(modEventBus);
         ModEntities.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(ModLootTables.class);
+        MinecraftForge.EVENT_BUS.register(ModWallMossDecorator.class);
+        ModTreeDecoratorTypes.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -100,6 +104,7 @@ public class TalesOfFolklore
         if(event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS)
         {
             event.accept(ModBlocks.VIRGINIA_PINE_LADDER);
+            event.accept(ModBlocks.VIRGINIA_PINE_SCAFFOLDING);
         }
 
         if(event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS)
@@ -128,6 +133,7 @@ public class TalesOfFolklore
             event.enqueueWork(() -> {
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.VIRGINIA_PINE_DOOR.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.VIRGINIA_PINE_SAPLING.get(), RenderType.cutout());
+                //ItemBlockRenderTypes.setRenderLayer(ModBlocks.WALL_MOSS.get(), RenderType.cutout());
             });
         }
     }

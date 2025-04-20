@@ -32,7 +32,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.VIRGINIA_PINE_STAIRS.get());
         this.dropSelf(ModBlocks.VIRGINIA_PINE_DOOR.get());
         this.dropSelf(ModBlocks.VIRGINIA_PINE_SAPLING.get());
-        this.dropSelf(ModBlocks.VIRGINIA_PINE_LEAVES.get());
+        //this.dropSelf(ModBlocks.VIRGINIA_PINE_LEAVES.get());
         this.dropSelf(ModBlocks.VIRGINIA_PINE_WALL_SIGN.get());
         this.dropSelf(ModBlocks.VIRGINIA_PINE_LOG.get());
         this.dropSelf(ModBlocks.VIRGINIA_PINE_TRAPDOOR.get());
@@ -52,7 +52,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.STRIPPED_VIRGINIA_PINE_LOG.get());
         this.dropSelf(ModBlocks.WALL_MOSS.get());
 
-
+        this.add(ModBlocks.VIRGINIA_PINE_LEAVES.get(),
+                createLeavesDrops(ModBlocks.VIRGINIA_PINE_LEAVES.get(), ModBlocks.VIRGINIA_PINE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
     }
 
     @Override

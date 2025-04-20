@@ -103,17 +103,18 @@ public class TalesOfFolklore
             event.accept(ModBlocks.VIRGINIA_PINE_LEAVES);
             event.accept(ModBlocks.STRIPPED_VIRGINIA_PINE_WOOD);
             event.accept(ModBlocks.STRIPPED_VIRGINIA_PINE_LOG);
+            event.accept(ModBlocks.VIRGINIA_PINE_SCAFFOLDING);
         }
 
         if(event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS)
         {
             event.accept(ModBlocks.VIRGINIA_PINE_LADDER);
-            event.accept(ModBlocks.VIRGINIA_PINE_SCAFFOLDING);
         }
 
         if(event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS)
         {
             event.accept(ModBlocks.VIRGINIA_PINE_SAPLING);
+            event.accept(ModBlocks.WALL_MOSS);
         }
     }
 
@@ -137,7 +138,7 @@ public class TalesOfFolklore
             event.enqueueWork(() -> {
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.VIRGINIA_PINE_DOOR.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.VIRGINIA_PINE_SAPLING.get(), RenderType.cutout());
-                //ItemBlockRenderTypes.setRenderLayer(ModBlocks.WALL_MOSS.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.WALL_MOSS.get(), RenderType.cutout());
             });
         }
     }

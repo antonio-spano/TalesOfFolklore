@@ -11,30 +11,38 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.placement.BiomeFilter;
-import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.*;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 
 import java.util.List;
 
 public class ModPlacedFeatures {
-    public static final ResourceKey<PlacedFeature> VIRGINIA_PINE_PLACED_KEY = ResourceKey.create(
-            Registries.PLACED_FEATURE, new ResourceLocation(TalesOfFolklore.MOD_ID, "virginia_pine_placed"));
+
+    public static final ResourceKey<PlacedFeature> VIRGINIA_PINE_PLACED_KEY = registerKey("virginia_pine_placed");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
+        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         System.out.println("ModConfiguredFeatures: Bootstrapping started 2!");
 /*
         register(context, VIRGINIA_PINE_PLACED_KEY, ModConfiguredFeatures.VIRGINIA_PINE_KEY, List.of(
-                PlacementUtils.filteredByBlockSurvival(Blocks.GRASS_BLOCK), // Makes sure they spawn on grass-like blocks
+                PlacementUtils.filteredByBlockSurvival(Blocks.GRASS_BLOCK),
+                InSquarePlacement.spread(),// Makes sure they spawn on grass-like blocks
                 PlacementUtils.HEIGHTMAP, // Spawns using heightmaps
                 BiomeFilter.biome() // Restricts placement to the correct biome(s)
         )); */
-        System.out.println("ModConfiguredFeatures: Bootstrapping completed 2!");
+/*
+        register(context, VIRGINIA_PINE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.VIRGINIA_PINE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, .1f, 2),
+                        ModBlocks.VIRGINIA_PINE_SAPLING.get())); */
+
     }
 
+    public static ResourceKey<PlacedFeature> registerKey(String name)
+    {
+        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, name));
+    }
+/*
     private static void register(BootstapContext<PlacedFeature> context,
                                  ResourceKey<PlacedFeature> key,
                                  ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey,
@@ -43,5 +51,12 @@ public class ModPlacedFeatures {
                 context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeatureKey),
                 placementModifiers
         ));
+    } */
+
+    public static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
+                                Holder<ConfiguredFeature<?, ?>> configuration,
+                                List<PlacementModifier> modifiers)
+    {
+        context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
     }
 }

@@ -25,15 +25,15 @@ public class ModLootTables {
     // Usa un Set per un accesso più rapido ai nomi delle loot table
     private static final Set<ResourceLocation> LOOT_TABLES = new HashSet<>();
     static {
-        LOOT_TABLES.add(new ResourceLocation("minecraft", "chests/abandoned_mineshaft"));
-        LOOT_TABLES.add(new ResourceLocation("minecraft", "chests/buried_treasure"));
-        LOOT_TABLES.add(new ResourceLocation("minecraft", "chests/stronghold_library"));
-        LOOT_TABLES.add(new ResourceLocation("minecraft", "chests/igloo_chest"));
-        LOOT_TABLES.add(new ResourceLocation("minecraft", "chests/pillager_outpost"));
-        LOOT_TABLES.add(new ResourceLocation("minecraft", "chests/ruined_portal"));
-        LOOT_TABLES.add(new ResourceLocation("minecraft", "chests/simple_dungeon"));
-        LOOT_TABLES.add(new ResourceLocation("minecraft", "chests/shipwreck_supply"));
-        LOOT_TABLES.add(new ResourceLocation("minecraft", "chests/shipwreck_treasure"));
+        LOOT_TABLES.add(ResourceLocation.fromNamespaceAndPath("minecraft", "chests/abandoned_mineshaft"));
+        LOOT_TABLES.add(ResourceLocation.fromNamespaceAndPath("minecraft", "chests/buried_treasure"));
+        LOOT_TABLES.add(ResourceLocation.fromNamespaceAndPath("minecraft", "chests/stronghold_library"));
+        LOOT_TABLES.add(ResourceLocation.fromNamespaceAndPath("minecraft", "chests/igloo_chest"));
+        LOOT_TABLES.add(ResourceLocation.fromNamespaceAndPath("minecraft", "chests/pillager_outpost"));
+        LOOT_TABLES.add(ResourceLocation.fromNamespaceAndPath("minecraft", "chests/ruined_portal"));
+        LOOT_TABLES.add(ResourceLocation.fromNamespaceAndPath("minecraft", "chests/simple_dungeon"));
+        LOOT_TABLES.add(ResourceLocation.fromNamespaceAndPath("minecraft", "chests/shipwreck_supply"));
+        LOOT_TABLES.add(ResourceLocation.fromNamespaceAndPath("minecraft", "chests/shipwreck_treasure"));
     }
 
     @SubscribeEvent

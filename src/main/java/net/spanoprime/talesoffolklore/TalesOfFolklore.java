@@ -6,6 +6,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -26,9 +28,12 @@ import net.spanoprime.talesoffolklore.item.ModItems;
 import net.spanoprime.talesoffolklore.loot.ModLootTables;
 import net.spanoprime.talesoffolklore.util.ModWoodTypes;
 import net.spanoprime.talesoffolklore.worldgen.ModConfiguredFeatures;
+import net.spanoprime.talesoffolklore.worldgen.biome.ModTerrablender;
+import net.spanoprime.talesoffolklore.worldgen.biome.surface.ModSurfaceRules;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModTreeDecoratorTypes;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallMossDecorator;
 import org.slf4j.Logger;
+import terrablender.api.SurfaceRuleManager;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(TalesOfFolklore.MOD_ID)
@@ -53,6 +58,7 @@ public class TalesOfFolklore
         MinecraftForge.EVENT_BUS.register(ModWallMossDecorator.class);
         //MinecraftForge.EVENT_BUS.register(DataGenerators.class);
         ModTreeDecoratorTypes.register(modEventBus);
+        ModTerrablender.registerBiomes();
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -69,6 +75,10 @@ public class TalesOfFolklore
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
+        event.enqueueWork(() -> {
+            //((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.VIRGINIA_PINE_SAPLING.getId(), ModBlocks.);
+            //SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, ModSurfaceRules.makeRules());
+        });
     }
 
     // Add the example block item to the building blocks tab

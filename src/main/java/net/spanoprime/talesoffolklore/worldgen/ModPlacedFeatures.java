@@ -23,15 +23,7 @@ public class ModPlacedFeatures {
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
-        System.out.println("ModConfiguredFeatures: Bootstrapping started 2!");
-/*
-        register(context, VIRGINIA_PINE_PLACED_KEY, ModConfiguredFeatures.VIRGINIA_PINE_KEY, List.of(
-                PlacementUtils.filteredByBlockSurvival(Blocks.GRASS_BLOCK),
-                InSquarePlacement.spread(),// Makes sure they spawn on grass-like blocks
-                PlacementUtils.HEIGHTMAP, // Spawns using heightmaps
-                BiomeFilter.biome() // Restricts placement to the correct biome(s)
-        )); */
-/*
+    /*
         register(context, VIRGINIA_PINE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.VIRGINIA_PINE_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, .1f, 2),
                         ModBlocks.VIRGINIA_PINE_SAPLING.get())); */

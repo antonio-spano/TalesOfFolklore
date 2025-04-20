@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-20T19:02:35.141475	Loot Tables
+// 1.20.1	2025-04-21T00:48:45.850603	Loot Tables
 bd685005441693cbe3ff81a0b33278f705eb7548 data/talesoffolklore/loot_tables/blocks/stripped_virginia_pine_log.json
 6318acf262a74e6512763aebc777256acc0d895a data/talesoffolklore/loot_tables/blocks/stripped_virginia_pine_wood.json
 da6259424beacd746dfed1d3ba75b632c9b0e8f8 data/talesoffolklore/loot_tables/blocks/virginia_pine_button.json
@@ -7,7 +7,7 @@ a2866017267fb76cd1f3d54076e5f1e10c6ab009 data/talesoffolklore/loot_tables/blocks
 33bbd60d8c7184a4246d3421ef0341058f078b1e data/talesoffolklore/loot_tables/blocks/virginia_pine_fence_gate.json
 b5b6274257eddfb3cc39c9983c035da3ead06112 data/talesoffolklore/loot_tables/blocks/virginia_pine_hanging_sign.json
 1da5f3490679c8ae18f925cdf9205bcb0060440b data/talesoffolklore/loot_tables/blocks/virginia_pine_ladder.json
-9327b2533830342168a73c5e051757cbafab5a84 data/talesoffolklore/loot_tables/blocks/virginia_pine_leaves.json
+1d6bebe3d03eb88730a6abf830ab1c54a0df92de data/talesoffolklore/loot_tables/blocks/virginia_pine_leaves.json
 26829b9c0b828a0a8cb6d58da91d5dec24fd4d00 data/talesoffolklore/loot_tables/blocks/virginia_pine_log.json
 e0492c0381697fc8947b6c277806ea4045a0697e data/talesoffolklore/loot_tables/blocks/virginia_pine_planks.json
 e86b61c34d7234fb8858b91b4834589522c9675a data/talesoffolklore/loot_tables/blocks/virginia_pine_pressure_plate.json

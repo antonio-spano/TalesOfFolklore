@@ -41,56 +41,9 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        /*
-        simpleItem(ModItems.SAPPHIRE);
-        simpleItem(ModItems.RAW_SAPPHIRE);
 
-        simpleItem(ModItems.METAL_DETECTOR);
-        simpleItem(ModItems.PINE_CONE);
-        simpleItem(ModItems.STRAWBERRY);
-        simpleItem(ModItems.STRAWBERRY_SEEDS);
-
-        simpleItem(ModItems.CORN);
-        simpleItem(ModItems.CORN_SEEDS);
-
-        simpleItem(ModItems.BAR_BRAWL_MUSIC_DISC);
-
-        simpleBlockItem(ModBlocks.SAPPHIRE_DOOR);
-
-        fenceItem(ModBlocks.SAPPHIRE_FENCE, ModBlocks.SAPPHIRE_BLOCK);
-        buttonItem(ModBlocks.SAPPHIRE_BUTTON, ModBlocks.SAPPHIRE_BLOCK);
-        wallItem(ModBlocks.SAPPHIRE_WALL, ModBlocks.SAPPHIRE_BLOCK);
-
-        evenSimplerBlockItem(ModBlocks.SAPPHIRE_STAIRS);
-        evenSimplerBlockItem(ModBlocks.SAPPHIRE_SLAB);
-        evenSimplerBlockItem(ModBlocks.SAPPHIRE_PRESSURE_PLATE);
-        evenSimplerBlockItem(ModBlocks.SAPPHIRE_FENCE_GATE);
-
-        trapdoorItem(ModBlocks.SAPPHIRE_TRAPDOOR);
-
-        handheldItem(ModItems.SAPPHIRE_SWORD);
-        handheldItem(ModItems.SAPPHIRE_PICKAXE);
-        handheldItem(ModItems.SAPPHIRE_AXE);
-        handheldItem(ModItems.SAPPHIRE_SHOVEL);
-        handheldItem(ModItems.SAPPHIRE_HOE);
-
-        trimmedArmorItem(ModItems.SAPPHIRE_HELMET);
-        trimmedArmorItem(ModItems.SAPPHIRE_CHESTPLATE);
-        trimmedArmorItem(ModItems.SAPPHIRE_LEGGINGS);
-        trimmedArmorItem(ModItems.SAPPHIRE_BOOTS);
-
-        simpleBlockItemBlockTexture(ModBlocks.CATMINT);
-
-        withExistingParent(ModItems.RHINO_SPANW_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-
-        simpleItem(ModItems.PINE_SIGN);
-        simpleItem(ModItems.PINE_HANGING_SIGN);
-
-        simpleItem(ModItems.PINE_BOAT);
-        simpleItem(ModItems.PINE_CHEST_BOAT);*/
-
-        simpleItem(ModItems.VIRGINIA_PINE_BOAT);
-        simpleItem(ModItems.VIRGINIA_PINE_CHEST_BOAT);
+        //simpleItem(ModItems.VIRGINIA_PINE_BOAT);
+        //simpleItem(ModItems.VIRGINIA_PINE_CHEST_BOAT);
     }
 
     // Shoutout to El_Redstoniano for making this

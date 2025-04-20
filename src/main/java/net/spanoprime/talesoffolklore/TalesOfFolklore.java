@@ -18,6 +18,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
+import net.spanoprime.talesoffolklore.datagen.DataGenerators;
 import net.spanoprime.talesoffolklore.entity.ModBlockEntities;
 import net.spanoprime.talesoffolklore.entity.ModEntities;
 import net.spanoprime.talesoffolklore.entity.client.ModBoatRenderer;
@@ -42,12 +43,15 @@ public class TalesOfFolklore
     {
         IEventBus modEventBus = context.getModEventBus();
 
+        modEventBus.register(DataGenerators.class);
+
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModEntities.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(ModLootTables.class);
         MinecraftForge.EVENT_BUS.register(ModWallMossDecorator.class);
+        //MinecraftForge.EVENT_BUS.register(DataGenerators.class);
         ModTreeDecoratorTypes.register(modEventBus);
 
         // Register the commonSetup method for modloading

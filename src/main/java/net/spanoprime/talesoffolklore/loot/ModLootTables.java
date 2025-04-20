@@ -38,7 +38,6 @@ public class ModLootTables {
 
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
-
         // Controlla se il nome della loot table è presente nel Set
         if (LOOT_TABLES.contains(event.getName())) {
             Random random = new Random();

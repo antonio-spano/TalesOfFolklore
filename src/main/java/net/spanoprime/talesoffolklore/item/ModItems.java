@@ -1,6 +1,7 @@
 package net.spanoprime.talesoffolklore.item;
 
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -10,6 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 import net.spanoprime.talesoffolklore.entity.ModBoatEntity;
+import net.spanoprime.talesoffolklore.item.custom.FuelItem;
 import net.spanoprime.talesoffolklore.item.custom.ModBoatItem;
 
 public class ModItems {
@@ -51,7 +53,7 @@ public class ModItems {
             () -> new ModBoatItem(true, ModBoatEntity.Type.VIRGINIA_PINE, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> VIRGINIA_PINECONE = ITEMS.register("virginia_pinecone",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new SnowballItem(new Item.Properties()));
 
     public static void register(IEventBus eventBus)
     {

@@ -156,6 +156,7 @@ public class TalesOfFolklore
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.VIRGINIA_PINE_DOOR.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.VIRGINIA_PINE_SAPLING.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.WALL_MOSS.get(), RenderType.cutout());
+
             });
         }
     }

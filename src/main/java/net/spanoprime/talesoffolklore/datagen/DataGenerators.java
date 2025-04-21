@@ -1,6 +1,7 @@
 package net.spanoprime.talesoffolklore.datagen;
 
 import net.minecraft.WorldVersion;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -9,6 +10,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
+import net.spanoprime.talesoffolklore.entity.ModEntityTypes;
 import net.spanoprime.talesoffolklore.worldgen.*;
 import org.jetbrains.annotations.Debug;
 
@@ -38,6 +40,7 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(), new ModGlobalLootModifiersProvider(packOutput));
         generator.addProvider(event.includeServer(), new ModPoiTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
+        //EntityRenderers.register(ModEntityTypes.THROWABLE_PINECONE.get(), ThrowablePineConeRenderer::new);
 
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
     }

@@ -58,6 +58,7 @@ public class TalesOfFolklore
         MinecraftForge.EVENT_BUS.register(ModWallMossDecorator.class);
         //MinecraftForge.EVENT_BUS.register(DataGenerators.class);
         ModTreeDecoratorTypes.register(modEventBus);
+        //ModTreeDecoratorTypes.TREE_DECORATORS.register(modEventBus);
         ModTerrablender.registerBiomes();
 
         // Register the commonSetup method for modloading
@@ -71,6 +72,7 @@ public class TalesOfFolklore
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

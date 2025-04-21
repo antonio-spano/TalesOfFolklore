@@ -2,6 +2,7 @@ package net.spanoprime.talesoffolklore.worldgen;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraftforge.registries.RegistryObject;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 
@@ -23,10 +25,18 @@ public class ModPlacedFeatures {
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+
+
     /*
         register(context, VIRGINIA_PINE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.VIRGINIA_PINE_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, .1f, 2),
                         ModBlocks.VIRGINIA_PINE_SAPLING.get())); */
+        register(context, VIRGINIA_PINE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.VIRGINIA_PINE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, .1f, 2),
+                        ModBlocks.VIRGINIA_PINE_SAPLING.get()));
+
+        ResourceKey.create(Registries.PLACED_FEATURE,
+                ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, "virginia_pine_placed"));
 
     }
 

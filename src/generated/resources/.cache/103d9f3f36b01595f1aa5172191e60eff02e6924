@@ -1,2 +1,5 @@
-// 1.20.1	2025-04-21T00:48:45.85117	Registries
+// 1.20.1	2025-04-21T12:07:10.58878	Registries
+668fe0277b47a25527c7926cbd20cc0a558ec2f5 data/talesoffolklore/forge/biome_modifier/add_tree_virginia_pine.json
 a341ae6e00951e8f1f7943fdc9c60e20ab1b358e data/talesoffolklore/worldgen/biome/appalachian_forest.json
+9dcd3942ddfbbe8a6536b182469643f400d042f6 data/talesoffolklore/worldgen/configured_feature/virginia_pine.json
+e3ff0b11fbabce78b30572a0b60282fc9034862b data/talesoffolklore/worldgen/placed_feature/virginia_pine_placed.json

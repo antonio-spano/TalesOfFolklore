@@ -56,11 +56,12 @@ public class ModBiomes
         globalOverworldGeneration(biomeBuilder);
 
         // Add specific features to the biome
-        BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
-        BiomeDefaultFeatures.addForestFlowers(biomeBuilder);
+        //BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
+        //BiomeDefaultFeatures.addForestFlowers(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
         BiomeDefaultFeatures.addExtraGold(biomeBuilder);
+        BiomeDefaultFeatures.addPlainGrass(biomeBuilder); //grass
 
         // Safely add vanilla vegetation placements
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS);
@@ -74,18 +75,18 @@ public class ModBiomes
         // Build and return the actual Biome object with custom visuals and overrides
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
-                .downfall(0.8f)
-                .temperature(0.7f)
+                .downfall(0.5f) // default downfall
+                .temperature(0.5f) // default temperature
                 .generationSettings(biomeBuilder.build())
                 .mobSpawnSettings(spawnBuilder.build())
                 .specialEffects((new BiomeSpecialEffects.Builder())
-                        .fogColor(0x22a1e6)
-                        .waterColor(0xe82e3b)
-                        .waterFogColor(0xbf1b26)
-                        .skyColor(0x30c918)
-                        .grassColorOverride(0x7f03fc)
-                        .foliageColorOverride(0xd203fc)
-                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .fogColor(0xEAEAEA) // grigio chiaro
+                        .waterColor(0x3F76E4) // default water color
+                        .waterFogColor(0x050533) // default water fog color
+                        .skyColor(0x78A7FF) // default sky color (calculated based on temperature)
+                        .grassColorOverride(0xA7C191) // tundra grass color
+                        //.foliageColorOverride(null) // default foliage color (remove override)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS) // optional, kept from original
                         .build())
                 .build();
     }

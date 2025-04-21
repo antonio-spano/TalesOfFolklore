@@ -7,6 +7,7 @@
   "item.talesoffolklore.tales_of_folklore_r": "Tales Of Folklore",
   "item.talesoffolklore.virginia_pine_boat": "Virginia Pine Boat",
   "item.talesoffolklore.virginia_pine_chest_boat": "Virginia Pine Chest Boat",
+  "item.talesoffolklore.virginia_pinecone": "Virginia Pinecone",
 
   "block.talesoffolklore.virginia_pine_planks": "Virginia Pine Planks",
   "block.talesoffolklore.virginia_pine_stairs": "Virginia Pine Stairs",
@@ -27,7 +28,7 @@
   "block.talesoffolklore.virginia_pine_ladder": "Virginia Pine Ladder",
   "block.talesoffolklore.virginia_pine_sapling": "Virginia Pine Sapling",
   "block.talesoffolklore.virginia_pine_scaffolding": "Virginia Pine Scaffolding",
-  "block.talesoffolklore.wall_moss": "Wall Moss",
+  "block.talesoffolklore.wall_moss": "Mossy Bark",
 
   "entity.talesoffolklore.mod_chest_boat": "Boat With Chest"
 }

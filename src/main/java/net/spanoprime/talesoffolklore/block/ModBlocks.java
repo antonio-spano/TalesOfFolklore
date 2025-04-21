@@ -1,21 +1,11 @@
 package net.spanoprime.talesoffolklore.block;
 
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.BlockCollisions;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.client.model.obj.ObjMaterialLibrary;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -27,8 +17,6 @@ import net.spanoprime.talesoffolklore.item.custom.FuelBlockItem;
 import net.spanoprime.talesoffolklore.util.ModWoodTypes;
 import net.spanoprime.talesoffolklore.worldgen.tree.VirginiaPineTreeGrower;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -114,7 +102,7 @@ public class ModBlocks {
             () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD)));
 
     public static final RegistryObject<Block> WALL_MOSS = registerBlock("wall_moss",
-            () -> new WallMossBlock(BlockBehaviour.Properties.copy(Blocks.MOSS_CARPET)
+            () -> new ModWallMossBlock(BlockBehaviour.Properties.copy(Blocks.MOSS_CARPET)
                     .noCollission()
                     .instabreak()
                     .sound(SoundType.MOSS_CARPET)));

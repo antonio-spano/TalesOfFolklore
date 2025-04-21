@@ -1,5 +1,5 @@
-// 1.20.1	2025-04-21T12:07:10.58878	Registries
-668fe0277b47a25527c7926cbd20cc0a558ec2f5 data/talesoffolklore/forge/biome_modifier/add_tree_virginia_pine.json
-a341ae6e00951e8f1f7943fdc9c60e20ab1b358e data/talesoffolklore/worldgen/biome/appalachian_forest.json
-9dcd3942ddfbbe8a6536b182469643f400d042f6 data/talesoffolklore/worldgen/configured_feature/virginia_pine.json
-e3ff0b11fbabce78b30572a0b60282fc9034862b data/talesoffolklore/worldgen/placed_feature/virginia_pine_placed.json
+// 1.20.1	2025-04-21T21:40:33.557383	Registries
+c80a5a74f83b95f7f425fefc02a8e654f8a16410 data/talesoffolklore/forge/biome_modifier/add_tree_virginia_pine.json
+079a780071402aa379be059f0b0f6e1d9252490e data/talesoffolklore/worldgen/biome/appalachian_forest.json
+55e0d518e1cba82157bc8ed5bd130f83b3465e9f data/talesoffolklore/worldgen/configured_feature/virginia_pine.json
+1c88db19270d203419d0d27328b2b3f14b42c744 data/talesoffolklore/worldgen/placed_feature/virginia_pine_placed.json

@@ -50,6 +50,9 @@ public class ModItems {
     public static final RegistryObject<Item> VIRGINIA_PINE_CHEST_BOAT = ITEMS.register("virginia_pine_chest_boat",
             () -> new ModBoatItem(true, ModBoatEntity.Type.VIRGINIA_PINE, new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> VIRGINIA_PINECONE = ITEMS.register("virginia_pinecone",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
     public static void register(IEventBus eventBus)
     {
         ITEMS.register(eventBus);

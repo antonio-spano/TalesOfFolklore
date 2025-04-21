@@ -35,8 +35,8 @@ public class ModOverworldRegion extends Region
                 .temperature(ParameterUtils.Temperature. span(ParameterUtils.Temperature.COOL, ParameterUtils.Temperature. FROZEN))
                 .humidity(ParameterUtils.Humidity. span(ParameterUtils.Humidity.ARID, ParameterUtils.Humidity.DRY))
                 .continentalness(ParameterUtils.Continentalness.INLAND)
-                .erosion (ParameterUtils.Erosion.EROSION_0, ParameterUtils.Erosion.EROSION_1)
-                .depth(ParameterUtils.Depth.SURFACE, ParameterUtils.Depth. FLOOR)
+                .depth(ParameterUtils.Depth.values()) // invece di solo SURFACE e FLOOR
+                .erosion(ParameterUtils.Erosion.values()) // per includere tutte le possibilità
                 .weirdness(ParameterUtils.Weirdness.MID_SLICE_NORMAL_ASCENDING, ParameterUtils.Weirdness.MID_SLICE_NORMAL_DESCENDING)
                 .build(). forEach(parameterPoint ->  builder.add(parameterPoint, ModBiomes.APPALACHIAN_FOREST));
         //TODO: OCCHIO AI PARAMETERPOINTS DOVREBBERO ESSERE POINT

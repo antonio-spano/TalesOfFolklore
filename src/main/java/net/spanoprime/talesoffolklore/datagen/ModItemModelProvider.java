@@ -40,10 +40,11 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     @Override
-    protected void registerModels() {
-
+    protected void registerModels()
+    {
         //simpleItem(ModItems.VIRGINIA_PINE_BOAT);
         //simpleItem(ModItems.VIRGINIA_PINE_CHEST_BOAT);
+        simpleItem(ModItems.VIRGINIA_PINECONE);
     }
 
     // Shoutout to El_Redstoniano for making this

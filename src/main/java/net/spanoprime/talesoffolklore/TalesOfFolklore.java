@@ -128,6 +128,11 @@ public class TalesOfFolklore
             event.accept(ModBlocks.VIRGINIA_PINE_SAPLING);
             event.accept(ModBlocks.WALL_MOSS);
         }
+
+        if(event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES)
+        {
+            event.accept(ModItems.VIRGINIA_PINECONE);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

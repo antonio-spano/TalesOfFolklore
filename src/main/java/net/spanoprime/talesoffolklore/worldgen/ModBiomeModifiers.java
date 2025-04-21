@@ -5,9 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,7 +19,10 @@ public class ModBiomeModifiers {
         var biomes = context.lookup(Registries.BIOME);
 
         context.register(ADD_TREE_VIRGINIA_PINE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
-                biomes.getOrThrow(Tags.Biomes.IS_PLAINS),
+                HolderSet.direct(biomes.getOrThrow(ResourceKey.create(
+                        Registries.BIOME, // The biome registry
+                        ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, "appalachian_forest") // Your custom biome key
+                ))),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.VIRGINIA_PINE_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION));
     }

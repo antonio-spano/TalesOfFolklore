@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
@@ -44,12 +45,12 @@ public class ModConfiguredFeatures {
 
         TreeConfiguration config = new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.VIRGINIA_PINE_LOG.get()), // Trunk block
-                new StraightTrunkPlacer(5, 2, 0), // Trunk shape
+                new StraightTrunkPlacer(21, 0, 3), // Trunk shape
                 BlockStateProvider.simple(ModBlocks.VIRGINIA_PINE_LEAVES.get()), // Leaves block
                 new MegaPineFoliagePlacer(
-                        ConstantInt.of(0), // foliage offset (di solito 0)
+                        ConstantInt.of(1), // foliage offset (di solito 0)
                         ConstantInt.of(0), // foliage randomness (di solito 0)
-                        ConstantInt.of(7)  // foliage radius, prova anche con 5-9
+                        UniformInt.of(13, 17)  // foliage height
                 ), // Foliage
                 new TwoLayersFeatureSize(1, 0, 1) // Tree height layering
         )

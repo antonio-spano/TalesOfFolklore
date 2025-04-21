@@ -1,7 +1,6 @@
 package net.spanoprime.talesoffolklore.block.custom;
 
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -16,10 +15,11 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
+import net.spanoprime.talesoffolklore.block.ModBlocks;
 
 import javax.annotation.Nullable;
 
-public class WallMossBlock extends Block {
+public class ModWallMossBlock extends Block {
 
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
@@ -28,7 +28,7 @@ public class WallMossBlock extends Block {
     private static final VoxelShape SHAPE_EAST  = Block.box(0, 0, 0, 1, 16, 16);
     private static final VoxelShape SHAPE_WEST  = Block.box(15, 0, 0, 16, 16, 16);
 
-    public WallMossBlock(Properties props) {
+    public ModWallMossBlock(Properties props) {
         super(props);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH)); // Impostiamo la direzione predefinita
     }
@@ -79,7 +79,18 @@ public class WallMossBlock extends Block {
         Direction dir = state.getValue(FACING);
         BlockPos attachedPos = pos.relative(dir.getOpposite());
         BlockState attachedState = level.getBlockState(attachedPos);
-        return attachedState.isFaceSturdy(level, attachedPos, dir);
+
+        // Controlla se il blocco a cui è attaccato è un log (inclusi quelli di Virginia Pine)
+        if (attachedState.is(Blocks.OAK_LOG) || attachedState.is(Blocks.SPRUCE_LOG) || attachedState.is(Blocks.BIRCH_LOG) ||
+                attachedState.is(Blocks.JUNGLE_LOG) || attachedState.is(Blocks.ACACIA_LOG) || attachedState.is(Blocks.DARK_OAK_LOG) ||
+                attachedState.is(Blocks.OAK_WOOD) || attachedState.is(Blocks.SPRUCE_WOOD) ||
+                attachedState.is(Blocks.BIRCH_WOOD) || attachedState.is(Blocks.JUNGLE_WOOD) ||
+                attachedState.is(Blocks.ACACIA_WOOD) || attachedState.is(Blocks.DARK_OAK_WOOD) ||
+                attachedState.is(ModBlocks.VIRGINIA_PINE_LOG.get()) || attachedState.is(ModBlocks.VIRGINIA_PINE_WOOD.get())) {
+            return true;
+        }
+
+        return false; // Il blocco si attacca solo se è un log
     }
 
 

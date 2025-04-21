@@ -6,20 +6,19 @@
       "minecraft:canyon"
     ]
   },
-  "downfall": 0.8,
+  "downfall": 0.5,
   "effects": {
-    "fog_color": 2269670,
-    "foliage_color": 13763580,
-    "grass_color": 8324092,
+    "fog_color": 15395562,
+    "grass_color": 10994065,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000
     },
-    "sky_color": 3197208,
-    "water_color": 15216187,
-    "water_fog_color": 12524326
+    "sky_color": 7907327,
+    "water_color": 4159204,
+    "water_fog_color": 329011
   },
   "features": [
     [],
@@ -28,8 +27,7 @@
       "minecraft:lake_lava_surface"
     ],
     [
-      "minecraft:amethyst_geode",
-      "minecraft:forest_rock"
+      "minecraft:amethyst_geode"
     ],
     [
       "minecraft:monster_room",
@@ -72,8 +70,8 @@
     ],
     [
       "minecraft:glow_lichen",
-      "minecraft:forest_flowers",
       "minecraft:patch_large_fern",
+      "minecraft:patch_tall_grass_2",
       "minecraft:trees_plains",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",
@@ -190,5 +188,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.7
+  "temperature": 0.5
 }

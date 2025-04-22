@@ -10,7 +10,6 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
-import net.spanoprime.talesoffolklore.entity.ModEntityTypes;
 import net.spanoprime.talesoffolklore.worldgen.*;
 import org.jetbrains.annotations.Debug;
 

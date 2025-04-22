@@ -4,9 +4,12 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
@@ -15,11 +18,15 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaPineFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
+import net.minecraft.world.level.levelgen.feature.treedecorators.AlterGroundDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallMossDecorator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModConfiguredFeatures {
@@ -28,20 +35,19 @@ public class ModConfiguredFeatures {
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         System.out.println("ModConfiguredFeatures: Bootstrapping started...");
-        /*
-            context.register(
-                    VIRGINIA_PINE_KEY,
-                    new ConfiguredFeature<>(
-                            Feature.TREE,
-                            new TreeConfiguration.TreeConfigurationBuilder(
-                                    BlockStateProvider.simple(ModBlocks.VIRGINIA_PINE_LOG.get()),
-                                    new StraightTrunkPlacer(5, 2, 0),
-                                    BlockStateProvider.simple(ModBlocks.VIRGINIA_PINE_LEAVES.get()),
-                                    new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 4),
-                                    new TwoLayersFeatureSize(1, 0, 1))
-                                    .build()
-                    )
-            ); */
+
+        List<TreeDecorator> decorators = new ArrayList<>();
+        decorators.add(new ModWallMossDecorator(0.5f)); // Mantieni il tuo decoratore custom
+
+        // Aggiungi il decoratore per il terreno (Mycelium + Coarse Dirt)
+        decorators.add(new AlterGroundDecorator(
+                // Usa un WeightedStateProvider per mischiare i blocchi
+                new WeightedStateProvider(
+                        SimpleWeightedRandomList.<BlockState>builder()
+                                .add(Blocks.PODZOL.defaultBlockState(), 3) // Aggiunge Mycelium con peso 1 (50%)
+                                .add(Blocks.COARSE_DIRT.defaultBlockState(), 1) // Aggiunge Coarse Dirt con peso 1 (50%)
+                ) // Chiude il builder della lista pesata
+        ));
 
         TreeConfiguration config = new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.VIRGINIA_PINE_LOG.get()), // Trunk block
@@ -55,7 +61,8 @@ public class ModConfiguredFeatures {
                 new TwoLayersFeatureSize(1, 0, 1) // Tree height layering
         )
                 // Aggiunta del decoratore personalizzato (se vuoi usarlo)
-                .decorators(List.of(new ModWallMossDecorator(.5f))) // oppure lascia vuoto se non vuoi usarlo
+                .decorators(decorators)
+                // oppure lascia vuoto se non vuoi usarlo
                 .build();
 
         context.register(VIRGINIA_PINE_KEY, new ConfiguredFeature<>(Feature.TREE, config));

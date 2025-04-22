@@ -8,6 +8,9 @@ public class ModTerrablender
 {
     public static void registerBiomes()
     {
-        Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, "overworld"), 5));
+        // Torniamo a un peso basso, come 1 o 2. Con parametri più specifici,
+        // non c'è bisogno di un peso alto. Prova con 2.
+        Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, "overworld"), 8));
+        // ^--- Peso riportato a 2
     }
 }

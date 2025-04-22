@@ -4,9 +4,10 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
+import net.minecraft.data.worldgen.placement.VegetationPlacements; // Assicurati sia importato
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
@@ -14,6 +15,9 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
+import org.joml.Math;
+// Assumi che questo esista se lo userai per i tuoi alberi
+// import net.spanoprime.talesoffolklore.worldgen.ModPlacedFeatures;
 
 public class ModBiomes
 {
@@ -21,12 +25,10 @@ public class ModBiomes
             ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, "appalachian_forest"));
 
     public static void bootstrap(BootstapContext<Biome> context) {
-        // Register the Appalachian Forest biome with checks for validity
         context.register(APPALACHIAN_FOREST, appalachianForest(context));
     }
 
     public static void globalOverworldGeneration(BiomeGenerationSettings.Builder builder) {
-        // Add global overworld generation features
         BiomeDefaultFeatures.addDefaultCarversAndLakes(builder);
         BiomeDefaultFeatures.addDefaultCrystalFormations(builder);
         BiomeDefaultFeatures.addDefaultMonsterRoom(builder);
@@ -36,58 +38,65 @@ public class ModBiomes
     }
 
     public static Biome appalachianForest(BootstapContext<Biome> context) {
-        // Build the spawning settings
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         spawnBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 5, 4, 4));
         BiomeDefaultFeatures.farmAnimals(spawnBuilder);
-        BiomeDefaultFeatures.commonSpawns(spawnBuilder);
+        BiomeDefaultFeatures.commonSpawns(spawnBuilder); // Include pipistrelli, ragni, zombie, etc.
 
-        // Obtain registry lookups safely
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers = context.lookup(Registries.CONFIGURED_CARVER);
 
-        // Ensure both lookups are valid (fallback or throw an exception if needed)
-        if (placedFeatures == null || configuredCarvers == null) {
-            throw new IllegalStateException("Missing required registries for Appalachation Forest generation.");
-        }
+        // Rimosso controllo null perché BootstrapContext dovrebbe garantirli
+        // if (placedFeatures == null || configuredCarvers == null) {
+        //     throw new IllegalStateException("Missing required registries for Appalachian Forest generation.");
+        // }
 
-        // Build the biome generation settings
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers);
         globalOverworldGeneration(biomeBuilder);
 
-        // Add specific features to the biome
-        //BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
-        //BiomeDefaultFeatures.addForestFlowers(biomeBuilder);
-        BiomeDefaultFeatures.addFerns(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
-        BiomeDefaultFeatures.addExtraGold(biomeBuilder);
-        BiomeDefaultFeatures.addPlainGrass(biomeBuilder); //grass
+        // --- Generazione Features Specifiche ---
+        //BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder); // Rocce coperte di muschio? Considera se adatte
+        BiomeDefaultFeatures.addFerns(biomeBuilder); // Felci
+        BiomeDefaultFeatures.addDefaultOres(biomeBuilder); // Minerali standard
+        // BiomeDefaultFeatures.addExtraGold(biomeBuilder); // Oro extra? Potrebbe starci tematicamente
+        BiomeDefaultFeatures.addPlainGrass(biomeBuilder); // Erba base
 
-        // Safely add vanilla vegetation placements
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS);
+        // --- ALBERI ---
+        // Usa alberi più fitti di Plains ma meno specifici di Taiga
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS); // Querce e Betulle più fitte
 
-        // TODO: Handle ModPlacedFeatures safely if needed (remove invalid calls to getHolder())
+        // TODO: Aggiungi qui i tuoi alberi custom quando pronti
         // biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.VIRGINIA_PINE_PLACED_KEY);
 
-        BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultExtraVegetation(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder); // Funghi standard
+        BiomeDefaultFeatures.addDefaultExtraVegetation(biomeBuilder); // Canna da zucchero, zucche
 
-        // Build and return the actual Biome object with custom visuals and overrides
+        // --- Biome Properties & Effects ---
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
-                .downfall(0.5f) // default downfall
-                .temperature(0.5f) // default temperature
+                .downfall(0.6f)
+                .temperature(0.3f) // Leggermente freddo/temperato
                 .generationSettings(biomeBuilder.build())
                 .mobSpawnSettings(spawnBuilder.build())
                 .specialEffects((new BiomeSpecialEffects.Builder())
-                        .fogColor(0xEAEAEA) // grigio chiaro
-                        .waterColor(0x3F76E4) // default water color
-                        .waterFogColor(0x050533) // default water fog color
-                        .skyColor(0x78A7FF) // default sky color (calculated based on temperature)
-                        .grassColorOverride(0xA7C191) // tundra grass color
-                        //.foliageColorOverride(null) // default foliage color (remove override)
-                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS) // optional, kept from original
+                        .fogColor(0xDADADA) // Grigio chiaro per la nebbia
+                        .waterColor(0x3F76E4)
+                        .waterFogColor(0x050533)
+                        .skyColor(calculateSkyColor(0.3f)) // Calcolato dinamicamente
+                        .grassColorOverride(0x80A755) // Verde erba stile foresta temperata/leggermente fredda
+                        //.foliageColorOverride(0x60884D) // Verde fogliame abbinato (Opzionale)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
                         .build())
                 .build();
     }
+
+    // Helper method per il colore del cielo basato sulla temperatura (vanilla lo fa così)
+    private static int calculateSkyColor(float temperature) {
+        float $$1 = temperature / 3.0F;
+        $$1 = Mth.clamp($$1, -1.0F, 1.0F);
+        return Mth.hsvToRgb(0.62222224F - $$1 * 0.05F, 0.5F + $$1 * 0.1F, 1.0F);
+    }
+
+    // Bisogna importare Mth
+    // import net.minecraft.util.Mth;
 }

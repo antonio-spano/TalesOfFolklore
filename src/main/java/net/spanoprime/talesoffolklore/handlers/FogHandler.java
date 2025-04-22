@@ -2,90 +2,108 @@ package net.spanoprime.talesoffolklore.handlers;
 
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth; // Import per Mth.lerp
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
+import net.spanoprime.talesoffolklore.worldgen.biome.ModBiomes; // Usa la chiave del bioma direttamente
 
 @Mod.EventBusSubscriber(modid = TalesOfFolklore.MOD_ID, value = Dist.CLIENT)
 public class FogHandler {
 
-    private static final float MIN_FOG = 30.0f;
-    private static final float MAX_FOG = 300.0f;
-    private static final float FOG_SPEED = 5.0f;
+    private static final float MIN_FOG_DISTANCE = 30.0f; // Distanza nebbia minima (più vicina)
+    private static final float MAX_FOG_DISTANCE = 300.0f; // Distanza nebbia massima (default, lontana)
+    private static final float FOG_TRANSITION_SPEED = 0.05f; // Velocità di transizione (più basso = più lento/smooth)
 
-    private static float currentFogDistance = MAX_FOG;
-    private static boolean shouldRenderFog = false;
-    private static boolean isInBiome = false;
+    private static float currentFogDistance = MAX_FOG_DISTANCE;
+    private static float targetFogDistance = MAX_FOG_DISTANCE;
+    private static boolean renderCustomFog = false; // Flag per attivare il rendering custom
+
+    // Helper per interpolazione lineare
+    private static float lerp(float start, float end, float delta) {
+        return Mth.lerp(delta, start, end); // Usa Mth.lerp per correttezza
+    }
 
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
 
-        var mc = net.minecraft.client.Minecraft.getInstance();
+        Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.level == null) return;
 
-        var biomeKey = mc.level.getBiome(mc.player.blockPosition()).unwrapKey();
-        boolean inTargetBiome = biomeKey.isPresent() &&
-                biomeKey.get().location().equals(ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, "appalachian_forest"));
+        // Controlla se il giocatore è nel bioma target
+        boolean isInTargetBiome = mc.level.getBiome(mc.player.blockPosition()).is(ModBiomes.APPALACHIAN_FOREST);
 
-        // Entrata nel bioma → attiva la nebbia
-        if (inTargetBiome && !isInBiome) {
-            isInBiome = true;
-            shouldRenderFog = true;
-        }
-
-        // Uscita dal bioma → inizia a spegnere la nebbia
-        if (!inTargetBiome && isInBiome) {
-            isInBiome = false;
-        }
-
-        // Gestione transizione
-        if (isInBiome) {
-            currentFogDistance = Math.max(MIN_FOG, currentFogDistance - FOG_SPEED);
+        // Imposta la distanza target della nebbia
+        if (isInTargetBiome) {
+            targetFogDistance = MIN_FOG_DISTANCE;
         } else {
-            if (shouldRenderFog) {
-                currentFogDistance = Math.min(MAX_FOG, currentFogDistance + FOG_SPEED);
-                if (currentFogDistance >= MAX_FOG) {
-                    shouldRenderFog = false; // disattiva nebbia quando è completamente "svanita"
-                }
-            }
+            targetFogDistance = MAX_FOG_DISTANCE;
+        }
+
+        // Interpola dolcemente la distanza corrente verso la distanza target
+        currentFogDistance = lerp(currentFogDistance, targetFogDistance, FOG_TRANSITION_SPEED);
+
+        // Determina se dobbiamo applicare la nebbia custom
+        // Attiva se siamo nel bioma o se la nebbia non è ancora completamente dissolta
+        renderCustomFog = isInTargetBiome || !Mth.equal(currentFogDistance, MAX_FOG_DISTANCE);
+
+        // Piccola soglia per evitare calcoli/rendering quando la nebbia è praticamente sparita
+        if (Math.abs(currentFogDistance - MAX_FOG_DISTANCE) < 0.1f) {
+            currentFogDistance = MAX_FOG_DISTANCE; // Snap alla distanza massima
+            if (!isInTargetBiome) renderCustomFog = false; // Disattiva se siamo fuori e la nebbia è a max
+        }
+        if (Math.abs(currentFogDistance - MIN_FOG_DISTANCE) < 0.1f) {
+            currentFogDistance = MIN_FOG_DISTANCE; // Snap alla distanza minima
         }
     }
 
     @SubscribeEvent
     public static void onFogDensity(ViewportEvent.RenderFog event) {
-        if (!shouldRenderFog) return;
+        // Applica solo se il flag è attivo e non siamo in modalità spettatore o acqua
+        if (!renderCustomFog || event.getCamera().isDetached() || event.getCamera().getEntity().isSpectator() || event.getCamera().getFluidInCamera().equals(net.minecraft.tags.FluidTags.WATER)) {
+            return;
+        }
 
-        float near = 0.0f;
+        float near = 0.0f; // Puoi regolare il near plane se necessario, ma 0 di solito va bene
         float far = currentFogDistance;
 
         event.setCanceled(true);
         event.setNearPlaneDistance(near);
         event.setFarPlaneDistance(far);
-        event.setFogShape(FogShape.SPHERE);
+        event.setFogShape(FogShape.SPHERE); // Nebbia sferica
 
+        // Imposta i valori per lo shader della nebbia
         RenderSystem.setShaderFogStart(near);
         RenderSystem.setShaderFogEnd(far);
     }
 
     @SubscribeEvent
     public static void onFogColor(ViewportEvent.ComputeFogColor event) {
-        if (!shouldRenderFog) return;
+        // Applica solo se il flag è attivo e non siamo in modalità spettatore o acqua
+        if (!renderCustomFog || event.getCamera().isDetached() || event.getCamera().getEntity().isSpectator() || event.getCamera().getFluidInCamera().equals(net.minecraft.tags.FluidTags.WATER)) {
+            return;
+        }
 
-        // Grigio pallido per l’atmosfera misteriosa
-        float r = 216f / 255f;
-        float g = 216f / 255f;
-        float b = 216f / 255f;
+        // Colore Nebbia: Grigio pallido desiderato
+        float targetR = 216f / 255f;
+        float targetG = 216f / 255f;
+        float targetB = 216f / 255f;
 
-        // Leggero blending col colore esistente (se vuoi intensità dinamica, fammi sapere)
-        float blend = 0.7f;
-        float finalR = event.getRed() * (1 - blend) + r * blend;
-        float finalG = event.getGreen() * (1 - blend) + g * blend;
-        float finalB = event.getBlue() * (1 - blend) + b * blend;
+        // Calcola l'intensità del blending basata su quanto è fitta la nebbia
+        // Quando currentFogDistance == MAX_FOG_DISTANCE, blendFactor = 0 (nessun colore custom)
+        // Quando currentFogDistance == MIN_FOG_DISTANCE, blendFactor = 1 (colore custom pieno)
+        float blendFactor = Mth.clamp(1.0f - (currentFogDistance - MIN_FOG_DISTANCE) / (MAX_FOG_DISTANCE - MIN_FOG_DISTANCE), 0.0f, 1.0f);
+
+        // Interpola il colore attuale verso il colore target usando il blendFactor
+        float finalR = lerp(event.getRed(), targetR, blendFactor);
+        float finalG = lerp(event.getGreen(), targetG, blendFactor);
+        float finalB = lerp(event.getBlue(), targetB, blendFactor);
 
         event.setRed(finalR);
         event.setGreen(finalG);

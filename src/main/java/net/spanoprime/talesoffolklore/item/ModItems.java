@@ -11,6 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 import net.spanoprime.talesoffolklore.entity.ModBoatEntity;
+import net.spanoprime.talesoffolklore.item.custom.AppalachianMapItem;
 import net.spanoprime.talesoffolklore.item.custom.FuelItem;
 import net.spanoprime.talesoffolklore.item.custom.ModBoatItem;
 
@@ -25,10 +26,10 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> APPALACHIAN_FOREST_MAP = ITEMS.register("appalachian_forest_map",
-            () -> new Item(new Item.Properties().stacksTo(1)));
+            () -> new AppalachianMapItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> SPIRITS_FOREST_MAP = ITEMS.register("spirits_forest_map",
-            () -> new Item(new Item.Properties().stacksTo(1)));
+            () -> new MapItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> TALES_OF_FOLKLORE_R = ITEMS.register("tales_of_folklore_r",
             () -> new Item(new Item.Properties().stacksTo(1)));

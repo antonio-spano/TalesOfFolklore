@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -19,6 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MapItem;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -144,6 +146,11 @@ public class AppalachianMapItem extends Item {
                 BlockPos finalPos = targetPos.get();
                 BlockPos surfacePos = serverLevel.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, finalPos);
                 LOGGER.info("Final Step: Creating map centered near {}", surfacePos);
+
+                if (pPlayer instanceof ServerPlayer serverPlayer) {
+                    GameType gameMode = serverPlayer.gameMode.getGameModeForPlayer();
+                    if (gameMode != GameType.CREATIVE) { itemstack.shrink(1); }
+                }
 
                 ItemStack mapStack = MapItem.create(serverLevel, surfacePos.getX(), surfacePos.getZ(), (byte) 2, true, true);
                 mapStack.setHoverName(Component.translatable("item.talesoffolklore.appalachian_map.revealed_title").withStyle(ChatFormatting.DARK_GREEN));

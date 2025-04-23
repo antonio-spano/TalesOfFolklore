@@ -48,7 +48,11 @@ public class ModWallIvySeed extends VineBlock {
 
     // Helper per terreno valido
     private boolean isValidGround(BlockState groundState) {
-        return groundState.is(Blocks.DIRT) || groundState.is(Blocks.GRASS_BLOCK);
+        return groundState.is(Blocks.DIRT)
+                || groundState.is(Blocks.GRASS_BLOCK)
+                || groundState.is(Blocks.PODZOL)
+                || groundState.is(Blocks.COARSE_DIRT)
+                || groundState.is(Blocks.ROOTED_DIRT);
     }
 
 

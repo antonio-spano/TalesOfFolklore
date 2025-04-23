@@ -107,6 +107,12 @@ public class ModBlocks {
                     .instabreak()
                     .sound(SoundType.MOSS_CARPET)));
 
+    public static final RegistryObject<Block> WALL_IVY_SEED = registerBlock("wall_ivy_seed",
+            () -> new ModWallIvySeed(BlockBehaviour.Properties.copy(Blocks.VINE).randomTicks()));
+
+    public static final RegistryObject<Block> WALL_IVY = registerBlock("wall_ivy",
+            () -> new ModWallIvy(BlockBehaviour.Properties.copy(Blocks.VINE)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

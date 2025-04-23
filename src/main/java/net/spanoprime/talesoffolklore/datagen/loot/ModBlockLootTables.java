@@ -1,5 +1,6 @@
 package net.spanoprime.talesoffolklore.datagen.loot;
 
+import net.minecraft.world.level.block.Blocks;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 import net.spanoprime.talesoffolklore.item.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -51,6 +52,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.STRIPPED_VIRGINIA_PINE_WOOD.get());
         this.dropSelf(ModBlocks.STRIPPED_VIRGINIA_PINE_LOG.get());
         this.dropSelf(ModBlocks.WALL_MOSS.get());
+        this.dropSelf(ModBlocks.WALL_IVY_SEED.get());
+        this.dropOther(ModBlocks.WALL_IVY.get(), ModBlocks.WALL_IVY_SEED.get());
 
         this.add(ModBlocks.VIRGINIA_PINE_LEAVES.get(),
                 createLeavesDrops(ModBlocks.VIRGINIA_PINE_LEAVES.get(), ModBlocks.VIRGINIA_PINE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));

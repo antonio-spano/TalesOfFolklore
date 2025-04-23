@@ -127,6 +127,8 @@ public class TalesOfFolklore
         {
             event.accept(ModBlocks.VIRGINIA_PINE_SAPLING);
             event.accept(ModBlocks.WALL_MOSS);
+            event.accept(ModBlocks.WALL_IVY_SEED);
+            event.accept(ModBlocks.WALL_IVY);
         }
 
         if(event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES)

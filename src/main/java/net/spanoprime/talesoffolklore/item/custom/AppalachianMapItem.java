@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 
 import java.util.Optional; // Still needed for clarity
 
-public class AppalachianMapItem extends Item {
+public class AppalachianMapItem extends MapItem {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
@@ -146,14 +146,16 @@ public class AppalachianMapItem extends Item {
                 BlockPos finalPos = targetPos.get();
                 BlockPos surfacePos = serverLevel.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, finalPos);
                 LOGGER.info("Final Step: Creating map centered near {}", surfacePos);
-
+                /*
                 if (pPlayer instanceof ServerPlayer serverPlayer) {
                     GameType gameMode = serverPlayer.gameMode.getGameModeForPlayer();
                     if (gameMode != GameType.CREATIVE) { itemstack.shrink(1); }
-                }
+                } */
 
                 ItemStack mapStack = MapItem.create(serverLevel, surfacePos.getX(), surfacePos.getZ(), (byte) 2, true, true);
                 mapStack.setHoverName(Component.translatable("item.talesoffolklore.appalachian_map.revealed_title").withStyle(ChatFormatting.DARK_GREEN));
+
+                MapItem.renderBiomePreviewMap(serverLevel, mapStack);
 
                 if (!pPlayer.getAbilities().instabuild) {
                     itemstack.shrink(1);

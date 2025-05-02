@@ -30,6 +30,8 @@
   "block.talesoffolklore.virginia_pine_sapling": "Virginia Pine Sapling",
   "block.talesoffolklore.virginia_pine_scaffolding": "Virginia Pine Scaffolding",
   "block.talesoffolklore.wall_moss": "Mossy Bark",
+  "block.talesoffolklore.wall_ivy": "Wall Ivy",
+  "block.talesoffolklore.wall_ivy_seed": "Wall Ivy Seed",
 
   "entity.talesoffolklore.mod_chest_boat": "Boat With Chest"
 }

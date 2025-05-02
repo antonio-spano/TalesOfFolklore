@@ -39,7 +39,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.VIRGINIA_PINE_WALL_SIGN.get(),
                         ModBlocks.VIRGINIA_PINE_WOOD.get(),
                         ModBlocks.STRIPPED_VIRGINIA_PINE_WOOD.get(),
-                        ModBlocks.STRIPPED_VIRGINIA_PINE_LOG.get());
+                        ModBlocks.STRIPPED_VIRGINIA_PINE_LOG.get(),
+                        ModBlocks.WALL_IVY_SEED.get(),
+                        ModBlocks.WALL_IVY.get());
 
         this.tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(ModBlocks.VIRGINIA_PINE_LEAVES.get());

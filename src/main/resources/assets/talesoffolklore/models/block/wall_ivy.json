@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/cube_all",
+	"textures": {
+		"all": "talesoffolklore:block/wall_ivy"
+	},
+	"render_type": "cutout"
+}

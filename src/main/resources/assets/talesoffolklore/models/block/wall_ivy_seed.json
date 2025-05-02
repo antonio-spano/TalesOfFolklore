@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/vine",
+	"textures": {
+		"vine": "talesoffolklore:block/wall_ivy_seed",
+		"particle": "talesoffolklore:block/wall_ivy_seed"
+	},
+	"render_type": "cutout"
+}

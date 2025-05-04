@@ -111,7 +111,7 @@ public class ModBlocks {
             () -> new ModWallIvySeed(BlockBehaviour.Properties.copy(Blocks.VINE).randomTicks()));
 
     public static final RegistryObject<Block> WALL_IVY = registerBlock("wall_ivy",
-            () -> new ModWallIvy(BlockBehaviour.Properties.copy(Blocks.VINE)));
+            () -> new ModWallIvy(BlockBehaviour.Properties.copy(Blocks.VINE).randomTicks()));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {

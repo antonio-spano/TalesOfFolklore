@@ -1,7 +1,8 @@
 {
-	"parent": "minecraft:block/cube_all",
+	"parent": "minecraft:block/vine",
 	"textures": {
-		"all": "talesoffolklore:block/wall_ivy"
+		"vine": "talesoffolklore:block/wall_ivy",
+		"particle": "talesoffolklore:block/wall_ivy"
 	},
 	"render_type": "cutout"
 }

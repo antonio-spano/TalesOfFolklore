@@ -1,83 +1,165 @@
 package net.spanoprime.talesoffolklore.block.custom;
 
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.VineBlock; // Usato solo per le proprietà
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.phys.shapes.Shapes; // Import mancante
+import net.minecraft.world.phys.shapes.Shapes;
 
-// Blocco edera normale. Non si espande da solo.
-// Viene piazzato solo da ModWallIvySeed.
-// Deve avere un muro valido adiacente per sopravvivere.
+import java.util.Map;
+import java.util.stream.Collectors;
+
+/**
+ * Blocco edera normale. Non si espande da solo.
+ * Viene piazzato solo da ModWallIvySeed.
+ * Deve avere un muro valido adiacente per sopravvivere.
+ * Si attacca visivamente ai muri con texture piane.
+ * Ha una selection box sottile ma è attraversabile.
+ */
 public class ModWallIvy extends Block {
 
-    // Forma sottile, come le viti, per non avere collisione
-    protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D); // Leggermente dentro il blocco
+    // Proprietà booleane per i lati orizzontali
+    public static final BooleanProperty NORTH = VineBlock.NORTH;
+    public static final BooleanProperty EAST = VineBlock.EAST;
+    public static final BooleanProperty SOUTH = VineBlock.SOUTH;
+    public static final BooleanProperty WEST = VineBlock.WEST;
 
-    public ModWallIvy(Properties pProperties) {
-        // Proprietà tipiche per edera/viti: nessun'ombra, nessuna collisione, si rompe subito, suono di pianta
+    // Mappa statica per accedere facilmente alla proprietà dalla direzione
+    public static final Map<Direction, BooleanProperty> PROPERTY_BY_DIRECTION = VineBlock.PROPERTY_BY_DIRECTION.entrySet().stream()
+            .filter(entry -> entry.getKey().getAxis().isHorizontal())
+            .collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, Map.Entry::getValue));
+
+    // --- Definizioni delle forme sottili per la SELECTION BOX ---
+    // Spessore di 1 pixel (1/16 di blocco)
+    protected static final double THICKNESS = 1.0D; // Spessore in pixel
+    protected static final VoxelShape EAST_AABB = Block.box(0.0D, 0.0D, 0.0D, THICKNESS, 16.0D, 16.0D);   // Attaccato a Ovest, si estende verso Est
+    protected static final VoxelShape WEST_AABB = Block.box(16.0D - THICKNESS, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D); // Attaccato a Est, si estende verso Ovest
+    protected static final VoxelShape SOUTH_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, THICKNESS);  // Attaccato a Nord, si estende verso Sud
+    protected static final VoxelShape NORTH_AABB = Block.box(0.0D, 0.0D, 16.0D - THICKNESS, 16.0D, 16.0D, 16.0D); // Attaccato a Sud, si estende verso Nord
+
+    public ModWallIvy(BlockBehaviour.Properties pProperties) {
+        // Proprietà: attraversabile (.noCollission), si rompe subito, suono di pianta
+        // noOcclusion aiuta con il rendering
         super(pProperties.noOcclusion().noCollission().instabreak().sound(SoundType.VINE));
+        // Stato di default: nessun lato attaccato
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(NORTH, Boolean.valueOf(false))
+                .setValue(EAST, Boolean.valueOf(false))
+                .setValue(SOUTH, Boolean.valueOf(false))
+                .setValue(WEST, Boolean.valueOf(false)));
     }
 
-    // Forma del blocco (senza collisione di default, ma definiamo la forma visiva)
+    // Registra le proprietà dello stato del blocco
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        pBuilder.add(NORTH, EAST, SOUTH, WEST);
+    }
+
+    // --- Forma del Blocco ---
+
+    /**
+     * Determina la SELECTION BOX (contorno nero).
+     * Questa forma è composta dalle facce sottili corrispondenti ai lati attaccati.
+     * NON influisce sulla collisione fisica grazie a .noCollission().
+     */
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE; // Usa la forma definita sopra
+        VoxelShape shape = Shapes.empty();
+        // Combina le forme dei lati attivi
+        if (pState.getValue(SOUTH)) { shape = Shapes.or(shape, NORTH_AABB); }
+        if (pState.getValue(NORTH)) { shape = Shapes.or(shape, SOUTH_AABB); }
+        if (pState.getValue(WEST)) { shape = Shapes.or(shape, EAST_AABB); }
+        if (pState.getValue(EAST)) { shape = Shapes.or(shape, WEST_AABB); }
+        // Ritorna la forma combinata (o vuota se nessun lato è attivo,
+        // anche se non dovrebbe succedere con la logica di sopravvivenza)
+        return shape.isEmpty() ? Shapes.block() : shape; // Ritorna block() se vuota per sicurezza, ma idealmente non serve
+        // Potremmo anche semplicemente ritornare `shape;`
+        // return shape;
     }
 
-    // Opzionale: Rende il blocco trasparente alla luce
+    // NOTA: Non sovrascriviamo getCollisionShape.
+    // Poiché abbiamo usato .noCollission() nelle proprietà, getCollisionShape
+    // restituirà automaticamente Shapes.empty(), rendendo il blocco attraversabile.
+
+    // --- Proprietà Visive ---
     @Override
     public boolean propagatesSkylightDown(BlockState pState, BlockGetter pReader, BlockPos pPos) {
-        return true; // Lascia passare la luce del cielo
+        return true;
     }
 
-    // Opzionale: Fa sì che non scurisca troppo l'area
     @Override
     public float getShadeBrightness(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return 1.0F; // Massima luminosità, come l'aria (o 0.8F se preferisci un po' d'ombra)
+        return 1.0F;
     }
 
-    // Necessario: Controlla se l'edera può rimanere in questa posizione
+    // --- Logica di Sopravvivenza e Piazzamento ---
+
     @Override
     public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        // Deve esserci almeno un muro solido valido accanto (orizzontalmente)
-        return hasAdjacentWallSupport(pLevel, pPos);
+        return !getStateBasedOnAdjacentWalls(pLevel, pPos, this.defaultBlockState()).isAir();
     }
 
-    // Controlla se c'è un muro valido e solido accanto (orizzontalmente)
-    // Questo metodo può essere statico o meno, qui lo mettiamo non statico
-    // ma potremmo renderlo statico e passargli pState se servisse.
-    private boolean hasAdjacentWallSupport(LevelReader pLevel, BlockPos pPos) {
-        for (Direction direction : Direction.Plane.HORIZONTAL) {
-            BlockPos neighborPos = pPos.relative(direction);
-            BlockState neighborState = pLevel.getBlockState(neighborPos);
-            // Il blocco vicino deve essere un muro valido E avere una faccia solida verso l'edera
-            if (ModWallIvySeed.isWall(neighborState) && neighborState.isFaceSturdy(pLevel, neighborPos, direction.getOpposite())) {
-                return true; // Trovato supporto, può sopravvivere
-            }
-        }
-        return false; // Nessun supporto trovato
-    }
-
-    // Necessario: Aggiorna lo stato del blocco quando un vicino cambia
     @Override
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        // Se il blocco non può più sopravvivere (es. il muro di supporto viene rotto),
-        // ritorna aria per distruggere questo blocco di edera.
-        if (!this.canSurvive(pState, pLevel, pCurrentPos)) {
+        BlockState newState = getStateBasedOnAdjacentWalls(pLevel, pCurrentPos, this.defaultBlockState());
+        if (newState.isAir()) {
             return Blocks.AIR.defaultBlockState();
         }
-        // Altrimenti, ritorna lo stato corrente (non cambia nulla)
-        return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+        return newState;
     }
 
-    // NON ha isRandomlyTicking, quindi non cresce da solo.
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+        Level level = pContext.getLevel();
+        BlockPos pos = pContext.getClickedPos();
+        BlockState state = getStateBasedOnAdjacentWalls(level, pos, this.defaultBlockState());
+        return state.isAir() ? null : state;
+    }
+
+    // --- Metodi Helper Statici --- (Usati internamente e da ModWallIvySeed)
+
+    private static boolean canAttachTo(LevelReader pLevel, BlockPos pPos, Direction pDirection) {
+        if (!PROPERTY_BY_DIRECTION.containsKey(pDirection)) {
+            return false;
+        }
+        BlockPos neighborPos = pPos.relative(pDirection);
+        BlockState neighborState = pLevel.getBlockState(neighborPos);
+        return ModWallIvySeed.isWall(neighborState) && neighborState.isFaceSturdy(pLevel, neighborPos, pDirection.getOpposite());
+    }
+
+    public static BlockState getStateBasedOnAdjacentWalls(LevelReader pLevel, BlockPos pPos, BlockState ivyBaseState) {
+        BlockState state = ivyBaseState;
+        boolean foundSupport = false;
+
+        // Reset all properties before checking, starting from the base state
+        state = state.setValue(NORTH, false).setValue(EAST, false).setValue(SOUTH, false).setValue(WEST, false);
+
+
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            if (canAttachTo(pLevel, pPos, direction)) {
+                BooleanProperty property = PROPERTY_BY_DIRECTION.get(direction);
+                if (property != null) {
+                    state = state.setValue(property, Boolean.valueOf(true));
+                    foundSupport = true;
+                }
+            }
+        }
+        return foundSupport ? state : Blocks.AIR.defaultBlockState();
+    }
+
+    // Non ha isRandomlyTicking()
 }

@@ -1,5 +1,20 @@
 {
-  "variants": {
-    "": { "model": "talesoffolklore:block/wall_ivy" }
-  }
+  "multipart": [
+    {
+      "when": { "north": "true" },
+      "apply": { "model": "talesoffolklore:block/wall_ivy" }
+    },
+    {
+      "when": { "east": "true" },
+      "apply": { "model": "talesoffolklore:block/wall_ivy", "y": 90, "uvlock": true }
+    },
+    {
+      "when": { "south": "true" },
+      "apply": { "model": "talesoffolklore:block/wall_ivy", "y": 180, "uvlock": true }
+    },
+    {
+      "when": { "west": "true" },
+      "apply": { "model": "talesoffolklore:block/wall_ivy", "y": 270, "uvlock": true }
+    }
+  ]
 }

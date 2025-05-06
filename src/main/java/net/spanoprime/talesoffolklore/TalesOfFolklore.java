@@ -150,6 +150,7 @@ public class TalesOfFolklore
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+
             Sheets.addWoodType(ModWoodTypes.VIRGINIA_PINE);
             EntityRenderers.register(ModEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer(pContext, false));
             EntityRenderers.register(ModEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer(pContext, true));
@@ -158,6 +159,8 @@ public class TalesOfFolklore
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.VIRGINIA_PINE_DOOR.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.VIRGINIA_PINE_SAPLING.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.WALL_MOSS.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.WALL_IVY_SEED.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.WALL_IVY.get(), RenderType.cutout());
 
             });
         }

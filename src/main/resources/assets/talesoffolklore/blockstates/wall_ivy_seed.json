@@ -1,24 +1,20 @@
 {
   "multipart": [
     {
-      "when": { "up": "true" },
-      "apply": { "model": "talesoffolklore:block/wall_ivy_seed" }
-    },
-    {
       "when": { "north": "true" },
-      "apply": { "model": "talesoffolklore:block/wall_ivy_seed" }
+      "apply": { "model": "talesoffolklore:block/wall_ivy_seed", "x": 270, "y": 0, "uvlock": true }
     },
     {
       "when": { "east": "true" },
-      "apply": { "model": "talesoffolklore:block/wall_ivy_seed", "y": 90, "uvlock": true }
+      "apply": { "model": "talesoffolklore:block/wall_ivy_seed", "x": 270, "y": 90, "uvlock": true }
     },
     {
       "when": { "south": "true" },
-      "apply": { "model": "talesoffolklore:block/wall_ivy_seed", "y": 180, "uvlock": true }
+      "apply": { "model": "talesoffolklore:block/wall_ivy_seed", "x": 270, "y": 180, "uvlock": true }
     },
     {
       "when": { "west": "true" },
-      "apply": { "model": "talesoffolklore:block/wall_ivy_seed", "y": 270, "uvlock": true }
+      "apply": { "model": "talesoffolklore:block/wall_ivy_seed", "x": 270, "y": 270, "uvlock": true }
     }
   ]
 }

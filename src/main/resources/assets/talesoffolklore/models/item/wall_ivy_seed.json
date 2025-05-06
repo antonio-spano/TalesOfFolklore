@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "talesoffolklore:block/wall_ivy"
+		"layer0": "talesoffolklore:block/wall_ivy_seed"
 	}
 }

@@ -28,6 +28,10 @@
             }
           ]
         }
+      },
+      {
+        "type": "talesoffolklore:wall_ivy_seed",
+        "probability": 0.25
       }
     ],
     "dirt_provider": {

@@ -14,6 +14,9 @@ public class ModTreeDecoratorTypes {
     public static final RegistryObject<TreeDecoratorType<ModWallMossDecorator>> WALL_MOSS =
             TREE_DECORATORS.register("wall_moss", () -> new TreeDecoratorType<>(ModWallMossDecorator.CODEC));
 
+    public static final RegistryObject<TreeDecoratorType<ModWallIvyDecorator>> WALL_IVY =
+            TREE_DECORATORS.register("wall_ivy_seed", () -> new TreeDecoratorType<>(ModWallIvyDecorator.CODEC));
+
     public static void register(IEventBus eventBus) {
         TREE_DECORATORS.register(eventBus);
     }

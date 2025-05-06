@@ -36,19 +36,26 @@ public class ModWallMossDecorator extends TreeDecorator {
         RandomSource random = context.random();
         BlockState moss = ModBlocks.WALL_MOSS.get().defaultBlockState();
 
+        // Trova la Y minima dei log per sapere dove inizia il tronco
+        int minY = context.logs().stream().mapToInt(BlockPos::getY).min().orElse(Integer.MAX_VALUE);
+
         for (BlockPos logPos : context.logs()) {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                if (random.nextFloat() < this.probability) {
-                    BlockPos targetPos = logPos.relative(direction);
+            // Applica solo se è dal 4° blocco in su (minY + 3)
+            if (logPos.getY() >= minY + 5) {
+                for (Direction direction : Direction.Plane.HORIZONTAL) {
+                    if (random.nextFloat() < this.probability) {
+                        BlockPos targetPos = logPos.relative(direction);
 
-                    if (context.isAir(targetPos)
-                            && !context.logs().contains(targetPos)
-                            && !context.leaves().contains(targetPos)) {
+                        if (context.isAir(targetPos)
+                                && !context.logs().contains(targetPos)
+                                && !context.leaves().contains(targetPos)) {
 
-                        context.setBlock(targetPos, moss.setValue(BlockStateProperties.FACING, direction));
+                            context.setBlock(targetPos, moss.setValue(BlockStateProperties.FACING, direction));
+                        }
                     }
                 }
             }
         }
     }
+
 }

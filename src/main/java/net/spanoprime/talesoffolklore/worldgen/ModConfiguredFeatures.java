@@ -24,6 +24,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
+import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallIvyDecorator;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallMossDecorator;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class ModConfiguredFeatures {
                                 .add(Blocks.COARSE_DIRT.defaultBlockState(), 1) // Aggiunge Coarse Dirt con peso 1 (50%)
                 ) // Chiude il builder della lista pesata
         ));
+        decorators.add(new ModWallIvyDecorator(0.25f));
 
         TreeConfiguration config = new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.VIRGINIA_PINE_LOG.get()), // Trunk block

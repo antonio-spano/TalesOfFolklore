@@ -19,7 +19,7 @@ public class ModOverworldRegion extends Region
     public ModOverworldRegion(ResourceLocation name, int weight) {
         super(name, RegionType.OVERWORLD, weight); // Riceve 20
     }
-
+/*
     @Override
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
         //VanillaParameterOverlayBuilder builder = new VanillaParameterOverlayBuilder();
@@ -41,9 +41,25 @@ public class ModOverworldRegion extends Region
                 .weirdness(ParameterUtils.Weirdness.FULL_RANGE)
                 .build().forEach(point -> builder.add(point, ModBiomes.APPALACHIAN_FOREST));
 
-        builder.build().forEach(mapper::accept); */
+        builder.build().forEach(mapper::accept);
 
         // NOTA: Se questo fallisce, il metodo replaceBiome() è teoricamente più pulito,
         // ma se nemmeno quello ha funzionato, il problema è più profondo.
+    } */
+
+    @Override
+    public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
+        var points = new ParameterUtils.ParameterPointListBuilder()
+                .temperature(ParameterUtils.Temperature.COOL)
+                .humidity(ParameterUtils.Humidity.WET)
+                .continentalness(Climate.Parameter.span(0.75f, 1.0f)) // zona molto interna, lontano dallo spawn
+                .erosion(Climate.Parameter.span(-0.375f, -0.25f))
+                .depth(Climate.Parameter.point(0.0f))
+                .weirdness(Climate.Parameter.span(0.6f, 0.9f))
+                .build();
+
+        for (var point : points) {
+            mapper.accept(Pair.of(point, ModBiomes.APPALACHIAN_FOREST));
+        }
     }
 }

@@ -10,7 +10,10 @@ public class ModTerrablender
     {
         // Torniamo a un peso basso, come 1 o 2. Con parametri più specifici,
         // non c'è bisogno di un peso alto. Prova con 2.
-        Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, "overworld"), 13));
+        //Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, "overworld"), 13));
         // ^--- Peso riportato a 2
+
+        // In ModTerrablender.java
+        Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath("talesoffolklore", "overworld"), 1));
     }
 }

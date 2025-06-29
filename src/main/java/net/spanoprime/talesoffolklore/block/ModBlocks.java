@@ -1,6 +1,7 @@
 package net.spanoprime.talesoffolklore.block;
 
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CompassItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -112,6 +113,18 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> WALL_IVY = registerBlock("wall_ivy",
             () -> new ModWallIvy(BlockBehaviour.Properties.copy(Blocks.VINE).randomTicks()));
+
+    public static final RegistryObject<Block> YELLOW_FUNGUS = registerBlock("yellow_fungus",
+            () -> new ModYellowFungusBlock(BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.MOSS_CARPET)));
+
+    public static final RegistryObject<Block> RED_FUNGUS = registerBlock("red_fungus",
+            () -> new BushBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM)
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.MOSS_CARPET)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {

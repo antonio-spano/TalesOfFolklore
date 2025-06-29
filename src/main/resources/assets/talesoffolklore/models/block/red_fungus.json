@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/cross",
+	"textures": {
+		"cross": "talesoffolklore:block/red_fungus"
+	}
+}

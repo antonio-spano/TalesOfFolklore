@@ -1,4 +1,5 @@
-// 1.20.1	2025-04-23T22:49:09.512083	Loot Tables
+// 1.20.1	2025-05-15T11:09:42.23336	Loot Tables
+b38e262292fb12c79e7a4b4c031daa9b15e755ce data/talesoffolklore/loot_tables/blocks/red_fungus.json
 bd685005441693cbe3ff81a0b33278f705eb7548 data/talesoffolklore/loot_tables/blocks/stripped_virginia_pine_log.json
 6318acf262a74e6512763aebc777256acc0d895a data/talesoffolklore/loot_tables/blocks/stripped_virginia_pine_wood.json
 da6259424beacd746dfed1d3ba75b632c9b0e8f8 data/talesoffolklore/loot_tables/blocks/virginia_pine_button.json
@@ -23,3 +24,4 @@ f0e21fdbf7710065d1347e21bd235dc8b2c7316d data/talesoffolklore/loot_tables/blocks
 b6219ec9e8ee8f94a005d87a3a823a58ee573c3e data/talesoffolklore/loot_tables/blocks/wall_ivy.json
 9c38c6c612208d2480f44515fc512e046924f2e0 data/talesoffolklore/loot_tables/blocks/wall_ivy_seed.json
 09d07460683c01fd035bfc59101ce3616f7046a0 data/talesoffolklore/loot_tables/blocks/wall_moss.json
+623eb11e72cfb066f0e4bf3070b8681af6d1c809 data/talesoffolklore/loot_tables/blocks/yellow_fungus.json

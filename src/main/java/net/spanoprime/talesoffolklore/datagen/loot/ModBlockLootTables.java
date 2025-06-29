@@ -52,6 +52,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.STRIPPED_VIRGINIA_PINE_WOOD.get());
         this.dropSelf(ModBlocks.STRIPPED_VIRGINIA_PINE_LOG.get());
         this.dropSelf(ModBlocks.WALL_MOSS.get());
+        this.dropSelf(ModBlocks.YELLOW_FUNGUS.get());
+        this.dropSelf(ModBlocks.RED_FUNGUS.get());
         this.dropSelf(ModBlocks.WALL_IVY_SEED.get());
         this.dropOther(ModBlocks.WALL_IVY.get(), ModBlocks.WALL_IVY_SEED.get());
 

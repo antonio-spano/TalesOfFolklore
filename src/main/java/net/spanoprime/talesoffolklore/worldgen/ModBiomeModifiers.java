@@ -15,6 +15,7 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_TREE_VIRGINIA_PINE = registerKey("add_tree_virginia_pine");
 
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
+        /*
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         var biomes = context.lookup(Registries.BIOME);
 
@@ -24,7 +25,7 @@ public class ModBiomeModifiers {
                         ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, "appalachian_forest") // Your custom biome key
                 ))),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.VIRGINIA_PINE_PLACED_KEY)),
-                GenerationStep.Decoration.VEGETAL_DECORATION));
+                GenerationStep.Decoration.VEGETAL_DECORATION)); */
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {

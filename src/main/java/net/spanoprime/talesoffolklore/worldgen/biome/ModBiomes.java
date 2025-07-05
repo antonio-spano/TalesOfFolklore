@@ -15,6 +15,7 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
+import net.spanoprime.talesoffolklore.worldgen.ModPlacedFeatures;
 import org.joml.Math;
 // Assumi che questo esista se lo userai per i tuoi alberi
 // import net.spanoprime.talesoffolklore.worldgen.ModPlacedFeatures;
@@ -63,10 +64,10 @@ public class ModBiomes
 
         // --- ALBERI ---
         // Usa alberi più fitti di Plains ma meno specifici di Taiga
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS); // Querce e Betulle più fitte
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS); // Querce e Betulle più fitte
 
         // TODO: Aggiungi qui i tuoi alberi custom quando pronti
-        // biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.VIRGINIA_PINE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.VIRGINIA_PINE_PLACED_KEY);
 
         BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder); // Funghi standard
         BiomeDefaultFeatures.addDefaultExtraVegetation(biomeBuilder); // Canna da zucchero, zucche

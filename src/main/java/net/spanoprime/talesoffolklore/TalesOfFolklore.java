@@ -30,7 +30,7 @@ import net.spanoprime.talesoffolklore.item.ModItems;
 import net.spanoprime.talesoffolklore.loot.ModLootTables;
 import net.spanoprime.talesoffolklore.util.ModWoodTypes;
 import net.spanoprime.talesoffolklore.worldgen.ModConfiguredFeatures;
-import net.spanoprime.talesoffolklore.worldgen.biome.ModTerrablender;
+import net.spanoprime.talesoffolklore.worldgen.ModWorldGen;
 import net.spanoprime.talesoffolklore.worldgen.biome.surface.ModSurfaceRules;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModTreeDecoratorTypes;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallMossDecorator;
@@ -61,7 +61,9 @@ public class TalesOfFolklore
         //MinecraftForge.EVENT_BUS.register(DataGenerators.class);
         ModTreeDecoratorTypes.register(modEventBus);
         //ModTreeDecoratorTypes.TREE_DECORATORS.register(modEventBus);
-        ModTerrablender.registerBiomes();
+        //ModTerrablender.registerBiomes();
+
+        ModWorldGen.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);

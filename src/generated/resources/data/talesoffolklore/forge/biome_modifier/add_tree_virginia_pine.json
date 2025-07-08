@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "talesoffolklore:appalachian_forest",
-  "features": "talesoffolklore:virginia_pine_placed",
-  "step": "vegetal_decoration"
-}

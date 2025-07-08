@@ -16,8 +16,8 @@ public class WrapperBiomeSource extends BiomeSource {
     public static final Codec<WrapperBiomeSource> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     BiomeSource.CODEC.fieldOf("fallback_source").forGetter(WrapperBiomeSource::getFallbackSource),
-                    Codec.INT.fieldOf("center_x").forGetter(WrapperBiomeSource::getCenterX),
-                    Codec.INT.fieldOf("center_z").forGetter(WrapperBiomeSource::getCenterZ),
+                    //Codec.INT.fieldOf("center_x").forGetter(WrapperBiomeSource::getCenterX),
+                    //Codec.INT.fieldOf("center_z").forGetter(WrapperBiomeSource::getCenterZ),
                     Codec.LONG.fieldOf("radius_sq").forGetter(WrapperBiomeSource::getRadiusSq),
                     Biome.CODEC.fieldOf("biome").forGetter(WrapperBiomeSource::getAppalachianBiome)
             ).apply(instance, WrapperBiomeSource::new)
@@ -26,15 +26,19 @@ public class WrapperBiomeSource extends BiomeSource {
     private final BiomeSource fallbackSource;
     private final int centerX;
     private final int centerZ;
+    private final int maxCoord = 4000;
+    private final int rangeCoord = 2000;
     private final long radiusSq;
     private final Holder<Biome> appalachianBiome;
 
     // Il costruttore non cambia
-    public WrapperBiomeSource(BiomeSource fallbackSource, int centerX, int centerZ, long radiusSq, Holder<Biome> appalachianBiome) {
+    public WrapperBiomeSource(BiomeSource fallbackSource, long radiusSq, Holder<Biome> appalachianBiome) {
         super();
         this.fallbackSource = fallbackSource;
-        this.centerX = centerX;
-        this.centerZ = centerZ;
+        this.centerX = (int) (maxCoord + Math.random() * rangeCoord) * ((int)(Math.random() * 2) == 0 ? -1 : 1);
+        this.centerZ = (int) (maxCoord + Math.random() * rangeCoord) * ((int)(Math.random() * 2) == 0 ? -1 : 1);
+        System.out.println("SYNERGO X" + this.centerX);
+        System.out.println("SYNERGO Z" + this.centerZ);
         this.radiusSq = radiusSq;
         this.appalachianBiome = appalachianBiome;
     }

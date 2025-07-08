@@ -10,10 +10,10 @@ import net.spanoprime.talesoffolklore.TalesOfFolklore;
 public class ModTags {
     public static class Structures {
         public static final TagKey<Structure> ON_APPALACHIAN_MAP =
-                TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, "on_appalachian_map"));
+                TagKey.create(Registries.STRUCTURE, new ResourceLocation(TalesOfFolklore.MOD_ID, "on_appalachian_map"));
         // Helper per evitare di creare tag vuoti, non strettamente necessario
         private static TagKey<Structure> tag(String name) {
-            return TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, name));
+            return TagKey.create(Registries.STRUCTURE, new ResourceLocation(TalesOfFolklore.MOD_ID, name));
         }
     }
 }

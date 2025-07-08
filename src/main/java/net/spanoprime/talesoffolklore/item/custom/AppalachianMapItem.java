@@ -33,7 +33,7 @@ public class AppalachianMapItem extends Item { // Nota: è meglio estendere Item
     // Definiamo una chiave per il nostro bioma. È più sicuro che usare riferimenti diretti.
     // Assicurati che il nome "appalachian_forest" corrisponda a quello che hai registrato.
     public static final ResourceKey<Biome> TARGET_BIOME = ResourceKey.create(Registries.BIOME,
-            ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, "appalachian_forest"));
+            new ResourceLocation(TalesOfFolklore.MOD_ID, "appalachian_forest"));
 
     public AppalachianMapItem(Properties pProperties) {
         super(pProperties);

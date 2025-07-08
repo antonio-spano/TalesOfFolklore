@@ -36,13 +36,13 @@ public class ModPlacedFeatures {
                         ModBlocks.VIRGINIA_PINE_SAPLING.get()));
 
         ResourceKey.create(Registries.PLACED_FEATURE,
-                ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, "virginia_pine_placed"));
+                new ResourceLocation(TalesOfFolklore.MOD_ID, "virginia_pine_placed"));
 
     }
 
     public static ResourceKey<PlacedFeature> registerKey(String name)
     {
-        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(TalesOfFolklore.MOD_ID, name));
     }
 /*
     private static void register(BootstapContext<PlacedFeature> context,

@@ -74,6 +74,7 @@ public class TalesOfFolklore
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModEntities.register(modEventBus);
+
         MinecraftForge.EVENT_BUS.register(ModLootTables.class);
         MinecraftForge.EVENT_BUS.register(ModWallMossDecorator.class);
         //MinecraftForge.EVENT_BUS.register(DataGenerators.class);

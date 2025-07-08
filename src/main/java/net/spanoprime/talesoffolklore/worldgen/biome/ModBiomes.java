@@ -23,7 +23,7 @@ import org.joml.Math;
 public class ModBiomes
 {
     public static final ResourceKey<Biome> APPALACHIAN_FOREST = ResourceKey.create(Registries.BIOME,
-            ResourceLocation.fromNamespaceAndPath(TalesOfFolklore.MOD_ID, "appalachian_forest"));
+            new ResourceLocation(TalesOfFolklore.MOD_ID, "appalachian_forest"));
 
     public static void bootstrap(BootstapContext<Biome> context) {
         context.register(APPALACHIAN_FOREST, appalachianForest(context));

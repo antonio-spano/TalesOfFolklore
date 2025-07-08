@@ -7,6 +7,7 @@ import net.minecraft.core.QuartPos; // <-- IMPORT NECESSARIO
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Climate;
+import net.spanoprime.talesoffolklore.item.custom.AppalachianMapItem;
 
 import java.util.stream.Stream;
 
@@ -34,11 +35,15 @@ public class WrapperBiomeSource extends BiomeSource {
     // Il costruttore non cambia
     public WrapperBiomeSource(BiomeSource fallbackSource, long radiusSq, Holder<Biome> appalachianBiome) {
         super();
+        float angle = (float) (Math.random() * 2 * Math.PI);
+        int distance = (int) (maxCoord + Math.random() * (rangeCoord + 1));
         this.fallbackSource = fallbackSource;
-        this.centerX = (int) (maxCoord + Math.random() * rangeCoord) * ((int)(Math.random() * 2) == 0 ? -1 : 1);
-        this.centerZ = (int) (maxCoord + Math.random() * rangeCoord) * ((int)(Math.random() * 2) == 0 ? -1 : 1);
-        System.out.println("SYNERGO X" + this.centerX);
-        System.out.println("SYNERGO Z" + this.centerZ);
+        this.centerX = (int) (Math.cos(angle) * distance);
+        this.centerZ = (int) (Math.sin(angle) * distance);
+        System.out.println("SYNERGO X: " + this.centerX);
+        System.out.println("SYNERGO Z: " + this.centerZ);
+        AppalachianMapItem.coordX = this.centerX;
+        AppalachianMapItem.coordZ = this.centerZ;
         this.radiusSq = radiusSq;
         this.appalachianBiome = appalachianBiome;
     }

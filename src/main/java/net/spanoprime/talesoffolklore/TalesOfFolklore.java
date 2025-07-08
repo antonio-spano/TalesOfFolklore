@@ -35,7 +35,6 @@ import net.spanoprime.talesoffolklore.worldgen.biome.surface.ModSurfaceRules;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModTreeDecoratorTypes;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallMossDecorator;
 import org.slf4j.Logger;
-import terrablender.api.SurfaceRuleManager;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(TalesOfFolklore.MOD_ID)

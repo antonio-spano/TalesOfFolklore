@@ -3,6 +3,7 @@ package net.spanoprime.talesoffolklore.worldgen.biome;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
+import net.minecraft.core.QuartPos; // <-- IMPORT NECESSARIO
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Climate;
@@ -11,7 +12,7 @@ import java.util.stream.Stream;
 
 public class WrapperBiomeSource extends BiomeSource {
 
-    // IL CODEC (Era già giusto)
+    // Il codec non cambia
     public static final Codec<WrapperBiomeSource> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     BiomeSource.CODEC.fieldOf("fallback_source").forGetter(WrapperBiomeSource::getFallbackSource),
@@ -22,16 +23,15 @@ public class WrapperBiomeSource extends BiomeSource {
             ).apply(instance, WrapperBiomeSource::new)
     );
 
-    // I CAMPI (Erano già giusti)
     private final BiomeSource fallbackSource;
     private final int centerX;
     private final int centerZ;
     private final long radiusSq;
     private final Holder<Biome> appalachianBiome;
 
-    // IL COSTRUTTORE (Corretto con super() vuoto)
+    // Il costruttore non cambia
     public WrapperBiomeSource(BiomeSource fallbackSource, int centerX, int centerZ, long radiusSq, Holder<Biome> appalachianBiome) {
-        super(); // Il costruttore padre non vuole argomenti.
+        super();
         this.fallbackSource = fallbackSource;
         this.centerX = centerX;
         this.centerZ = centerZ;
@@ -39,28 +39,35 @@ public class WrapperBiomeSource extends BiomeSource {
         this.appalachianBiome = appalachianBiome;
     }
 
-    // QUESTO È IL METODO MANCANTE CHE CAUSAVA TUTTI I PROBLEMI.
-    // Deve dire al gioco quali biomi sono possibili in questo mondo.
+    // Il metodo che abbiamo aggiunto prima non cambia
     @Override
     protected Stream<Holder<Biome>> collectPossibleBiomes() {
-        // La risposta è: tutti i biomi di vanilla (dal nostro fallback) PIÙ il nostro bioma custom.
         return Stream.concat(this.fallbackSource.possibleBiomes().stream(), Stream.of(this.appalachianBiome));
     }
 
-    // QUESTO ERA GIÀ GIUSTO
+    // ECCO LA CORREZIONE FINALE. SOLO QUI.
     @Override
-    public Holder<Biome> getNoiseBiome(int x, int y, int z, Climate.Sampler sampler) {
-        long distSq = (long)(x - centerX) * (x - centerX) + (long)(z - centerZ) * (z - centerZ);
-        return distSq <= this.radiusSq ? this.appalachianBiome : this.fallbackSource.getNoiseBiome(x, y, z, sampler);
+    public Holder<Biome> getNoiseBiome(int pX, int pY, int pZ, Climate.Sampler pSampler) {
+        // Convertiamo le quart-coordinate (pX, pZ) in coordinate a blocchi
+        int blockX = QuartPos.toBlock(pX);
+        int blockZ = QuartPos.toBlock(pZ);
+
+        // Ora il confronto è corretto (blocchi vs blocchi)
+        long distSq = (long)(blockX - this.centerX) * (long)(blockX - this.centerX) + (long)(blockZ - this.centerZ) * (long)(blockZ - this.centerZ);
+
+        if (distSq <= this.radiusSq) {
+            return this.appalachianBiome;
+        } else {
+            return this.fallbackSource.getNoiseBiome(pX, pY, pZ, pSampler);
+        }
     }
 
-    // QUESTO ERA GIÀ GIUSTO
+    // Il resto della classe non cambia
     @Override
     protected Codec<? extends BiomeSource> codec() {
         return CODEC;
     }
 
-    // I GETTER (Erano già giusti)
     public BiomeSource getFallbackSource() {
         return fallbackSource;
     }

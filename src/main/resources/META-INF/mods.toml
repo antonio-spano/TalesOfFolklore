@@ -33,13 +33,6 @@ versionRange="[1.20.1,1.21)" #mandatory - Supports Minecraft 1.20.1 up to (but n
 ordering="NONE"
 side="BOTH"
 
-[[dependencies.talesoffolklore]]
-modId="terrablender" #mandatory
-mandatory=true #mandatory
-versionRange="${terrablender_version_range}" #mandatory - Supports Minecraft 1.20.1 up to (but not including) 1.21
-ordering="NONE"
-side="BOTH"
-
 # Optional metadata for additional functionality
 #displayURL="https://github.com/SpanoPrime/tales-of-folklore" #optional homepage URL
 #updateJSONURL="https://example.com/talesoffolklore-updates.json" #optional updates URL

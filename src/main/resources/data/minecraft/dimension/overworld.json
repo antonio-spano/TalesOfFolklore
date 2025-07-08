@@ -11,7 +11,8 @@
       "fallback_source": {
         "type": "minecraft:multi_noise",
         "preset": "minecraft:overworld"
-      }
+      },
+      "biome": "talesoffolklore:appalachian_forest"
     }
   }
 }

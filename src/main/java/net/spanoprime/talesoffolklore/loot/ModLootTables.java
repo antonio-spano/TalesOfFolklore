@@ -47,8 +47,8 @@ public class ModLootTables {
             event.getTable().addPool(
                     LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(rolls))
-                            .add(LootItem.lootTableItem(ModItems.APPALACHIAN_MAP_PIECE.get()).setWeight(50))  // Peso aumentato
-                            .add(LootItem.lootTableItem(ModItems.SPIRITS_MAP_PIECE.get()).setWeight(50))  // Peso aumentato
+                            .add(LootItem.lootTableItem(ModItems.APPALACHIAN_MAP_PIECE.get()).setWeight(1))
+                            //.add(LootItem.lootTableItem(ModItems.SPIRITS_MAP_PIECE.get()).setWeight(50))
                             .build()
             );
         }

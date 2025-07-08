@@ -42,8 +42,9 @@ public class WrapperBiomeSource extends BiomeSource {
         this.centerZ = (int) (Math.sin(angle) * distance);
         System.out.println("SYNERGO X: " + this.centerX);
         System.out.println("SYNERGO Z: " + this.centerZ);
-        AppalachianMapItem.coordX = this.centerX;
-        AppalachianMapItem.coordZ = this.centerZ;
+        //AppalachianMapItem.coordX = this.centerX;
+        //AppalachianMapItem.coordZ = this.centerZ;
+
         this.radiusSq = radiusSq;
         this.appalachianBiome = appalachianBiome;
     }

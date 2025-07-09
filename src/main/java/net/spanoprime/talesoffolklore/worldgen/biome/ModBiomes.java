@@ -38,7 +38,7 @@ public class ModBiomes
         // Aggiungiamo MANUALMENTE solo quello che vogliamo.
         // NIENTE carvers, NIENTE laghi, NIENTE sorgenti.
 
-        //BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
 /*
         biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatures.getOrThrow(VanillaPlacedFeatures.ORE_DIRT));
         biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatures.getOrThrow(VanillaPlacedFeatures.ORE_GRAVEL));
@@ -50,54 +50,13 @@ public class ModBiomes
         BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
         BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
 
-        BiomeDefaultFeatures.addCherryGroveVegetation(biomeBuilder);
+        //BiomeDefaultFeatures.addCherryGroveVegetation(biomeBuilder);
 
-        biomeBuilder.addFeature(
-                GenerationStep.Decoration.UNDERGROUND_ORES,
-                placedFeatures.getOrThrow(ResourceKey.create(
-                        Registries.PLACED_FEATURE,
-                        new ResourceLocation("minecraft", "ore_dirt")
-                ))
-        );
-        biomeBuilder.addFeature(
-                GenerationStep.Decoration.UNDERGROUND_ORES,
-                placedFeatures.getOrThrow(ResourceKey.create(
-                        Registries.PLACED_FEATURE,
-                        new ResourceLocation("minecraft", "ore_gravel")
-                ))
-        );
-        biomeBuilder.addFeature(
-                GenerationStep.Decoration.UNDERGROUND_ORES,
-                placedFeatures.getOrThrow(ResourceKey.create(
-                        Registries.PLACED_FEATURE,
-                        new ResourceLocation("minecraft", "ore_granite")
-                ))
-        );
-        biomeBuilder.addFeature(
-                GenerationStep.Decoration.UNDERGROUND_ORES,
-                placedFeatures.getOrThrow(ResourceKey.create(
-                        Registries.PLACED_FEATURE,
-                        new ResourceLocation("minecraft", "ore_diorite")
-                ))
-        );
-        biomeBuilder.addFeature(
-                GenerationStep.Decoration.UNDERGROUND_ORES,
-                placedFeatures.getOrThrow(ResourceKey.create(
-                        Registries.PLACED_FEATURE,
-                        new ResourceLocation("minecraft", "ore_andesite")
-                ))
-        );
-        biomeBuilder.addFeature(
-                GenerationStep.Decoration.UNDERGROUND_ORES,
-                placedFeatures.getOrThrow(ResourceKey.create(
-                        Registries.PLACED_FEATURE,
-                        new ResourceLocation("minecraft", "ore_tuff")
-                ))
-        );
+
         //BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder);
         //BiomeDefaultFeatures.addDefaultExtraVegetation(biomeBuilder); // ← Aggiunge erba alta!
         //BiomeDefaultFeatures.addFerns(biomeBuilder);                  // ← Aggiunge anche felci
-        //BiomeDefaultFeatures.addForestGrass(biomeBuilder);            // ← OK
+        BiomeDefaultFeatures.addForestGrass(biomeBuilder);            // ← OK
         //BiomeDefaultFeatures.addDefaultGrass(biomeBuilder);
 
         // Aggiungiamo i tuoi alberi custom

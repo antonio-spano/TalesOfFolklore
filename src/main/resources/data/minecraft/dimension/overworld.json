@@ -7,7 +7,7 @@
       "type": "talesoffolklore:wrapper_biome_source",
       "center_x": 0,
       "center_z": 5000,
-      "radius_sq": 1000000,
+      "radius_sq": 490000,
       "fallback_source": {
         "type": "minecraft:multi_noise",
         "preset": "talesoffolklore:overworld"

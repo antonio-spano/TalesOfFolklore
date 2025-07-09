@@ -10,7 +10,7 @@
       "radius_sq": 1000000,
       "fallback_source": {
         "type": "minecraft:multi_noise",
-        "preset": "minecraft:overworld"
+        "preset": "talesoffolklore:overworld"
       },
       "biome": "talesoffolklore:appalachian_forest"
     }

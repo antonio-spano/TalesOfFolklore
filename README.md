@@ -21,3 +21,7 @@
 ## 📈 Development Process
 
 The development should follow a **straight path** as defined in the **feature file**. Ensure you adhere to the guidelines for smooth and consistent progress.
+
+## 👨‍💻 Developers
+
+SpanoPrime and Reaper0fEvil

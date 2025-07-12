@@ -12,12 +12,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.worldgen.biome.ModBiomes; // Usa la chiave del bioma direttamente
+import org.lwjgl.system.MathUtil;
 
 @Mod.EventBusSubscriber(modid = TalesOfFolklore.MOD_ID, value = Dist.CLIENT)
 public class FogHandler {
 
-    private static final float MIN_FOG_DISTANCE = 30.0f; // Distanza nebbia minima (più vicina)
-    private static final float MAX_FOG_DISTANCE = 300.0f; // Distanza nebbia massima (default, lontana)
+    private static final float MIN_FOG_DISTANCE = 300.0f; // Distanza nebbia minima (più vicina)
+    private static final float MAX_FOG_DISTANCE = 3000.0f; // Distanza nebbia massima (default, lontana)
     private static final float FOG_TRANSITION_SPEED = 0.05f; // Velocità di transizione (più basso = più lento/smooth)
 
     private static float currentFogDistance = MAX_FOG_DISTANCE;

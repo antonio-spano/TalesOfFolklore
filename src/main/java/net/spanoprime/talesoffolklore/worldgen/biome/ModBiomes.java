@@ -26,7 +26,7 @@ public class ModBiomes
 
     public static Biome appalachianForest(BootstapContext<Biome> context) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
-        BiomeDefaultFeatures.farmAnimals(spawnBuilder);
+        //BiomeDefaultFeatures.farmAnimals(spawnBuilder);
         BiomeDefaultFeatures.commonSpawns(spawnBuilder);
 
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -38,17 +38,11 @@ public class ModBiomes
         // Aggiungiamo MANUALMENTE solo quello che vogliamo.
         // NIENTE carvers, NIENTE laghi, NIENTE sorgenti.
 
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
-/*
-        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatures.getOrThrow(VanillaPlacedFeatures.ORE_DIRT));
-        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatures.getOrThrow(VanillaPlacedFeatures.ORE_GRAVEL));
-        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatures.getOrThrow(VanillaPlacedFeatures.ORE_GRANITE));
-        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatures.getOrThrow(VanillaPlacedFeatures.ORE_DIORITE));
-        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatures.getOrThrow(VanillaPlacedFeatures.ORE_ANDESITE));
-        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatures.getOrThrow(VanillaPlacedFeatures.ORE_TUFF));
-*/
         BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
         BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+
+        BiomeDefaultFeatures.addDefaultSprings(biomeBuilder);
 
         //BiomeDefaultFeatures.addCherryGroveVegetation(biomeBuilder);
 
@@ -57,10 +51,12 @@ public class ModBiomes
         //BiomeDefaultFeatures.addDefaultExtraVegetation(biomeBuilder); // ← Aggiunge erba alta!
         //BiomeDefaultFeatures.addFerns(biomeBuilder);                  // ← Aggiunge anche felci
         BiomeDefaultFeatures.addForestGrass(biomeBuilder);            // ← OK
+
         //BiomeDefaultFeatures.addDefaultGrass(biomeBuilder);
 
         // Aggiungiamo i tuoi alberi custom
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.VIRGINIA_PINE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_ROCK_PLACED_KEY);
         // --- FINE MODIFICA FONDAMENTALE ---
 
 

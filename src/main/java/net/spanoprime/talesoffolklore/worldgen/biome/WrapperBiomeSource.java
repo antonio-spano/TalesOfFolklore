@@ -58,19 +58,43 @@ public class WrapperBiomeSource extends BiomeSource {
     // ECCO LA CORREZIONE FINALE. SOLO QUI.
     @Override
     public Holder<Biome> getNoiseBiome(int pX, int pY, int pZ, Climate.Sampler pSampler) {
-        // Convertiamo le quart-coordinate (pX, pZ) in coordinate a blocchi
         int blockX = QuartPos.toBlock(pX);
         int blockZ = QuartPos.toBlock(pZ);
 
-        // Ora il confronto è corretto (blocchi vs blocchi)
-        long distSq = (long)(blockX - this.centerX) * (long)(blockX - this.centerX) + (long)(blockZ - this.centerZ) * (long)(blockZ - this.centerZ);
+        long distSq = (long)(blockX - this.centerX) * (long)(blockX - this.centerX) +
+                (long)(blockZ - this.centerZ) * (long)(blockZ - this.centerZ);
 
-        if (distSq <= this.radiusSq) {
+        Holder<Biome> originalBiome = this.fallbackSource.getNoiseBiome(pX, pY, pZ, pSampler);
+
+        if (distSq <= this.radiusSq && !isExcludedBiome(originalBiome)) {
             return this.appalachianBiome;
         } else {
-            return this.fallbackSource.getNoiseBiome(pX, pY, pZ, pSampler);
+            return originalBiome;
         }
     }
+
+    private boolean isExcludedBiome(Holder<Biome> biome) {
+        // Controlla i nomi dei biomi vanilla noti per essere marittimi o fiumi
+        // Nota: usa `biome.unwrap().map(...)` per accedere al ResourceKey o al nome
+
+        return biome.unwrap().map(key -> {
+            String path = key.location().getPath();
+
+            return path.contains("ocean") ||
+                    path.contains("cold_ocean") ||
+                    path.contains("deep_cold_ocean") ||
+                    path.contains("deep_frozen_ocean") ||
+                    path.contains("deep_lukewarm_ocean") ||
+                    path.contains("deep_ocean") ||
+                    path.contains("frozen_ocean") ||
+                    path.contains("lukewarm_ocean") ||
+                    path.contains("warm_ocean") ||
+                    path.contains("river") ||
+                    path.contains("frozen_river");
+                    //path.contains("beach") ||
+        }, (direct) -> false); // In caso non sia un ResourceKey
+    }
+
 
     // Il resto della classe non cambia
     @Override

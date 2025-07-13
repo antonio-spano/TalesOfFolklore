@@ -4,13 +4,13 @@
     {
       "biome": "talesoffolklore:appalachian_forest",
       "parameters": {
-        "temperature": [0.4, 0.7],
-        "humidity": [0.4, 0.9],
-        "continentalness": [1.6, 2.0],
-        "erosion": [0.0, 0.1],
-        "weirdness": [0.3, 0.9],
-        "depth": [2.2, 2.7],
-        "offset": 0.01
+        "temperature": [0.5, 0.7],
+        "humidity": [0.6, 0.9],
+        "continentalness": [0.3, 1.0],
+        "erosion": [0.2, 0.4],
+        "weirdness": [0.2, 0.6],
+        "depth": 1.6,
+        "offset": 0.0
       }
     }
   ]

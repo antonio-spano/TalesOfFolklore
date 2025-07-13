@@ -45,6 +45,7 @@ import net.spanoprime.talesoffolklore.item.custom.AppalachianMapItem;
 import net.spanoprime.talesoffolklore.loot.ModLootTables;
 import net.spanoprime.talesoffolklore.util.ModWoodTypes;
 import net.spanoprime.talesoffolklore.worldgen.ModConfiguredFeatures;
+import net.spanoprime.talesoffolklore.worldgen.ModPlacedFeatures;
 import net.spanoprime.talesoffolklore.worldgen.ModWorldGen;
 import net.spanoprime.talesoffolklore.worldgen.biome.ModBiomes;
 import net.spanoprime.talesoffolklore.worldgen.biome.surface.ModSurfaceRules;

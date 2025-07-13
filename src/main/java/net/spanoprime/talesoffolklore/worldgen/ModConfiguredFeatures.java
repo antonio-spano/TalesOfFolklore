@@ -2,6 +2,7 @@ package net.spanoprime.talesoffolklore.worldgen;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -13,6 +14,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
@@ -33,6 +36,7 @@ import java.util.List;
 public class ModConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> VIRGINIA_PINE_KEY = registerKey("virginia_pine");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> RIVERBANK_ROCK_KEY = registerKey("riverbank_rock");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         System.out.println("ModConfiguredFeatures: Bootstrapping started...");
@@ -66,6 +70,19 @@ public class ModConfiguredFeatures {
                 .decorators(decorators)
                 // oppure lascia vuoto se non vuoi usarlo
                 .build();
+
+        register(context, RIVERBANK_ROCK_KEY, Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(6, 2, 1, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                        new SimpleBlockConfiguration(new WeightedStateProvider(
+                                SimpleWeightedRandomList.<BlockState>builder()
+                                        .add(Blocks.STONE.defaultBlockState(), 10)
+                                        .add(Blocks.COBBLESTONE.defaultBlockState(), 1)
+                                        .add(Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 1)
+                                        .add(Blocks.ANDESITE.defaultBlockState(), 1)
+                        ))
+                ))
+        );
+
 
         context.register(VIRGINIA_PINE_KEY, new ConfiguredFeature<>(Feature.TREE, config));
 

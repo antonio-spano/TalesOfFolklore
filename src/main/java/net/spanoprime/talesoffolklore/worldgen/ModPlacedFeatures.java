@@ -1,5 +1,6 @@
 package net.spanoprime.talesoffolklore.worldgen;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.Registry;
@@ -11,6 +12,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.registries.RegistryObject;
@@ -22,6 +24,7 @@ import java.util.List;
 public class ModPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> VIRGINIA_PINE_PLACED_KEY = registerKey("virginia_pine_placed");
+    public static final ResourceKey<PlacedFeature> RIVERBANK_ROCK_PLACED_KEY = registerKey("riverbank_rock_placed");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -38,6 +41,20 @@ public class ModPlacedFeatures {
         ResourceKey.create(Registries.PLACED_FEATURE,
                 new ResourceLocation(TalesOfFolklore.MOD_ID, "virginia_pine_placed"));
 
+        register(context, RIVERBANK_ROCK_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.RIVERBANK_ROCK_KEY),
+                List.of(CountPlacement.of(6),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BlockPredicateFilter.forPredicate(
+                                BlockPredicate.anyOf(
+                                        BlockPredicate.matchesBlocks(new BlockPos(1, -1, 0), Blocks.WATER),
+                                        BlockPredicate.matchesBlocks(new BlockPos(-1, -1, 0), Blocks.WATER),
+                                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 1), Blocks.WATER),
+                                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, -1), Blocks.WATER)
+                                )
+                        ),
+                        BiomeFilter.biome())
+        );
     }
 
     public static ResourceKey<PlacedFeature> registerKey(String name)

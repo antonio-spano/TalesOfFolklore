@@ -1,5 +1,6 @@
 package net.spanoprime.talesoffolklore.worldgen;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -13,10 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaPineFoliagePlacer;
@@ -25,6 +23,8 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStatePr
 import net.minecraft.world.level.levelgen.feature.treedecorators.AlterGroundDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallIvyDecorator;
@@ -71,7 +71,20 @@ public class ModConfiguredFeatures {
                 // oppure lascia vuoto se non vuoi usarlo
                 .build();
 
-        register(context, RIVERBANK_ROCK_KEY, Feature.RANDOM_PATCH,
+        RuleTest replaceableGround = new BlockMatchTest(Blocks.DIRT);
+        RuleTest replaceableGrass = new BlockMatchTest(Blocks.GRASS_BLOCK);
+        RuleTest replaceablePodzol = new BlockMatchTest(Blocks.PODZOL);
+        RuleTest replaceableCoarseDirt = new BlockMatchTest(Blocks.COARSE_DIRT);
+
+        // Creiamo la lista di blocchi che le rocce andranno a sostituire.
+        List<OreConfiguration.TargetBlockState> rockTargets = ImmutableList.of(
+                OreConfiguration.target(replaceableGround, Blocks.COBBLESTONE.defaultBlockState()), // Sostituisce la terra con cobblestone
+                OreConfiguration.target(replaceableGrass, Blocks.STONE.defaultBlockState()), // Sostituisce l'erba con pietra
+                OreConfiguration.target(replaceablePodzol, Blocks.MOSSY_COBBLESTONE.defaultBlockState()), // Sostituisce il podzol con cobblestone muschioso
+                OreConfiguration.target(replaceableCoarseDirt, Blocks.ANDESITE.defaultBlockState()) // Sostituisce la coarse dirt con andesite
+        );
+
+        /*register(context, RIVERBANK_ROCK_KEY, Feature.RANDOM_PATCH,
                 new RandomPatchConfiguration(6, 2, 1, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(new WeightedStateProvider(
                                 SimpleWeightedRandomList.<BlockState>builder()
@@ -81,8 +94,9 @@ public class ModConfiguredFeatures {
                                         .add(Blocks.ANDESITE.defaultBlockState(), 1)
                         ))
                 ))
-        );
+        );*/
 
+        register(context, RIVERBANK_ROCK_KEY, Feature.ORE, new OreConfiguration(rockTargets, 32));
 
         context.register(VIRGINIA_PINE_KEY, new ConfiguredFeature<>(Feature.TREE, config));
 

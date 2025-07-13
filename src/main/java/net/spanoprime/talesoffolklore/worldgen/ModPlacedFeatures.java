@@ -41,8 +41,22 @@ public class ModPlacedFeatures {
         ResourceKey.create(Registries.PLACED_FEATURE,
                 new ResourceLocation(TalesOfFolklore.MOD_ID, "virginia_pine_placed"));
 
-        register(context, RIVERBANK_ROCK_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.RIVERBANK_ROCK_KEY),
+        /*register(context, RIVERBANK_ROCK_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.RIVERBANK_ROCK_KEY),
                 List.of(CountPlacement.of(6),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BlockPredicateFilter.forPredicate(
+                                BlockPredicate.anyOf(
+                                        BlockPredicate.matchesBlocks(new BlockPos(1, -1, 0), Blocks.WATER),
+                                        BlockPredicate.matchesBlocks(new BlockPos(-1, -1, 0), Blocks.WATER),
+                                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 1), Blocks.WATER),
+                                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, -1), Blocks.WATER)
+                                )
+                        ),
+                        BiomeFilter.biome())
+        );*/
+        register(context, RIVERBANK_ROCK_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.RIVERBANK_ROCK_KEY),
+                List.of(CountPlacement.of(12), // Ridotto il numero di tentativi perché ora generiamo ammassi, non blocchi singoli.
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BlockPredicateFilter.forPredicate(

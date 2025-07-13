@@ -1,53 +1,45 @@
 {
-  "type": "minecraft:random_patch",
+  "type": "minecraft:ore",
   "config": {
-    "feature": {
-      "feature": {
-        "type": "minecraft:simple_block",
-        "config": {
-          "to_place": {
-            "type": "minecraft:weighted_state_provider",
-            "entries": [
-              {
-                "data": {
-                  "Name": "minecraft:stone"
-                },
-                "weight": 10
-              },
-              {
-                "data": {
-                  "Name": "minecraft:cobblestone"
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "minecraft:mossy_cobblestone"
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "minecraft:andesite"
-                },
-                "weight": 1
-              }
-            ]
-          }
+    "discard_chance_on_air_exposure": 0.0,
+    "size": 64,
+    "targets": [
+      {
+        "state": {
+          "Name": "minecraft:cobblestone"
+        },
+        "target": {
+          "block": "minecraft:dirt",
+          "predicate_type": "minecraft:block_match"
         }
       },
-      "placement": [
-        {
-          "type": "minecraft:block_predicate_filter",
-          "predicate": {
-            "type": "minecraft:matching_blocks",
-            "blocks": "minecraft:air"
-          }
+      {
+        "state": {
+          "Name": "minecraft:stone"
+        },
+        "target": {
+          "block": "minecraft:grass_block",
+          "predicate_type": "minecraft:block_match"
         }
-      ]
-    },
-    "tries": 6,
-    "xz_spread": 2,
-    "y_spread": 1
+      },
+      {
+        "state": {
+          "Name": "minecraft:mossy_cobblestone"
+        },
+        "target": {
+          "block": "minecraft:podzol",
+          "predicate_type": "minecraft:block_match"
+        }
+      },
+      {
+        "state": {
+          "Name": "minecraft:andesite"
+        },
+        "target": {
+          "block": "minecraft:coarse_dirt",
+          "predicate_type": "minecraft:block_match"
+        }
+      }
+    ]
   }
 }

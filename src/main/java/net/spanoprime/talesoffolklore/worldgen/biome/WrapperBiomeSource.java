@@ -90,8 +90,9 @@ public class WrapperBiomeSource extends BiomeSource {
                     path.contains("lukewarm_ocean") ||
                     path.contains("warm_ocean") ||
                     path.contains("river") ||
-                    path.contains("frozen_river");
-                    //path.contains("beach") ||
+                    path.contains("frozen_river") ||
+                    path.contains("beach") ||
+                    path.contains("snowy_beach");
         }, (direct) -> false); // In caso non sia un ResourceKey
     }
 

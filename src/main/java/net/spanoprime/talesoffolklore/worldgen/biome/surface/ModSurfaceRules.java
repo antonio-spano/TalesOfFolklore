@@ -13,29 +13,30 @@ public class ModSurfaceRules {
     private static final SurfaceRules.RuleSource STONE = SurfaceRules.state(Blocks.STONE.defaultBlockState());
 
     public static SurfaceRules.RuleSource makeRiverOnlyRule() {
-        // La regola si attiva SOLO se siamo nel nostro bioma del fiume.
+        // Questa regola si attiva solo nel bioma appalachian_stream.
         return SurfaceRules.ifTrue(
                 SurfaceRules.isBiome(ModBiomes.APPALACHIAN_STREAM),
 
-                // Esegue questa sequenza di comandi ASSOLUTI, che sovrascrivono qualsiasi cosa.
+                // Esegue questa sequenza di regole dall'alto verso il basso.
+                // La prima regola che corrisponde vince.
                 SurfaceRules.sequence(
 
-                        // 1. CANCELLA IL CIELO: Se sei SOPRA Y=63, metti ARIA.
-                        // Questo distrugge colline e terreno in eccesso che potrebbero trovarsi dentro l'area del fiume.
-                        SurfaceRules.ifTrue(SurfaceRules.yBlockCheck(VerticalAnchor.aboveBottom(63), 0), AIR),
+                        // 1. Sopra Y=63 (quindi da Y=64 in su), metti ARIA.
+                        //    Questo appiattisce il terreno e rimuove le colline.
+                        SurfaceRules.ifTrue(SurfaceRules.yBlockCheck(VerticalAnchor.absolute(63), 0), AIR),
 
-                        // 2. IMPOSTA IL LIVELLO DEL MARE: A Y=63 ESATTO, metti ACQUA.
-                        // Questa è la superficie piatta del nostro ruscello.
-                        SurfaceRules.ifTrue(SurfaceRules.yBlockCheck(VerticalAnchor.absolute(63), 0), WATER),
+                        // 2. A Y=63, metti ACQUA. Questa è la superficie del fiume.
+                        //SurfaceRules.ifTrue(SurfaceRules.yBlockCheck(VerticalAnchor.absolute(63), 0), WATER),
 
-                        // 3. IMPOSTA IL LETTO DEL FIUME (Profondità 1): A Y=62 ESATTO, metti GHIAIA.
-                        SurfaceRules.ifTrue(SurfaceRules.yBlockCheck(VerticalAnchor.absolute(62), 0), GRAVEL),
+                        // 3. A Y=62, metti ACQUA. Questo crea il secondo blocco di profondità.
+                        SurfaceRules.ifTrue(SurfaceRules.yBlockCheck(VerticalAnchor.absolute(62), 0), WATER),
 
-                        // 4. RIEMPI TUTTO IL RESTO SOTTO CON PIETRA (Profondità 2 e oltre).
-                        // Questa è la regola "World Edit". Qualsiasi blocco la cui Y è 61 o meno
-                        // viene FORZATAMENTE trasformato in PIETRA.
-                        // Tappa le voragini, crea un fondo solido e piatto.
-                        SurfaceRules.ifTrue(SurfaceRules.yBlockCheck(VerticalAnchor.belowTop(62), 0), STONE)
+                        // 4. A Y=61, metti GHIAIA. Questo è il letto del fiume.
+                        SurfaceRules.ifTrue(SurfaceRules.yBlockCheck(VerticalAnchor.absolute(61), 0), GRAVEL),
+
+                        // 5. Sotto Y=61 (quindi da Y=60 in giù), metti PIETRA.
+                        //    Questo crea un fondo solido e tappa le caverne sottostanti.
+                        SurfaceRules.ifTrue(SurfaceRules.yBlockCheck(VerticalAnchor.absolute(60), 0), STONE)
                 )
         );
     }

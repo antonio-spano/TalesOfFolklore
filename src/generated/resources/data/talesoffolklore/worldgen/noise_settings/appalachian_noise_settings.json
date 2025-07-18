@@ -403,7 +403,7 @@
                 "type": "minecraft:y_above",
                 "add_stone_depth": false,
                 "anchor": {
-                  "above_bottom": 63
+                  "absolute": 63
                 },
                 "surface_depth_multiplier": 0
               },
@@ -420,7 +420,7 @@
                 "type": "minecraft:y_above",
                 "add_stone_depth": false,
                 "anchor": {
-                  "absolute": 63
+                  "absolute": 62
                 },
                 "surface_depth_multiplier": 0
               },
@@ -440,7 +440,7 @@
                 "type": "minecraft:y_above",
                 "add_stone_depth": false,
                 "anchor": {
-                  "absolute": 62
+                  "absolute": 61
                 },
                 "surface_depth_multiplier": 0
               },
@@ -457,7 +457,7 @@
                 "type": "minecraft:y_above",
                 "add_stone_depth": false,
                 "anchor": {
-                  "below_top": 62
+                  "absolute": 60
                 },
                 "surface_depth_multiplier": 0
               },

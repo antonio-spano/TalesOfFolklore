@@ -1,4 +1,4 @@
-package net.spanoprime.talesoffolklore.data;
+package net.spanoprime.talesoffolklore.datagen;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;

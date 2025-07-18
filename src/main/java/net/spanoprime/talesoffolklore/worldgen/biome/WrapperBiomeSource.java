@@ -55,7 +55,7 @@ public class WrapperBiomeSource extends BiomeSource {
     // Il metodo che abbiamo aggiunto prima non cambia
     @Override
     protected Stream<Holder<Biome>> collectPossibleBiomes() {
-        return Stream.concat(this.fallbackSource.possibleBiomes().stream(), Stream.of(this.appalachianBiome));
+        return Stream.concat(this.fallbackSource.possibleBiomes().stream(), Stream.of(this.appalachianBiome, this.appalachianStreamBiome));
     }
 
     // ECCO LA CORREZIONE FINALE. SOLO QUI.

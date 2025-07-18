@@ -100,7 +100,7 @@ public class ModBiomes
 
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
 
-        BiomeDefaultFeatures.addDefaultSeagrass(biomeBuilder);
+        BiomeDefaultFeatures.addWaterTrees(biomeBuilder);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)

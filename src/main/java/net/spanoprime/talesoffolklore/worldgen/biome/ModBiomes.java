@@ -4,6 +4,7 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -15,22 +16,28 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.worldgen.ModPlacedFeatures;
 
+import javax.naming.Context;
+
 public class ModBiomes
 {
     public static final ResourceKey<Biome> APPALACHIAN_FOREST = ResourceKey.create(Registries.BIOME,
             new ResourceLocation(TalesOfFolklore.MOD_ID, "appalachian_forest"));
 
-    public static void bootstrap(BootstapContext<Biome> context) {
-        context.register(APPALACHIAN_FOREST, appalachianForest(context));
+    public static final ResourceKey<Biome> APPALACHIAN_STREAM = ResourceKey.create(Registries.BIOME,
+            new ResourceLocation(TalesOfFolklore.MOD_ID, "appalachian_stream"));
+
+    public static void bootstrap(BootstapContext<Biome> context)
+    {
+        HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers = context.lookup(Registries.CONFIGURED_CARVER);
+        context.register(APPALACHIAN_FOREST, appalachianForest(context, placedFeatures, configuredCarvers));
+        context.register(APPALACHIAN_STREAM, appalachianStream(context, placedFeatures, configuredCarvers));
     }
 
-    public static Biome appalachianForest(BootstapContext<Biome> context) {
+    public static Biome appalachianForest(BootstapContext<Biome> context, HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         //BiomeDefaultFeatures.farmAnimals(spawnBuilder);
         BiomeDefaultFeatures.commonSpawns(spawnBuilder);
-
-        HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
-        HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers = context.lookup(Registries.CONFIGURED_CARVER);
 
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers);
 
@@ -56,9 +63,41 @@ public class ModBiomes
 
         // Aggiungiamo i tuoi alberi custom
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.VIRGINIA_PINE_PLACED_KEY);
-        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_ROCK_PLACED_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_ANDESITE_PLACED_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_COBBLESTONE_PLACED_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_STONE_PLACED_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_MOSSY_COBBLESTONE_PLACED_KEY);
         // --- FINE MODIFICA FONDAMENTALE ---
 
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .downfall(0.6f)
+                .temperature(0.3f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects((new BiomeSpecialEffects.Builder())
+                        .fogColor(0xDADADA)
+                        .waterColor(0x3F76E4)
+                        .waterFogColor(0x050533)
+                        .skyColor(calculateSkyColor(0.3f))
+                        .grassColorOverride(0x80A755)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
+    }
+
+    public static Biome appalachianStream(BootstapContext<Biome> context, HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers)
+    {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers);
+
+        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_STONE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_COBBLESTONE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_ANDESITE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_MOSSY_COBBLESTONE_PLACED_KEY);
+
+        BiomeDefaultFeatures.addDefaultSeagrass(biomeBuilder);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)

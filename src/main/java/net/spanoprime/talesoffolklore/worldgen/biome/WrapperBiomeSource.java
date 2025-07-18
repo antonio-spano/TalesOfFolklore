@@ -20,7 +20,8 @@ public class WrapperBiomeSource extends BiomeSource {
                     //Codec.INT.fieldOf("center_x").forGetter(WrapperBiomeSource::getCenterX),
                     //Codec.INT.fieldOf("center_z").forGetter(WrapperBiomeSource::getCenterZ),
                     Codec.LONG.fieldOf("radius_sq").forGetter(WrapperBiomeSource::getRadiusSq),
-                    Biome.CODEC.fieldOf("biome").forGetter(WrapperBiomeSource::getAppalachianBiome)
+                    Biome.CODEC.fieldOf("biome").forGetter(WrapperBiomeSource::getAppalachianBiome),
+                    Biome.CODEC.fieldOf("appalachian_stream_biome").forGetter(WrapperBiomeSource::getAppalachianStreamBiome)
             ).apply(instance, WrapperBiomeSource::new)
     );
 
@@ -31,9 +32,10 @@ public class WrapperBiomeSource extends BiomeSource {
     private final int rangeCoord = 2000;
     private final long radiusSq;
     private final Holder<Biome> appalachianBiome;
+    private final Holder<Biome> appalachianStreamBiome;
 
     // Il costruttore non cambia
-    public WrapperBiomeSource(BiomeSource fallbackSource, long radiusSq, Holder<Biome> appalachianBiome) {
+    public WrapperBiomeSource(BiomeSource fallbackSource, long radiusSq, Holder<Biome> appalachianBiome, Holder<Biome> appalachianStreamBiome) {
         super();
         float angle = (float) (Math.random() * 2 * Math.PI);
         int distance = (int) (maxCoord + Math.random() * (rangeCoord + 1));
@@ -47,6 +49,7 @@ public class WrapperBiomeSource extends BiomeSource {
 
         this.radiusSq = radiusSq;
         this.appalachianBiome = appalachianBiome;
+        this.appalachianStreamBiome = appalachianStreamBiome;
     }
 
     // Il metodo che abbiamo aggiunto prima non cambia
@@ -69,6 +72,8 @@ public class WrapperBiomeSource extends BiomeSource {
         if (distSq <= this.radiusSq && !isExcludedBiome(originalBiome)) {
             return this.appalachianBiome;
         } else {
+            if (distSq <= this.radiusSq && isRiverBiome(originalBiome))
+                return this.appalachianStreamBiome;
             return originalBiome;
         }
     }
@@ -96,6 +101,17 @@ public class WrapperBiomeSource extends BiomeSource {
         }, (direct) -> false); // In caso non sia un ResourceKey
     }
 
+    private boolean isRiverBiome(Holder<Biome> biome)
+    {
+        return biome.unwrap().map(key -> {
+            String path = key.location().getPath();
+
+            return path.contains("river") ||
+                    path.contains("frozen_river") ||
+                    path.contains("beach") ||
+                    path.contains("snowy_beach");
+        }, (direct) -> false);
+    }
 
     // Il resto della classe non cambia
     @Override
@@ -117,5 +133,10 @@ public class WrapperBiomeSource extends BiomeSource {
     }
     public Holder<Biome> getAppalachianBiome() {
         return appalachianBiome;
+    }
+
+    public Holder<Biome> getAppalachianStreamBiome()
+    {
+        return appalachianStreamBiome;
     }
 }

@@ -20,7 +20,8 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider
             .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
             .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
 
-            .add(Registries.BIOME, ModBiomes::bootstrap);
+            .add(Registries.BIOME, ModBiomes::bootstrap)
+            .add(Registries.NOISE_SETTINGS, net.spanoprime.talesoffolklore.data.ModNoiseGeneratorSettingsProvider::bootstrap);
 
     public ModWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(TalesOfFolklore.MOD_ID));

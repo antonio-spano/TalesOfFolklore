@@ -41,15 +41,17 @@ public class ModBiomes
 
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers);
 
+        //BiomeDefaultFeatures.addDefaultSeagrass(biomeBuilder);
+
         // --- INIZIO MODIFICA FONDAMENTALE ---
         // Aggiungiamo MANUALMENTE solo quello che vogliamo.
         // NIENTE carvers, NIENTE laghi, NIENTE sorgenti.
 
-        BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
-        BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
+        //BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
+        //BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
 
-        BiomeDefaultFeatures.addDefaultSprings(biomeBuilder);
+        //BiomeDefaultFeatures.addDefaultSprings(biomeBuilder);
 
         //BiomeDefaultFeatures.addCherryGroveVegetation(biomeBuilder);
 
@@ -89,13 +91,14 @@ public class ModBiomes
 
     public static Biome appalachianStream(BootstapContext<Biome> context, HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers)
     {
-        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers);
 
-        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_STONE_PLACED_KEY);
+        /*biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_STONE_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_COBBLESTONE_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_ANDESITE_PLACED_KEY);
-        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_MOSSY_COBBLESTONE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_MOSSY_COBBLESTONE_PLACED_KEY); */
+
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
 
         BiomeDefaultFeatures.addDefaultSeagrass(biomeBuilder);
 

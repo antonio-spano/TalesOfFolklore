@@ -2,7 +2,7 @@
   "type": "minecraft:overworld",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:overworld",
+    "settings": "talesoffolklore:appalachian_noise_settings",
     "biome_source": {
       "type": "talesoffolklore:wrapper_biome_source",
       "center_x": 0,

@@ -99,8 +99,8 @@ public class WrapperBiomeSource extends BiomeSource {
 
         Holder<Biome> originalBiome = this.fallbackSource.getNoiseBiome(pX, pY, pZ, pSampler);
 
-        if (isRiverOrBeach(originalBiome)) {
-            return this.appalachianBiome;
+        if (isRiver(originalBiome)) {
+            return originalBiome;
         }
 
         if (isOcean(originalBiome)) {
@@ -112,10 +112,10 @@ public class WrapperBiomeSource extends BiomeSource {
 
     // ... il resto della classe (isRiverOrBeach, isOcean, getters, etc.) rimane identico ...
     // ...
-    private boolean isRiverOrBeach(Holder<Biome> biome) {
+    private boolean isRiver(Holder<Biome> biome) {
         return biome.unwrap().map(key -> {
             String path = key.location().getPath();
-            return path.contains("river") || path.contains("beach");
+            return path.contains("river");
         }, (direct) -> false);
     }
 

@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
+import net.spanoprime.talesoffolklore.block.custom.ModWallMossBlock;
 import net.spanoprime.talesoffolklore.worldgen.*;
 
 public class ModWallMossDecorator extends TreeDecorator {
@@ -36,12 +37,11 @@ public class ModWallMossDecorator extends TreeDecorator {
         RandomSource random = context.random();
         BlockState moss = ModBlocks.WALL_MOSS.get().defaultBlockState();
 
-        // Trova la Y minima dei log per sapere dove inizia il tronco
         int minY = context.logs().stream().mapToInt(BlockPos::getY).min().orElse(Integer.MAX_VALUE);
 
         for (BlockPos logPos : context.logs()) {
-            // Applica solo se è dal 4° blocco in su (minY + 3)
             if (logPos.getY() >= minY + 5) {
+                // Questo ciclo usa Direction.Plane.HORIZONTAL, quindi "direction" sarà sempre N, S, W, o E. Perfetto.
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
                     if (random.nextFloat() < this.probability) {
                         BlockPos targetPos = logPos.relative(direction);
@@ -50,7 +50,13 @@ public class ModWallMossDecorator extends TreeDecorator {
                                 && !context.logs().contains(targetPos)
                                 && !context.leaves().contains(targetPos)) {
 
-                            context.setBlock(targetPos, moss.setValue(BlockStateProperties.FACING, direction));
+                            // --- LA CORREZIONE È QUI ---
+                            // VECCHIA RIGA (SBAGLIATA):
+                            // context.setBlock(targetPos, moss.setValue(BlockStateProperties.FACING, direction));
+
+                            // NUOVA RIGA (CORRETTA):
+                            // Usiamo la proprietà FACING definita DENTRO la nostra classe del blocco.
+                            context.setBlock(targetPos, moss.setValue(ModWallMossBlock.FACING, direction));
                         }
                     }
                 }

@@ -15,12 +15,18 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.Fluids;
 
+/**
+ * Carves a meandering shallow stream and lines its banks with stone blocks so that
+ * the water sits slightly lower than the surrounding terrain while keeping a clean edge.
+ */
 public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
 
     private static final int MAX_WIDTH = 4;
-    private static final int CARVE_DEPTH = 5;
+    private static final int CARVE_DEPTH = 3;
+    private static final int BANK_THICKNESS = 1; // Thickness of the stone banks on each side
+
     // --- LUNGHEZZA AUMENTATA PER FIUMI PIÙ LUNGHI ---
-    private static final int PATH_LENGTH_PER_CHUNK = 512;
+    private static final int PATH_LENGTH_PER_CHUNK = 640;
 
     public StreamCarverFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
@@ -42,8 +48,9 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
             currentZ += Mth.sin(angle);
             angle += (random.nextFloat() - 0.5F) * 0.4F;
 
-            BlockPos currentPos = new BlockPos((int)currentX, 0, (int)currentZ);
+            BlockPos currentPos = new BlockPos((int) currentX, 0, (int) currentZ);
 
+            // Limit carving to the 3×3 chunk area centred on the starting chunk to avoid runaway generation
             if (Math.abs(chunkPos.x - (currentPos.getX() >> 4)) > 1 || Math.abs(chunkPos.z - (currentPos.getZ() >> 4)) > 1) {
                 continue;
             }
@@ -63,6 +70,7 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
         int radius = (width - 1) / 2;
         BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
+        // 1. CARVE THE CHANNEL AND PLACE WATER
         for (int dx = -radius; dx <= radius; dx++) {
             for (int dz = -radius; dz <= radius; dz++) {
                 if (dx * dx + dz * dz > radius * radius) {
@@ -75,32 +83,59 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
                     continue;
                 }
 
+                // Dig down to create a shallow bed
                 for (int i = 0; i <= CARVE_DEPTH; i++) {
                     level.setBlock(mutable, Blocks.AIR.defaultBlockState(), 2);
                     mutable.move(0, -1, 0);
                 }
 
+                // Bed layer (gravel) one block below water surface
                 mutable.move(0, 1, 0);
                 level.setBlock(mutable, Blocks.GRAVEL.defaultBlockState(), 2);
 
+                // Surface water block
                 BlockPos waterPos = mutable.move(0, 1, 0).immutable();
                 BlockState waterState = Fluids.WATER.defaultFluidState().createLegacyBlock();
                 level.setBlock(waterPos, waterState, 2);
 
                 // --- FIX DEFINITIVO CON LE API MODERNE ---
-                // Programmiamo il tick per sicurezza
+                // Schedule tick and update neighbours so water flows correctly and gravel settles
                 level.scheduleTick(waterPos, Fluids.WATER, 0);
 
-                // Notifichiamo i vicini usando il nuovo metodo neighborShapeChanged
-                // Questo forza l'acqua a scorrere e la ghiaia a cadere.
-                BlockState changedState = level.getBlockState(waterPos);
-                // Il valore 512 è la massima profondità di ricorsione standard, è un valore sicuro.
-                level.neighborShapeChanged(Direction.DOWN, level.getBlockState(waterPos.above()), waterPos, waterPos.above(), 2, 512);
-                level.neighborShapeChanged(Direction.UP, level.getBlockState(waterPos.below()), waterPos, waterPos.below(), 2, 512);
+                BlockState aboveState = level.getBlockState(waterPos.above());
+                BlockState belowState = level.getBlockState(waterPos.below());
+                level.neighborShapeChanged(Direction.DOWN, aboveState, waterPos, waterPos.above(), 2, 512);
+                level.neighborShapeChanged(Direction.UP, belowState, waterPos, waterPos.below(), 2, 512);
                 level.neighborShapeChanged(Direction.NORTH, level.getBlockState(waterPos.south()), waterPos, waterPos.south(), 2, 512);
                 level.neighborShapeChanged(Direction.SOUTH, level.getBlockState(waterPos.north()), waterPos, waterPos.north(), 2, 512);
                 level.neighborShapeChanged(Direction.EAST, level.getBlockState(waterPos.west()), waterPos, waterPos.west(), 2, 512);
                 level.neighborShapeChanged(Direction.WEST, level.getBlockState(waterPos.east()), waterPos, waterPos.east(), 2, 512);
+            }
+        }
+
+        // 2. ADD STONE BANKS AROUND THE CARVED CHANNEL
+        int bankRadius = radius + BANK_THICKNESS;
+        for (int dx = -bankRadius; dx <= bankRadius; dx++) {
+            for (int dz = -bankRadius; dz <= bankRadius; dz++) {
+                int dist2 = dx * dx + dz * dz;
+
+                if (dist2 <= (radius * radius) || dist2 > (bankRadius * bankRadius)) {
+                    // Skip the channel interior and any blocks beyond the bank thickness
+                    continue;
+                }
+
+                // Place a one‑block‑tall stone rim at surface level to create a neat bank
+                mutable.set(center.getX() + dx, center.getY()-1, center.getZ() + dz);
+                if (level.isOutsideBuildHeight(mutable)) {
+                    continue;
+                }
+
+                // Only replace non‑air blocks (avoid overwriting air above caves)
+                if (!level.getBlockState(mutable).isAir() &&
+                        !level.getBlockState(mutable).is(Blocks.GRAVEL) &&
+                        !level.getBlockState(mutable).is(Blocks.WATER)) {
+                    level.setBlock(mutable, Blocks.STONE.defaultBlockState(), 2);
+                }
             }
         }
     }

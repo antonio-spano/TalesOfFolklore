@@ -12,9 +12,6 @@ public class ModFeatures {
     public static final DeferredRegister<Feature<?>> FEATURES =
             DeferredRegister.create(Registries.FEATURE, TalesOfFolklore.MOD_ID);
 
-    public static final RegistryObject<Feature<NoneFeatureConfiguration>> SHALLOW_RIVERBED =
-            FEATURES.register("shallow_riverbed", () -> new ShallowRiverbedFeature(NoneFeatureConfiguration.CODEC));
-
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> STREAM_CARVER =
             FEATURES.register("stream_carver", () -> new StreamCarverFeature(NoneFeatureConfiguration.CODEC));
 

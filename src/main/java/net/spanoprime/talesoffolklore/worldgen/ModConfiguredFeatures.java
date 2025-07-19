@@ -38,9 +38,6 @@ public class ModConfiguredFeatures {
 
     // Chiave per l'albero
     public static final ResourceKey<ConfiguredFeature<?, ?>> VIRGINIA_PINE_KEY = registerKey("virginia_pine");
-
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SHALLOW_RIVERBED_KEY = registerKey("shallow_riverbed");
-
     public static final ResourceKey<ConfiguredFeature<?, ?>> STREAM_CARVER_KEY = registerKey("stream_carver");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
@@ -69,8 +66,6 @@ public class ModConfiguredFeatures {
         ).decorators(decorators).build();
 
         register(context, VIRGINIA_PINE_KEY, Feature.TREE, treeConfig);
-
-        register(context, SHALLOW_RIVERBED_KEY, ModFeatures.SHALLOW_RIVERBED.get(), new NoneFeatureConfiguration());
 
         register(context, STREAM_CARVER_KEY, ModFeatures.STREAM_CARVER.get(), new NoneFeatureConfiguration());
     }

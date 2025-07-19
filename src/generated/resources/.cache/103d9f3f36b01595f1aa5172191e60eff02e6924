@@ -1,10 +1,7 @@
-// 1.20.1	2025-07-19T15:38:56.833973	Registries
+// 1.20.1	2025-07-19T16:54:42.927648	Registries
 651e0296733c34c8e9ce5dc32ffdd9cec61d088b data/talesoffolklore/worldgen/biome/appalachian_forest.json
-1edd7d9b759275c500fe68a86a0c7e60e85ad9e7 data/talesoffolklore/worldgen/biome/appalachian_stream.json
-353667d735773b9594362ee3bcf226989c00c5cb data/talesoffolklore/worldgen/configured_feature/shallow_riverbed.json
 6ffe128a2a9821397a220b4878e6b102a75c7ad6 data/talesoffolklore/worldgen/configured_feature/stream_carver.json
 96e2e5a171aa9f2863903808203abdf8da7c9d06 data/talesoffolklore/worldgen/configured_feature/virginia_pine.json
 874aebe4f87bbe3e08e9242dc91df1330be4223b data/talesoffolklore/worldgen/noise_settings/appalachian_noise_settings.json
-5062027b2f666ab7f9733c7c8dca14e4c45ab38f data/talesoffolklore/worldgen/placed_feature/shallow_riverbed_placed.json
 bf4f08675abf73db4f59177b869936e37fecc3f0 data/talesoffolklore/worldgen/placed_feature/stream_carver_placed.json
 1c88db19270d203419d0d27328b2b3f14b42c744 data/talesoffolklore/worldgen/placed_feature/virginia_pine_placed.json

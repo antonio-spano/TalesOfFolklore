@@ -37,11 +37,7 @@ public class ModConfiguredFeatures {
     // Chiave per l'albero
     public static final ResourceKey<ConfiguredFeature<?, ?>> VIRGINIA_PINE_KEY = registerKey("virginia_pine");
 
-    // Chiavi per le rocce della riva
-    public static final ResourceKey<ConfiguredFeature<?, ?>> RIVERBANK_STONE_KEY = registerKey("riverbank_stone");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> RIVERBANK_COBBLESTONE_KEY = registerKey("riverbank_cobblestone");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> RIVERBANK_MOSSY_COBBLESTONE_KEY = registerKey("riverbank_mossy_cobblestone");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> RIVERBANK_ANDESITE_KEY = registerKey("riverbank_andesite");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> APPALACHIAN_STREAMBED_KEY = registerKey("appalachian_streambed");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         // --- VIRGINIA PINE ---
@@ -69,20 +65,6 @@ public class ModConfiguredFeatures {
         ).decorators(decorators).build();
 
         register(context, VIRGINIA_PINE_KEY, Feature.TREE, treeConfig);
-
-        // --- RIVERBANK ROCKS ---
-        RuleTest replaceableGround = new TagMatchTest(BlockTags.DIRT);
-
-        // La dimensione della "vena" è 1 per piazzare blocchi singoli e creare una linea
-        OreConfiguration stoneConfig = new OreConfiguration(List.of(OreConfiguration.target(replaceableGround, Blocks.STONE.defaultBlockState())), 1);
-        OreConfiguration cobblestoneConfig = new OreConfiguration(List.of(OreConfiguration.target(replaceableGround, Blocks.COBBLESTONE.defaultBlockState())), 1);
-        OreConfiguration mossyCobblestoneConfig = new OreConfiguration(List.of(OreConfiguration.target(replaceableGround, Blocks.MOSSY_COBBLESTONE.defaultBlockState())), 1);
-        OreConfiguration andesiteConfig = new OreConfiguration(List.of(OreConfiguration.target(replaceableGround, Blocks.ANDESITE.defaultBlockState())), 1);
-
-        register(context, RIVERBANK_STONE_KEY, Feature.ORE, stoneConfig);
-        register(context, RIVERBANK_COBBLESTONE_KEY, Feature.ORE, cobblestoneConfig);
-        register(context, RIVERBANK_MOSSY_COBBLESTONE_KEY, Feature.ORE, mossyCobblestoneConfig);
-        register(context, RIVERBANK_ANDESITE_KEY, Feature.ORE, andesiteConfig);
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

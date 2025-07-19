@@ -22,11 +22,8 @@ public class ModNoiseGeneratorSettingsProvider {
         // 2. Prendiamo le regole di superficie vanilla da quell'oggetto.
         SurfaceRules.RuleSource vanillaSurfaceRule = vanillaOverworld.surfaceRule();
 
-        // 3. Creiamo la nostra regola custom per il fiume.
         SurfaceRules.RuleSource riverRule = ModSurfaceRules.makeRiverOnlyRule();
 
-        // 4. Uniamo le due regole: la nostra avrà la priorità.
-        //    Se non siamo nel bioma del fiume, verranno usate le regole vanilla.
         SurfaceRules.RuleSource finalSurfaceRules = SurfaceRules.sequence(riverRule, vanillaSurfaceRule);
 
         // 5. Creiamo il nostro NoiseGeneratorSettings custom usando il costruttore a 11 parametri.
@@ -36,7 +33,7 @@ public class ModNoiseGeneratorSettingsProvider {
                 vanillaOverworld.defaultBlock(),
                 vanillaOverworld.defaultFluid(),
                 vanillaOverworld.noiseRouter(),
-                finalSurfaceRules, // <-- L'UNICA COSA CHE CAMBIAMO
+                vanillaSurfaceRule, // <-- L'UNICA COSA CHE CAMBIAMO
                 vanillaOverworld.spawnTarget(),
                 vanillaOverworld.seaLevel(),
                 vanillaOverworld.disableMobGeneration(),

@@ -3,22 +3,18 @@ package net.spanoprime.talesoffolklore.worldgen.biome;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
-import net.minecraft.core.QuartPos; // <-- IMPORT NECESSARIO
+import net.minecraft.core.QuartPos;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Climate;
-import net.spanoprime.talesoffolklore.item.custom.AppalachianMapItem;
 
 import java.util.stream.Stream;
 
 public class WrapperBiomeSource extends BiomeSource {
 
-    // Il codec non cambia
     public static final Codec<WrapperBiomeSource> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     BiomeSource.CODEC.fieldOf("fallback_source").forGetter(WrapperBiomeSource::getFallbackSource),
-                    //Codec.INT.fieldOf("center_x").forGetter(WrapperBiomeSource::getCenterX),
-                    //Codec.INT.fieldOf("center_z").forGetter(WrapperBiomeSource::getCenterZ),
                     Codec.LONG.fieldOf("radius_sq").forGetter(WrapperBiomeSource::getRadiusSq),
                     Biome.CODEC.fieldOf("biome").forGetter(WrapperBiomeSource::getAppalachianBiome),
                     Biome.CODEC.fieldOf("appalachian_stream_biome").forGetter(WrapperBiomeSource::getAppalachianStreamBiome)
@@ -28,37 +24,24 @@ public class WrapperBiomeSource extends BiomeSource {
     private final BiomeSource fallbackSource;
     private final int centerX;
     private final int centerZ;
-    private final int maxCoord = 4000;
-    private final int rangeCoord = 2000;
     private final long radiusSq;
     private final Holder<Biome> appalachianBiome;
     private final Holder<Biome> appalachianStreamBiome;
 
-    // Il costruttore non cambia
     public WrapperBiomeSource(BiomeSource fallbackSource, long radiusSq, Holder<Biome> appalachianBiome, Holder<Biome> appalachianStreamBiome) {
         super();
         float angle = (float) (Math.random() * 2 * Math.PI);
-        int distance = (int) (maxCoord + Math.random() * (rangeCoord + 1));
+        int distance = (int) (4000 + Math.random() * 2001); // Range 4000-6000
         this.fallbackSource = fallbackSource;
         this.centerX = (int) (Math.cos(angle) * distance);
         this.centerZ = (int) (Math.sin(angle) * distance);
-        System.out.println("SYNERGO X: " + this.centerX);
-        System.out.println("SYNERGO Z: " + this.centerZ);
-        //AppalachianMapItem.coordX = this.centerX;
-        //AppalachianMapItem.coordZ = this.centerZ;
-
+        System.out.println("SYNERGO BIOME SPAWNED AT X: " + this.centerX + ", Z: " + this.centerZ);
         this.radiusSq = radiusSq;
         this.appalachianBiome = appalachianBiome;
         this.appalachianStreamBiome = appalachianStreamBiome;
     }
 
-    // Il metodo che abbiamo aggiunto prima non cambia
-    @Override
-    protected Stream<Holder<Biome>> collectPossibleBiomes() {
-        return Stream.concat(this.fallbackSource.possibleBiomes().stream(), Stream.of(this.appalachianBiome, this.appalachianStreamBiome));
-    }
-
-    // ECCO LA CORREZIONE FINALE. SOLO QUI.
+    // ECCO LA LOGICA CHE FUNZIONA
     @Override
     public Holder<Biome> getNoiseBiome(int pX, int pY, int pZ, Climate.Sampler pSampler) {
         int blockX = QuartPos.toBlock(pX);
@@ -67,76 +50,54 @@ public class WrapperBiomeSource extends BiomeSource {
         long distSq = (long)(blockX - this.centerX) * (long)(blockX - this.centerX) +
                 (long)(blockZ - this.centerZ) * (long)(blockZ - this.centerZ);
 
+        // PRIMO CONTROLLO: siamo fuori dal cerchio? Se sì, fanculo, usa il bioma vanilla e non rompere il cazzo.
+        if (distSq > this.radiusSq) {
+            return this.fallbackSource.getNoiseBiome(pX, pY, pZ, pSampler);
+        }
+
+        // OK, SIAMO DENTRO IL CERCHIO.
         Holder<Biome> originalBiome = this.fallbackSource.getNoiseBiome(pX, pY, pZ, pSampler);
 
-        if (distSq <= this.radiusSq && !isExcludedBiome(originalBiome)) {
-            return this.appalachianBiome;
-        } else {
-            if (distSq <= this.radiusSq && isRiverBiome(originalBiome))
-                return this.appalachianStreamBiome;
+        // SECONDO CONTROLLO: il bioma originale è un fottuto fiume o una spiaggia?
+        // Se sì, piazzaci il nostro APPALACHIAN_STREAM.
+        if (isRiverOrBeach(originalBiome)) {
+            return this.appalachianStreamBiome;
+        }
+
+        // TERZO CONTROLLO: il bioma originale è un oceano?
+        // Se sì, lascialo stare. Non vogliamo i nostri alberi in mezzo al Pacifico.
+        if (isOcean(originalBiome)) {
             return originalBiome;
         }
+
+        // Se non è un fiume, non è una spiaggia e non è un oceano, ALLORA è il nostro APPALACHIAN_FOREST.
+        return this.appalachianBiome;
     }
 
-    private boolean isExcludedBiome(Holder<Biome> biome) {
-        // Controlla i nomi dei biomi vanilla noti per essere marittimi o fiumi
-        // Nota: usa `biome.unwrap().map(...)` per accedere al ResourceKey o al nome
-
+    private boolean isRiverOrBeach(Holder<Biome> biome) {
         return biome.unwrap().map(key -> {
             String path = key.location().getPath();
-
-            return path.contains("ocean") ||
-                    path.contains("cold_ocean") ||
-                    path.contains("deep_cold_ocean") ||
-                    path.contains("deep_frozen_ocean") ||
-                    path.contains("deep_lukewarm_ocean") ||
-                    path.contains("deep_ocean") ||
-                    path.contains("frozen_ocean") ||
-                    path.contains("lukewarm_ocean") ||
-                    path.contains("warm_ocean") ||
-                    path.contains("river") ||
-                    path.contains("frozen_river") ||
-                    path.contains("beach") ||
-                    path.contains("snowy_beach");
-        }, (direct) -> false); // In caso non sia un ResourceKey
-    }
-
-    private boolean isRiverBiome(Holder<Biome> biome)
-    {
-        return biome.unwrap().map(key -> {
-            String path = key.location().getPath();
-
-            return path.contains("river") ||
-                    path.contains("frozen_river") ||
-                    path.contains("beach") ||
-                    path.contains("snowy_beach");
+            return path.contains("river") || path.contains("beach");
         }, (direct) -> false);
     }
 
-    // Il resto della classe non cambia
+    private boolean isOcean(Holder<Biome> biome) {
+        return biome.unwrap().map(key -> key.location().getPath().contains("ocean"), (direct) -> false);
+    }
+
+    // Non toccare il resto. Va bene così.
+    @Override
+    protected Stream<Holder<Biome>> collectPossibleBiomes() {
+        return Stream.concat(this.fallbackSource.possibleBiomes().stream(), Stream.of(this.appalachianBiome, this.appalachianStreamBiome));
+    }
+
     @Override
     protected Codec<? extends BiomeSource> codec() {
         return CODEC;
     }
-
-    public BiomeSource getFallbackSource() {
-        return fallbackSource;
-    }
-    public int getCenterX() {
-        return centerX;
-    }
-    public int getCenterZ() {
-        return centerZ;
-    }
-    public long getRadiusSq() {
-        return radiusSq;
-    }
-    public Holder<Biome> getAppalachianBiome() {
-        return appalachianBiome;
-    }
-
-    public Holder<Biome> getAppalachianStreamBiome()
-    {
-        return appalachianStreamBiome;
-    }
+    // ... getter ...
+    public BiomeSource getFallbackSource() { return fallbackSource; }
+    public long getRadiusSq() { return radiusSq; }
+    public Holder<Biome> getAppalachianBiome() { return appalachianBiome; }
+    public Holder<Biome> getAppalachianStreamBiome() { return appalachianStreamBiome; }
 }

@@ -14,13 +14,7 @@
     "water_color": 4159204,
     "water_fog_color": 329011
   },
-  "features": [
-    [],
-    [],
-    [
-      "talesoffolklore:appalachian_streambed_placed"
-    ]
-  ],
+  "features": [],
   "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {

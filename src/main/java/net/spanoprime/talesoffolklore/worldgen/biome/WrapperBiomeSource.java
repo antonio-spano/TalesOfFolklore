@@ -61,7 +61,8 @@ public class WrapperBiomeSource extends BiomeSource {
         // SECONDO CONTROLLO: il bioma originale è un fottuto fiume o una spiaggia?
         // Se sì, piazzaci il nostro APPALACHIAN_STREAM.
         if (isRiverOrBeach(originalBiome)) {
-            return this.appalachianStreamBiome;
+            //return this.appalachianStreamBiome;
+            return originalBiome;
         }
 
         // TERZO CONTROLLO: il bioma originale è un oceano?

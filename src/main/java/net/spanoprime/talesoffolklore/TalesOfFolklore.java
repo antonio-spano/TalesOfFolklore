@@ -51,6 +51,7 @@ import net.spanoprime.talesoffolklore.worldgen.biome.ModBiomes;
 import net.spanoprime.talesoffolklore.worldgen.biome.surface.ModSurfaceRules;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModTreeDecoratorTypes;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallMossDecorator;
+import net.spanoprime.talesoffolklore.worldgen.feature.ModFeatures;
 import org.slf4j.Logger;
 
 import java.awt.*;
@@ -84,6 +85,7 @@ public class TalesOfFolklore
         //ModTerrablender.registerBiomes();
 
         ModWorldGen.register(modEventBus);
+        ModFeatures.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);

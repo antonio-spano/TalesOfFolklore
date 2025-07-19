@@ -21,7 +21,9 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> VIRGINIA_PINE_PLACED_KEY = registerKey("virginia_pine_placed");
 
     // Chiave per il letto del torrente
-    public static final ResourceKey<PlacedFeature> APPALACHIAN_STREAMBED_PLACED_KEY = registerKey("appalachian_streambed_placed");
+    public static final ResourceKey<PlacedFeature> SHALLOW_RIVERBED_PLACED_KEY = registerKey("shallow_riverbed_placed");
+
+    public static final ResourceKey<PlacedFeature> STREAM_CARVER_PLACED_KEY = registerKey("stream_carver_placed");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -32,12 +34,20 @@ public class ModPlacedFeatures {
                         ModBlocks.VIRGINIA_PINE_SAPLING.get()));
 
         // --- APPALACHIAN STREAMBED ---
-        register(context, APPALACHIAN_STREAMBED_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.APPALACHIAN_STREAMBED_KEY),
+        register(context, SHALLOW_RIVERBED_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SHALLOW_RIVERBED_KEY),
                 List.of(
-                        CountPlacement.of(3), // Piazza 3 patch per chunk per assicurare una copertura completa
+                        InSquarePlacement.spread(), // Esegui nel chunk
+                        PlacementUtils.HEIGHTMAP_TOP_SOLID, // Allineati alla superficie solida
+                        BiomeFilter.biome() // Solo nel bioma corretto (verrà applicato in ModBiomes)
+                ));
+
+        register(context, STREAM_CARVER_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.STREAM_CARVER_KEY),
+                List.of(
+                        // Prova a generare un torrente ogni 10 chunk. Modifica questo valore per frequenza.
+                        RarityFilter.onAverageOnceEvery(10),
                         InSquarePlacement.spread(),
-                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR, // Allinealo al fondale
-                        BiomeFilter.biome() // Esegui solo nel bioma corretto
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
                 ));
     }
 

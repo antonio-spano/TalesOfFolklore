@@ -40,6 +40,9 @@ public class ModBiomes
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
         BiomeDefaultFeatures.addForestGrass(biomeBuilder);
 
+        //biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.SHALLOW_RIVERBED_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.STREAM_CARVER_PLACED_KEY);
+
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.VIRGINIA_PINE_PLACED_KEY);
 
         return new Biome.BiomeBuilder()
@@ -65,7 +68,7 @@ public class ModBiomes
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
 
         // Aggiunge la feature per il letto di ghiaia del torrente
-        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.APPALACHIAN_STREAMBED_PLACED_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.SHALLOW_RIVERBED_PLACED_KEY);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)

@@ -29,6 +29,7 @@ import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallIvyDecorator;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallMossDecorator;
+import net.spanoprime.talesoffolklore.worldgen.feature.ModFeatures;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,9 @@ public class ModConfiguredFeatures {
     // Chiave per l'albero
     public static final ResourceKey<ConfiguredFeature<?, ?>> VIRGINIA_PINE_KEY = registerKey("virginia_pine");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> APPALACHIAN_STREAMBED_KEY = registerKey("appalachian_streambed");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SHALLOW_RIVERBED_KEY = registerKey("shallow_riverbed");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> STREAM_CARVER_KEY = registerKey("stream_carver");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         // --- VIRGINIA PINE ---
@@ -67,20 +70,9 @@ public class ModConfiguredFeatures {
 
         register(context, VIRGINIA_PINE_KEY, Feature.TREE, treeConfig);
 
-        //--- APPALACHIAN STREAMBED ---
-        register(context, APPALACHIAN_STREAMBED_KEY, Feature.VEGETATION_PATCH,
-                new VegetationPatchConfiguration(
-                        BlockTags.STONE_ORE_REPLACEABLES, // CORRETTO: Usa un tag esistente per i blocchi da rimpiazzare
-                        BlockStateProvider.simple(Blocks.GRAVEL.defaultBlockState()), // Il blocco da piazzare
-                        PlacementUtils.inlinePlaced(Feature.NO_OP, new NoneFeatureConfiguration()), // CORRETTO: Feature che non fa nulla
-                        CaveSurface.FLOOR, // Piazzalo sul fondo di corpi d'acqua/caverne
-                        ConstantInt.of(3), // Profondità della sostituzione (per assicurare un letto solido)
-                        0.0f,
-                        5,
-                        5.0f, // Chance di piazzare la vegetation_feature (messa a 0 per sicurezza)
-                        UniformInt.of(6, 14), // Raggio orizzontale della patch
-                        0.1f
-                ));
+        register(context, SHALLOW_RIVERBED_KEY, ModFeatures.SHALLOW_RIVERBED.get(), new NoneFeatureConfiguration());
+
+        register(context, STREAM_CARVER_KEY, ModFeatures.STREAM_CARVER.get(), new NoneFeatureConfiguration());
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

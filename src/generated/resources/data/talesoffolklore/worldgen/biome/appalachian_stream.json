@@ -17,15 +17,8 @@
   "features": [
     [],
     [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
     [
-      "minecraft:trees_water"
+      "talesoffolklore:appalachian_streambed_placed"
     ]
   ],
   "has_precipitation": true,

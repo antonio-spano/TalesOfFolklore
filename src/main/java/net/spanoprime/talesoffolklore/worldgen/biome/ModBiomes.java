@@ -4,7 +4,6 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -15,8 +14,6 @@ import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.worldgen.ModPlacedFeatures;
-
-import javax.naming.Context;
 
 public class ModBiomes
 {
@@ -36,41 +33,14 @@ public class ModBiomes
 
     public static Biome appalachianForest(BootstapContext<Biome> context, HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
-        //BiomeDefaultFeatures.farmAnimals(spawnBuilder);
         BiomeDefaultFeatures.commonSpawns(spawnBuilder);
 
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers);
 
-        //BiomeDefaultFeatures.addDefaultSeagrass(biomeBuilder);
-
-        // --- INIZIO MODIFICA FONDAMENTALE ---
-        // Aggiungiamo MANUALMENTE solo quello che vogliamo.
-        // NIENTE carvers, NIENTE laghi, NIENTE sorgenti.
-
-        //BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
-        //BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        BiomeDefaultFeatures.addForestGrass(biomeBuilder);
 
-        //BiomeDefaultFeatures.addDefaultSprings(biomeBuilder);
-
-        //BiomeDefaultFeatures.addCherryGroveVegetation(biomeBuilder);
-
-
-        //BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder);
-        //BiomeDefaultFeatures.addDefaultExtraVegetation(biomeBuilder); // ← Aggiunge erba alta!
-        //BiomeDefaultFeatures.addFerns(biomeBuilder);                  // ← Aggiunge anche felci
-        BiomeDefaultFeatures.addForestGrass(biomeBuilder);            // ← OK
-
-        //BiomeDefaultFeatures.addDefaultGrass(biomeBuilder);
-
-        // Aggiungiamo i tuoi alberi custom
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.VIRGINIA_PINE_PLACED_KEY);
-        //biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_ANDESITE_PLACED_KEY);
-        //biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_COBBLESTONE_PLACED_KEY);
-        //biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_STONE_PLACED_KEY);
-        //biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_MOSSY_COBBLESTONE_PLACED_KEY);
-        // --- FINE MODIFICA FONDAMENTALE ---
-
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
@@ -92,15 +62,10 @@ public class ModBiomes
     public static Biome appalachianStream(BootstapContext<Biome> context, HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers)
     {
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers);
-
-        /*biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_STONE_PLACED_KEY);
-        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_COBBLESTONE_PLACED_KEY);
-        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_ANDESITE_PLACED_KEY);
-        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIVERBANK_MOSSY_COBBLESTONE_PLACED_KEY); */
-
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
 
-        BiomeDefaultFeatures.addWaterTrees(biomeBuilder);
+        // Aggiunge la feature per il letto di ghiaia del torrente
+        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.APPALACHIAN_STREAMBED_PLACED_KEY);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)

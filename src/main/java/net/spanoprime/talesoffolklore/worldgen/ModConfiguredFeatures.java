@@ -2,6 +2,7 @@ package net.spanoprime.talesoffolklore.worldgen;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -13,8 +14,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaPineFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
@@ -22,8 +24,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStatePr
 import net.minecraft.world.level.levelgen.feature.treedecorators.AlterGroundDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
-import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
-import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallIvyDecorator;
@@ -65,6 +66,21 @@ public class ModConfiguredFeatures {
         ).decorators(decorators).build();
 
         register(context, VIRGINIA_PINE_KEY, Feature.TREE, treeConfig);
+
+        //--- APPALACHIAN STREAMBED ---
+        register(context, APPALACHIAN_STREAMBED_KEY, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        BlockTags.STONE_ORE_REPLACEABLES, // CORRETTO: Usa un tag esistente per i blocchi da rimpiazzare
+                        BlockStateProvider.simple(Blocks.GRAVEL.defaultBlockState()), // Il blocco da piazzare
+                        PlacementUtils.inlinePlaced(Feature.NO_OP, new NoneFeatureConfiguration()), // CORRETTO: Feature che non fa nulla
+                        CaveSurface.FLOOR, // Piazzalo sul fondo di corpi d'acqua/caverne
+                        ConstantInt.of(3), // Profondità della sostituzione (per assicurare un letto solido)
+                        0.0f,
+                        5,
+                        5.0f, // Chance di piazzare la vegetation_feature (messa a 0 per sicurezza)
+                        UniformInt.of(6, 14), // Raggio orizzontale della patch
+                        0.1f
+                ));
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

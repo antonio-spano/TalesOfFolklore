@@ -219,6 +219,7 @@ public class TalesOfFolklore
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.WALL_IVY_SEED.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.WALL_IVY.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.RED_FUNGUS.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.APPALACHIAN_GRASS_BLOCK.get(), RenderType.cutoutMipped());
             });
         }
     }

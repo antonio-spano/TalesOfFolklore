@@ -2,7 +2,7 @@
   "textures": {
     "particle": "talesoffolklore:block/dirt",
     "bottom": "talesoffolklore:block/dirt",
-    "top": "minecraft:block/grass_block_top",
+    "top": "block/grass_block_top",
     "side": "talesoffolklore:block/grass_block_side",
     "overlay": "block/grass_block_side_overlay"
   },

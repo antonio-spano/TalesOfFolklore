@@ -36,6 +36,11 @@
   // Keep this false. This is only for vanilla legacy villages to make it spawn properly. We don't need no hacks here!
   "use_expansion_hack": false,
 
+  "terrain_adaptation": {
+    "type": "minecraft:beard_box",
+    "beard_size": 2
+  },
+
   // What mobs can spawn over time in the structure.
   // Make sure you add the mob to the right category (monster, creature, etc)
   "spawn_overrides": {

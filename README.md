@@ -2,7 +2,7 @@
 
 ## 📝 Coding Standards
 
-- **Variables**: Use **snake_case** (e.g. `tales_of_folklore`) for variable names, except for `MOD_ID`, paths, and similar cases.
+- **Variables**: Use **camelCase** (e.g. `talesOfFolklore`) for variable names, except for `MOD_ID`, paths, and similar cases.
 - **Class Names**: Use **PascalCase** (e.g. `TalesOfFolklore`).
 - **Function Names**: Use **camelCase** (e.g. `talesOfFolklore`).
 

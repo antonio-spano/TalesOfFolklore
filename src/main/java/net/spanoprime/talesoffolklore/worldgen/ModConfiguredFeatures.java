@@ -51,7 +51,7 @@ public class ModConfiguredFeatures {
                                 .add(Blocks.COARSE_DIRT.defaultBlockState(), 1)
                 )
         ));
-        decorators.add(new ModWallIvyDecorator(0.25f));
+        decorators.add(new ModWallIvyDecorator(0.15f));
 
         TreeConfiguration treeConfig = new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.VIRGINIA_PINE_LOG.get()),

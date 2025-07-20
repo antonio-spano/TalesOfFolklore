@@ -47,7 +47,7 @@ public class ModConfiguredFeatures {
         decorators.add(new AlterGroundDecorator(
                 new WeightedStateProvider(
                         SimpleWeightedRandomList.<BlockState>builder()
-                                .add(Blocks.PODZOL.defaultBlockState(), 3)
+                                .add(Blocks.PODZOL.defaultBlockState(), 2)
                                 .add(Blocks.COARSE_DIRT.defaultBlockState(), 1)
                 )
         ));
@@ -55,7 +55,7 @@ public class ModConfiguredFeatures {
 
         TreeConfiguration treeConfig = new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.VIRGINIA_PINE_LOG.get()),
-                new StraightTrunkPlacer(21, 0, 3),
+                new StraightTrunkPlacer(22, 0, 5),
                 BlockStateProvider.simple(ModBlocks.VIRGINIA_PINE_LEAVES.get()),
                 new MegaPineFoliagePlacer(
                         ConstantInt.of(1),

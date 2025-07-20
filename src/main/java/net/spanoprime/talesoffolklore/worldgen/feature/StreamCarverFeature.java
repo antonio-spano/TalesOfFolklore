@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.Fluids;
+import net.spanoprime.talesoffolklore.block.ModBlocks;
 
 /**
  * Carves a meandering shallow stream and lines its banks with stone blocks so that
@@ -134,7 +135,7 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
                 if (!level.getBlockState(mutable).isAir() &&
                         !level.getBlockState(mutable).is(Blocks.GRAVEL) &&
                         !level.getBlockState(mutable).is(Blocks.WATER)) {
-                    level.setBlock(mutable, Blocks.STONE.defaultBlockState(), 2);
+                    level.setBlock(mutable, ModBlocks.RIVERBANK_COBBLESTONE.get().defaultBlockState(), 2);
                 }
             }
         }

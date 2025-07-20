@@ -18,7 +18,7 @@
                   "snowy": "false"
                 }
               },
-              "weight": 3
+              "weight": 2
             },
             {
               "data": {
@@ -73,9 +73,9 @@
     },
     "trunk_placer": {
       "type": "minecraft:straight_trunk_placer",
-      "base_height": 21,
+      "base_height": 22,
       "height_rand_a": 0,
-      "height_rand_b": 3
+      "height_rand_b": 5
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",

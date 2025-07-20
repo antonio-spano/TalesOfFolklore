@@ -18,20 +18,26 @@
                   "snowy": "false"
                 }
               },
+              "weight": 6
+            },
+            {
+              "data": {
+                "Name": "talesoffolklore:lush_dirt"
+              },
               "weight": 2
             },
             {
               "data": {
                 "Name": "minecraft:coarse_dirt"
               },
-              "weight": 1
+              "weight": 2
             }
           ]
         }
       },
       {
         "type": "talesoffolklore:wall_ivy_seed",
-        "probability": 0.25
+        "probability": 0.23
       }
     ],
     "dirt_provider": {

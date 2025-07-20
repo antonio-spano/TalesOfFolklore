@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "talesoffolklore:block/streambed_rocks"
+      },
+      {
+        "model": "talesoffolklore:block/streambed_rocks",
+        "y": 90
+      },
+      {
+        "model": "talesoffolklore:block/streambed_rocks",
+        "y": 180
+      },
+      {
+        "model": "talesoffolklore:block/streambed_rocks",
+        "y": 270
+      }
+    ]
+  }
+}

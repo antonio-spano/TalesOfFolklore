@@ -8,6 +8,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -97,12 +98,17 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
 
                 // Gravel bed
                 mut.move(0, 1, 0);
-                level.setBlock(mut, Blocks.GRAVEL.defaultBlockState(), 2);
+
+                int random = (int) (Math.random() * 4);
+
+                if (random == 1) level.setBlock(mut, ModBlocks.STREAMBED_ROCKS.get().defaultBlockState(), 2);
+                else level.setBlock(mut, Blocks.GRAVEL.defaultBlockState(), 2);
 
                 // Water surface
                 BlockPos waterPos = mut.move(0, 1, 0).immutable();
                 BlockState water  = Fluids.WATER.defaultFluidState().createLegacyBlock();
                 level.setBlock(waterPos, water, 2);
+                if (random == 2) level.setBlock(mut, Blocks.SEAGRASS.defaultBlockState(), 2);
                 level.scheduleTick(waterPos, Fluids.WATER, 0);
                 updateNeighbours(level, waterPos);
             }

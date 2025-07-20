@@ -46,7 +46,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.RED_FUNGUS.get(),
                         ModBlocks.RIVERBANK_COBBLESTONE.get(),
                         ModBlocks.APPALACHIAN_GRASS_BLOCK.get(),
-                        ModBlocks.APPALACHIAN_DIRT.get());
+                        ModBlocks.APPALACHIAN_DIRT.get(),
+                        ModBlocks.LUSH_DIRT.get(),
+                        ModBlocks.STREAMBED_ROCKS.get());
 
         this.tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(ModBlocks.VIRGINIA_PINE_LEAVES.get());

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "talesoffolklore:block/lush_dirt"
+      },
+      {
+        "model": "talesoffolklore:block/lush_dirt",
+        "y": 90
+      },
+      {
+        "model": "talesoffolklore:block/lush_dirt",
+        "y": 180
+      },
+      {
+        "model": "talesoffolklore:block/lush_dirt",
+        "y": 270
+      }
+    ]
+  }
+}

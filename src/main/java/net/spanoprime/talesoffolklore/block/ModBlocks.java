@@ -138,6 +138,14 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)
                     .sound(SoundType.GRASS)));
 
+    public static final RegistryObject<Block> LUSH_DIRT = registerBlock("lush_dirt",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)
+                    .sound(SoundType.GRASS)));
+
+    public static final RegistryObject<Block> STREAMBED_ROCKS = registerBlock("streambed_rocks",
+            () -> new GravelBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)
+                    .sound(SoundType.GRAVEL)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

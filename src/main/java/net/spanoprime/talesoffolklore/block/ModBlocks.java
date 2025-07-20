@@ -131,7 +131,7 @@ public class ModBlocks {
                     .sound(SoundType.STONE)));
 
     public static final RegistryObject<Block> APPALACHIAN_GRASS_BLOCK = registerBlock("appalachian_grass_block",
-            () -> new GrassBlock(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)
+            () -> new ModAppalachianGrassBlock(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)
                     .sound(SoundType.GRASS)));
 
     public static final RegistryObject<Block> APPALACHIAN_DIRT = registerBlock("appalachian_dirt",

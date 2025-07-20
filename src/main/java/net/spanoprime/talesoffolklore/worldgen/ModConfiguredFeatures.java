@@ -47,9 +47,9 @@ public class ModConfiguredFeatures {
         decorators.add(new AlterGroundDecorator(
                 new WeightedStateProvider(
                         SimpleWeightedRandomList.<BlockState>builder()
-                                .add(Blocks.PODZOL.defaultBlockState(), 6)
-                                .add(ModBlocks.LUSH_DIRT.get().defaultBlockState(), 2)
-                                .add(Blocks.COARSE_DIRT.defaultBlockState(), 2)
+                                .add(Blocks.PODZOL.defaultBlockState(), 1)
+                                //.add(ModBlocks.LUSH_DIRT.get().defaultBlockState(), 2)
+                                .add(Blocks.COARSE_DIRT.defaultBlockState(), 1)
                 )
         ));
         decorators.add(new ModWallIvyDecorator(0.23f));

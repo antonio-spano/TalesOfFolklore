@@ -18,19 +18,13 @@
                   "snowy": "false"
                 }
               },
-              "weight": 6
-            },
-            {
-              "data": {
-                "Name": "talesoffolklore:lush_dirt"
-              },
-              "weight": 2
+              "weight": 1
             },
             {
               "data": {
                 "Name": "minecraft:coarse_dirt"
               },
-              "weight": 2
+              "weight": 1
             }
           ]
         }

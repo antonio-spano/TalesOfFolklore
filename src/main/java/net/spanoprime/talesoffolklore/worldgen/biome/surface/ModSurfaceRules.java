@@ -1,9 +1,13 @@
 package net.spanoprime.talesoffolklore.worldgen.biome.surface;
 
+import com.sun.jna.platform.win32.Variant;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
+import net.spanoprime.talesoffolklore.block.custom.ModAppalachianGrassBlock;
+import net.spanoprime.talesoffolklore.worldgen.ModNoiseParameters;
 import net.spanoprime.talesoffolklore.worldgen.biome.ModBiomes;
 
 /**
@@ -19,25 +23,34 @@ public final class ModSurfaceRules {
 
     /** Restituisce la RuleSource da inserire nel SurfaceRuleData dello Overworld. */
     public static SurfaceRules.RuleSource overworldRules() {
-
+        //int rand = (int)(Math.random() * 4);
         // Blocchi custom
         BlockState GRASS = ModBlocks.APPALACHIAN_GRASS_BLOCK.get().defaultBlockState();
+        BlockState GRASS0 = GRASS.setValue(ModAppalachianGrassBlock.VARIANT, 1);
+        BlockState GRASS1 = GRASS.setValue(ModAppalachianGrassBlock.VARIANT, 2);
+        BlockState GRASS2 = GRASS.setValue(ModAppalachianGrassBlock.VARIANT, 3);
+
         BlockState DIRT  = ModBlocks.APPALACHIAN_DIRT.get().defaultBlockState();
         BlockState ROCK  = ModBlocks.RIVERBANK_COBBLESTONE.get().defaultBlockState();
 
-        // Condizione: siamo nel bioma Appalachian Forest?
-        SurfaceRules.ConditionSource isAppalachian =
-                SurfaceRules.isBiome(ModBiomes.APPALACHIAN_FOREST);
+// Scegli variante in base al rumore “surface”
+        SurfaceRules.RuleSource chooseVariant = SurfaceRules.sequence(
+                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE, -1.0D, 0.0D),
+                        SurfaceRules.state(GRASS)),
+                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE, 0.0D, 0.33D),
+                        SurfaceRules.state(GRASS0)),
+                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE,  0.33D, 0.66D),
+                        SurfaceRules.state(GRASS1)),
+                /* fallback */      SurfaceRules.state(GRASS2)
+        );
 
-        // Sequenza di sostituzioni
+// Surface-rule finale per il tuo bioma
         SurfaceRules.RuleSource appalachianSurface = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,  SurfaceRules.state(GRASS)),
+                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, chooseVariant),
                 SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, SurfaceRules.state(DIRT)),
-                /* fallback dentro il bioma → pietra fluviale */
                 SurfaceRules.state(ROCK)
         );
 
-        // Applichiamo la sequenza solo al nostro bioma
-        return SurfaceRules.ifTrue(isAppalachian, appalachianSurface);
+        return SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.APPALACHIAN_FOREST), appalachianSurface);
     }
 }

@@ -407,13 +407,76 @@
                 "surface_type": "floor"
               },
               "then_run": {
-                "type": "minecraft:block",
-                "result_state": {
-                  "Name": "talesoffolklore:appalachian_grass_block",
-                  "Properties": {
-                    "snowy": "false"
+                "type": "minecraft:sequence",
+                "sequence": [
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "max_threshold": 0.0,
+                      "min_threshold": -1.0,
+                      "noise": "talesoffolklore:variant_noise"
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "talesoffolklore:appalachian_grass_block",
+                        "Properties": {
+                          "snowy": "false",
+                          "variant": "0"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "max_threshold": 0.33,
+                      "min_threshold": 0.0,
+                      "noise": "talesoffolklore:variant_noise"
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "talesoffolklore:appalachian_grass_block",
+                        "Properties": {
+                          "snowy": "false",
+                          "variant": "1"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "max_threshold": 0.66,
+                      "min_threshold": 0.33,
+                      "noise": "talesoffolklore:variant_noise"
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "talesoffolklore:appalachian_grass_block",
+                        "Properties": {
+                          "snowy": "false",
+                          "variant": "2"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "Name": "talesoffolklore:appalachian_grass_block",
+                      "Properties": {
+                        "snowy": "false",
+                        "variant": "3"
+                      }
+                    }
                   }
-                }
+                ]
               }
             },
             {

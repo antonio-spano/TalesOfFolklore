@@ -126,6 +126,18 @@ public class ModBlocks {
                     .instabreak()
                     .sound(SoundType.MOSS_CARPET)));
 
+    public static final RegistryObject<Block> RIVERBANK_COBBLESTONE = registerBlock("riverbank_cobblestone",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)
+                    .sound(SoundType.STONE)));
+
+    public static final RegistryObject<Block> APPALACHIAN_GRASS_BLOCK = registerBlock("appalachian_grass_block",
+            () -> new GrassBlock(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)
+                    .sound(SoundType.GRASS)));
+
+    public static final RegistryObject<Block> APPALACHIAN_DIRT = registerBlock("appalachian_dirt",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)
+                    .sound(SoundType.GRASS)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

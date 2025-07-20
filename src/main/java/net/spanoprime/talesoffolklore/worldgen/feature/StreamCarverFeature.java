@@ -26,7 +26,7 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
     private static final int BANK_THICKNESS = 1; // Thickness of the stone banks on each side
 
     // --- LUNGHEZZA AUMENTATA PER FIUMI PIÙ LUNGHI ---
-    private static final int PATH_LENGTH_PER_CHUNK = 2048;
+    private static final int PATH_LENGTH_PER_CHUNK = 4096;
 
     public StreamCarverFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);

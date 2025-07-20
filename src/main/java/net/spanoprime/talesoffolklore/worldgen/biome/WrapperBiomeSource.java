@@ -35,9 +35,6 @@ public class WrapperBiomeSource extends BiomeSource {
     private int  centerX, centerZ;
     private volatile boolean centerReady;
 
-    /** TRUE se il BiomeSource originale non va manipolato (flat, single-biome, end, …). */
-    private final boolean bypass;
-
     /* ──────────────────── Costruttore ──────────────────── */
     public WrapperBiomeSource(BiomeSource fallback,
                               long radiusSq,
@@ -46,10 +43,6 @@ public class WrapperBiomeSource extends BiomeSource {
         this.fallback    = fallback;
         this.radiusSq    = radiusSq;
         this.appalachian = appalachian;
-
-        /* Bypass se NON MultiNoise oppure se MultiNoise con un solo bioma (es. superflat 1.20). */
-        this.bypass = !(fallback instanceof MultiNoiseBiomeSource)
-                ||  fallback.possibleBiomes().size() == 1;
     }
 
     /* ──────────────────── Inizializza il centro una sola volta (lazy) ──────────────────── */
@@ -82,9 +75,6 @@ public class WrapperBiomeSource extends BiomeSource {
     /* ──────────────────── Query biome ──────────────────── */
     @Override
     public Holder<Biome> getNoiseBiome(int qx, int qy, int qz, Sampler sampler) {
-
-        if (bypass)                                   // super-flat, single-biome, End…
-            return fallback.getNoiseBiome(qx, qy, qz, sampler);
 
         if (!centerReady) initCenter(sampler);
 

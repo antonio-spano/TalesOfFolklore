@@ -12,8 +12,8 @@
         "type": "minecraft:multi_noise",
         "preset": "talesoffolklore:overworld"
       },
-      "biome": "talesoffolklore:appalachian_forest",
-      "appalachian_stream_biome": "talesoffolklore:appalachian_stream"
+      "biome": "talesoffolklore:appalachian_forest"
+      //"appalachian_stream_biome": "talesoffolklore:appalachian_stream"
     }
   }
 }

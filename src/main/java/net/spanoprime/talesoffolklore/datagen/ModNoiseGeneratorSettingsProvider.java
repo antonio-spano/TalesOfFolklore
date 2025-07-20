@@ -22,9 +22,9 @@ public class ModNoiseGeneratorSettingsProvider {
         // 2. Prendiamo le regole di superficie vanilla da quell'oggetto.
         SurfaceRules.RuleSource vanillaSurfaceRule = vanillaOverworld.surfaceRule();
 
-        //SurfaceRules.RuleSource riverRule = ModSurfaceRules.makeRiverOnlyRule();
+        SurfaceRules.RuleSource appalachianRule = ModSurfaceRules.overworldRules();
 
-        //SurfaceRules.RuleSource finalSurfaceRules = SurfaceRules.sequence(riverRule, vanillaSurfaceRule);
+        SurfaceRules.RuleSource finalSurfaceRules = SurfaceRules.sequence(appalachianRule, vanillaSurfaceRule);
 
         // 5. Creiamo il nostro NoiseGeneratorSettings custom usando il costruttore a 11 parametri.
         //    Copiamo ogni parametro dall'oggetto vanilla, tranne la surfaceRule.
@@ -33,7 +33,7 @@ public class ModNoiseGeneratorSettingsProvider {
                 vanillaOverworld.defaultBlock(),
                 vanillaOverworld.defaultFluid(),
                 vanillaOverworld.noiseRouter(),
-                vanillaSurfaceRule, // <-- L'UNICA COSA CHE CAMBIAMO
+                finalSurfaceRules, // <-- L'UNICA COSA CHE CAMBIAMO
                 vanillaOverworld.spawnTarget(),
                 vanillaOverworld.seaLevel(),
                 vanillaOverworld.disableMobGeneration(),

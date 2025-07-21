@@ -55,7 +55,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.STREAMBED_ROCKS.get());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.RIVERBANK_COBBLESTONE.get());
+                .add(ModBlocks.APPALACHIAN_STONE.get(),
+                        ModBlocks.MOSSY_STREAMBANK_ROCKS.get());
 
         this.tag(BlockTags.DIRT)
                 .add(ModBlocks.APPALACHIAN_GRASS_BLOCK.get(),

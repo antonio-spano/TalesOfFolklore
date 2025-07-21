@@ -31,7 +31,7 @@ public final class ModSurfaceRules {
         BlockState GRASS2 = GRASS.setValue(ModAppalachianGrassBlock.VARIANT, 3);
 
         BlockState DIRT  = ModBlocks.APPALACHIAN_DIRT.get().defaultBlockState();
-        BlockState ROCK  = ModBlocks.RIVERBANK_COBBLESTONE.get().defaultBlockState();
+        BlockState ROCK  = ModBlocks.APPALACHIAN_STONE.get().defaultBlockState();
 
 // Scegli variante in base al rumore “surface”
         SurfaceRules.RuleSource chooseVariant = SurfaceRules.sequence(

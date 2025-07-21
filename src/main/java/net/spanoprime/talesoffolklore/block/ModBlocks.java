@@ -126,8 +126,8 @@ public class ModBlocks {
                     .instabreak()
                     .sound(SoundType.MOSS_CARPET)));
 
-    public static final RegistryObject<Block> RIVERBANK_COBBLESTONE = registerBlock("riverbank_cobblestone",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)
+    public static final RegistryObject<Block> APPALACHIAN_STONE = registerBlock("appalachian_stone",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .sound(SoundType.STONE)));
 
     public static final RegistryObject<Block> APPALACHIAN_GRASS_BLOCK = registerBlock("appalachian_grass_block",
@@ -145,6 +145,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> STREAMBED_ROCKS = registerBlock("streambed_rocks",
             () -> new GravelBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)
                     .sound(SoundType.GRAVEL)));
+
+    public static final RegistryObject<Block> MOSSY_STREAMBANK_ROCKS = registerBlock("mossy_streambank_rocks",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.MOSSY_COBBLESTONE)
+                    .sound(SoundType.STONE)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {

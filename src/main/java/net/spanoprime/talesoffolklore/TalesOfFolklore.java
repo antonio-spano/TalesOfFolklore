@@ -142,11 +142,12 @@ public class TalesOfFolklore
             event.accept(ModBlocks.STRIPPED_VIRGINIA_PINE_WOOD);
             event.accept(ModBlocks.STRIPPED_VIRGINIA_PINE_LOG);
             event.accept(ModBlocks.VIRGINIA_PINE_SCAFFOLDING);
-            event.accept(ModBlocks.RIVERBANK_COBBLESTONE);
+            event.accept(ModBlocks.APPALACHIAN_STONE);
             event.accept(ModBlocks.APPALACHIAN_DIRT);
             event.accept(ModBlocks.APPALACHIAN_GRASS_BLOCK);
             event.accept(ModBlocks.LUSH_DIRT);
             event.accept(ModBlocks.STREAMBED_ROCKS);
+            event.accept(ModBlocks.MOSSY_STREAMBANK_ROCKS);
         }
 
         if(event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS)

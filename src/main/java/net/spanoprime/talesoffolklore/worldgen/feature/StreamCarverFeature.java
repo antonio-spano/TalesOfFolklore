@@ -127,7 +127,7 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
                 BlockState current = level.getBlockState(mut);
                 if (!current.isAir() && !current.is(Blocks.GRAVEL) && !current.is(Blocks.WATER) &&
                         !current.is(BlockTags.LOGS) && !current.is(BlockTags.LEAVES)) {
-                    level.setBlock(mut, ModBlocks.RIVERBANK_COBBLESTONE.get().defaultBlockState(), 2);
+                    level.setBlock(mut, ModBlocks.MOSSY_STREAMBANK_ROCKS.get().defaultBlockState(), 2);
                 }
             }
         }

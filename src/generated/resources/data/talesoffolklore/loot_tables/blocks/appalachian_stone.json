@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "talesoffolklore:riverbank_cobblestone"
+          "name": "minecraft:cobblestone"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "talesoffolklore:blocks/riverbank_cobblestone"
+  "random_sequence": "talesoffolklore:blocks/appalachian_stone"
 }

@@ -2,20 +2,30 @@ package net.spanoprime.talesoffolklore.block.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CarpetBlock;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.spanoprime.talesoffolklore.block.ModBlocks;
+
+import javax.crypto.spec.PSource;
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class ModPineNeedlesBlock extends CarpetBlock
 {
@@ -47,6 +57,44 @@ public class ModPineNeedlesBlock extends CarpetBlock
     @Override
     public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pMovedByPiston) {
         super.onPlace(pState, pLevel, pPos, pOldState, pMovedByPiston);
+    }
+
+    @Override
+    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+
+        ItemStack heldItem = pPlayer.getItemInHand(pHand);
+        int currentVariant = pLevel.getBlockState(pPos).getValue(VARIANT);
+
+        if (heldItem.is(this.asItem()) && currentVariant < 3)
+        {
+            int newVariant = currentVariant + 1;
+
+            pLevel.setBlock(pPos, pState.setValue(VARIANT, newVariant), 3);
+            //pLevel.getBlockState(pPos).setValue(VARIANT, newVariant);
+
+            SoundType soundtype = this.getSoundType(pState, pLevel, pPos, pPlayer);
+            pLevel.playSound(pPlayer, pPos, soundtype.getPlaceSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+            System.out.println("FIGAAAA" + newVariant + "Current Variant: " + currentVariant);
+
+            // Rimuoviamo un oggetto dalla mano del giocatore, a meno che non sia in creativa.
+            if (!pPlayer.getAbilities().instabuild) {
+                heldItem.shrink(1);
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
+    }
+
+    @Override
+    public List<ItemStack> getDrops(BlockState pState, LootParams.Builder pParams) {
+        return Collections.singletonList(new ItemStack(ModBlocks.PINE_NEEDLES.get(), pState.getValue(VARIANT) + 1));
+    }
+
+    @Override
+    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+        BlockPos belowPos = pPos.below();
+        BlockState belowState = pLevel.getBlockState(belowPos);
+        return belowState.isFaceSturdy(pLevel, belowPos, Direction.UP);
     }
 
     @Override

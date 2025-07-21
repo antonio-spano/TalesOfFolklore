@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.spanoprime.talesoffolklore.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "talesoffolklore.refmap.json",
+  "mixins": [
+    "NoExperimentalWarningMixin",
+    "WorldCreationUiStateMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

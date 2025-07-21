@@ -1,6 +1,11 @@
 {
-  "replace": false,
+  "replace": true,
   "values": [
-    "talesoffolklore:talesoffolklore"
+    "talesoffolklore:talesoffolklore",
+    "minecraft:normal",
+    "minecraft:large_biomes",
+    "minecraft:flat",
+    "minecraft:amplified",
+    "minecraft:single_biome_surface"
   ]
 }

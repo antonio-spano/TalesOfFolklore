@@ -19,6 +19,10 @@ Will you uncover the truth behind the tales… or become just another legend los
 authors="SpanoPrime, ReaperOfEvil" #optional
 #logoFile="examplemod.png" #optional - Include if you want a logo for your mod
 
+mixins=[
+    "talesoffolklore.mixins.json"
+]
+
 [[dependencies.talesoffolklore]]
 modId="forge" #mandatory
 mandatory=true #mandatory

@@ -113,7 +113,7 @@ public class WrapperBiomeSource extends BiomeSource {
     }
 
     private boolean isRiver(Holder<Biome> b) { return pathContains(b, "river"); }
-    private boolean isOcean(Holder<Biome> b) { return pathContains(b, "ocean") || pathContains(b, "beach"); }
+    private boolean isOcean(Holder<Biome> b) { return pathContains(b, "ocean"); }
 
     private static boolean pathContains(Holder<Biome> b, String sub) {
         return b.unwrap().map(k -> k.location().getPath().contains(sub), d -> false);

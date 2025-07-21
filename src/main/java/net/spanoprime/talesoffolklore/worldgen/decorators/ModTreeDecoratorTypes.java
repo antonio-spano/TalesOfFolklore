@@ -20,6 +20,12 @@ public class ModTreeDecoratorTypes {
     public static final RegistryObject<TreeDecoratorType<ModPineNeedlesDecorator>> PINE_NEEDLES =
             TREE_DECORATORS.register("pine_needles", () -> new TreeDecoratorType<>(ModPineNeedlesDecorator.CODEC));
 
+    public static final RegistryObject<TreeDecoratorType<ModYellowFungusDecorator>> YELLOW_FUNGUS =
+            TREE_DECORATORS.register("yellow_fungus", () -> new TreeDecoratorType<>(ModYellowFungusDecorator.CODEC));
+
+    public static final RegistryObject<TreeDecoratorType<ModUndergrowthDecorator>> UNDERGROWTH =
+            TREE_DECORATORS.register("undergrowth", () -> new TreeDecoratorType<>(ModUndergrowthDecorator.CODEC));
+
     public static void register(IEventBus eventBus) {
         TREE_DECORATORS.register(eventBus);
     }

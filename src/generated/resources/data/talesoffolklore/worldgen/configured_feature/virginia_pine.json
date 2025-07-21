@@ -36,6 +36,14 @@
       {
         "type": "talesoffolklore:pine_needles",
         "probability": 0.3
+      },
+      {
+        "type": "talesoffolklore:yellow_fungus",
+        "probability": 0.05
+      },
+      {
+        "type": "talesoffolklore:undergrowth",
+        "probability": 0.3
       }
     ],
     "dirt_provider": {

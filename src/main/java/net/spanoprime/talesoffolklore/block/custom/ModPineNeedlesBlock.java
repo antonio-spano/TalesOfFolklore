@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class ModPineNeedlesBlock extends CarpetBlock
+public class ModPineNeedlesBlock extends BushBlock
 {
     public static final IntegerProperty VARIANT = IntegerProperty.create("variant", 0, 4);
 
@@ -88,13 +88,6 @@ public class ModPineNeedlesBlock extends CarpetBlock
     @Override
     public List<ItemStack> getDrops(BlockState pState, LootParams.Builder pParams) {
         return Collections.singletonList(new ItemStack(ModBlocks.PINE_NEEDLES.get(), pState.getValue(VARIANT) + 1));
-    }
-
-    @Override
-    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        BlockPos belowPos = pPos.below();
-        BlockState belowState = pLevel.getBlockState(belowPos);
-        return belowState.isFaceSturdy(pLevel, belowPos, Direction.UP);
     }
 
     @Override

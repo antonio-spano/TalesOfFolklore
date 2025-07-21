@@ -151,8 +151,12 @@ public class ModBlocks {
                     .sound(SoundType.STONE)));
 
     public static final RegistryObject<Block> PINE_NEEDLES = registerBlock("pine_needles",
-            () -> new ModPineNeedlesBlock(BlockBehaviour.Properties.copy(Blocks.MOSS_CARPET)
-                    .sound(SoundType.AZALEA_LEAVES)));
+            () -> new ModPineNeedlesBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)
+                    .sound(SoundType.SWEET_BERRY_BUSH)));
+    
+    public static final RegistryObject<Block> UNDERGROWTH = registerBlock("undergrowth",
+            () -> new ModUndergrowthBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)
+                    .sound(SoundType.SWEET_BERRY_BUSH)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {

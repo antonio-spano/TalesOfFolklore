@@ -5,6 +5,7 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -13,10 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaPineFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
@@ -27,9 +25,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlac
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
-import net.spanoprime.talesoffolklore.worldgen.decorators.ModPineNeedlesDecorator;
-import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallIvyDecorator;
-import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallMossDecorator;
+import net.spanoprime.talesoffolklore.worldgen.decorators.*;
 import net.spanoprime.talesoffolklore.worldgen.feature.ModFeatures;
 
 import java.util.ArrayList;
@@ -40,6 +36,7 @@ public class ModConfiguredFeatures {
     // Chiave per l'albero
     public static final ResourceKey<ConfiguredFeature<?, ?>> VIRGINIA_PINE_KEY = registerKey("virginia_pine");
     public static final ResourceKey<ConfiguredFeature<?, ?>> STREAM_CARVER_KEY = registerKey("stream_carver");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> RED_FUNGUS_KEY = registerKey("red_fungus");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         // --- VIRGINIA PINE ---
@@ -55,6 +52,8 @@ public class ModConfiguredFeatures {
         ));
         decorators.add(new ModWallIvyDecorator(0.23f));
         decorators.add(new ModPineNeedlesDecorator(.3f));
+        decorators.add(new ModYellowFungusDecorator(.05f));
+        decorators.add(new ModUndergrowthDecorator(.3f));
 
         TreeConfiguration treeConfig = new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.VIRGINIA_PINE_LOG.get()),
@@ -71,6 +70,15 @@ public class ModConfiguredFeatures {
         register(context, VIRGINIA_PINE_KEY, Feature.TREE, treeConfig);
 
         register(context, STREAM_CARVER_KEY, ModFeatures.STREAM_CARVER.get(), new NoneFeatureConfiguration());
+
+        register(context, RED_FUNGUS_KEY, Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        2, // Quanti tentativi per piazzare il fungo in una chiazza.
+                        7,  // Dispersione orizzontale.
+                        0,  // Dispersione verticale.
+                        PlacementUtils.inlinePlaced(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.RED_FUNGUS.get())))
+                ));
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

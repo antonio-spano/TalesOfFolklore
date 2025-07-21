@@ -41,6 +41,8 @@ public class ModBiomes
 
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.VIRGINIA_PINE_PLACED_KEY);
 
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.RED_FUNGUS_PLACED_KEY);
+
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
                 .downfall(0.6f)

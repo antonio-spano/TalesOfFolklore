@@ -8,6 +8,8 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
@@ -20,6 +22,7 @@ public class ModPlacedFeatures {
     // Chiave per l'albero
     public static final ResourceKey<PlacedFeature> VIRGINIA_PINE_PLACED_KEY = registerKey("virginia_pine_placed");
     public static final ResourceKey<PlacedFeature> STREAM_CARVER_PLACED_KEY = registerKey("stream_carver_placed");
+    public static final ResourceKey<PlacedFeature> RED_FUNGUS_PLACED_KEY = registerKey("red_fungus_placed");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -35,6 +38,26 @@ public class ModPlacedFeatures {
                         RarityFilter.onAverageOnceEvery(10),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+        // Sostituisci la tua riga con questa:
+        register(context, RED_FUNGUS_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.RED_FUNGUS_KEY),
+                // Invece di usare un pacchetto per l'erba, costruiamo le regole a mano:
+                List.of(
+                        // Regola 1: Frequenza. Quante "chiazze" per chunk.
+                        // Puoi usare CountPlacement.of(X) per un numero fisso,
+                        // o il tuo countExtra per un numero variabile. Usiamo il tuo:
+                        PlacementUtils.countExtra(2, .1f, 1),
+
+                        // Regola 2: Spargili a caso nel chunk.
+                        InSquarePlacement.spread(),
+
+                        // Regola 3: Piazzali sulla superficie del mondo.
+                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE),
+
                         BiomeFilter.biome()
                 ));
     }

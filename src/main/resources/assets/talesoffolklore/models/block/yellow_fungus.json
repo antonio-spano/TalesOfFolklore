@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "talesoffolklore:block/pine_fungus_1",
-		"particle": "talesoffolklore:block/pine_fungus"
+		"0": "talesoffolklore:block/yellow_fungus",
+		"particle": "talesoffolklore:block/yellow_fungus"
 	},
 	"elements": [
 		{

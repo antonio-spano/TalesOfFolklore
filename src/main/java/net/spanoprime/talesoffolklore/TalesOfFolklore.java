@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.TickEvent;
@@ -159,16 +160,20 @@ public class TalesOfFolklore
         {
             event.accept(ModBlocks.VIRGINIA_PINE_SAPLING);
             event.accept(ModBlocks.WALL_MOSS);
-            event.accept(ModBlocks.WALL_IVY_SEED);
             event.accept(ModBlocks.WALL_IVY);
-            event.accept(ModBlocks.YELLOW_FUNGUS);
-            event.accept(ModBlocks.RED_FUNGUS);
             event.accept(ModBlocks.PINE_NEEDLES);
         }
 
         if(event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES)
         {
             event.accept(ModItems.VIRGINIA_PINECONE);
+        }
+
+        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS)
+        {
+            event.accept(ModBlocks.YELLOW_FUNGUS);
+            event.accept(ModBlocks.RED_FUNGUS);
+            event.accept(ModBlocks.WALL_IVY_SEED);
         }
     }
 
@@ -224,7 +229,8 @@ public class TalesOfFolklore
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.WALL_IVY.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.RED_FUNGUS.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.APPALACHIAN_GRASS_BLOCK.get(), RenderType.cutoutMipped());
-                ItemBlockRenderTypes.setRenderLayer(ModBlocks.PINE_NEEDLES.get(), RenderType.cutoutMipped());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.UNDERGROWTH.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.PINE_NEEDLES.get(), RenderType.cutout());
             });
         }
     }

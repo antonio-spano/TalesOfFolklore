@@ -22,6 +22,7 @@ public class ModWallMossDecorator extends TreeDecorator {
     );
 
     private final float probability;
+    private int threshold = 5;
 
     public ModWallMossDecorator(float probability) {
         this.probability = probability;
@@ -40,7 +41,7 @@ public class ModWallMossDecorator extends TreeDecorator {
         int minY = context.logs().stream().mapToInt(BlockPos::getY).min().orElse(Integer.MAX_VALUE);
 
         for (BlockPos logPos : context.logs()) {
-            if (logPos.getY() >= minY + 5) {
+            if (logPos.getY() >= minY + threshold) {
                 // Questo ciclo usa Direction.Plane.HORIZONTAL, quindi "direction" sarà sempre N, S, W, o E. Perfetto.
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
                     if (random.nextFloat() < this.probability) {

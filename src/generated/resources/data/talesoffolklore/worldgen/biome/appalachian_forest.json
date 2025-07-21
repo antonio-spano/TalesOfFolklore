@@ -45,7 +45,8 @@
     [],
     [
       "minecraft:patch_grass_forest",
-      "talesoffolklore:virginia_pine_placed"
+      "talesoffolklore:virginia_pine_placed",
+      "talesoffolklore:red_fungus_placed"
     ]
   ],
   "has_precipitation": true,

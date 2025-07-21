@@ -38,5 +38,7 @@
   "block.talesoffolklore.lush_dirt": "Lush Dirt",
   "block.talesoffolklore.streambed_rocks": "Stream Rocks",
 
-  "entity.talesoffolklore.mod_chest_boat": "Boat With Chest"
+  "entity.talesoffolklore.mod_chest_boat": "Boat With Chest",
+
+  "generator.talesoffolklore.talesoffolklore": "Tales of Folklore"
 }

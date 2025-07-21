@@ -192,9 +192,11 @@ public class TalesOfFolklore
                     64
             ));
 
-            BlockPos biomePos = closestBiome3d.get().getFirst();
-            AppalachianMapItem.coordX = biomePos.getX();
-            AppalachianMapItem.coordZ = biomePos.getZ();
+            closestBiome3d.ifPresent(pair -> {
+                BlockPos biomePos = closestBiome3d.get().getFirst();
+                AppalachianMapItem.coordX = biomePos.getX();
+                AppalachianMapItem.coordZ = biomePos.getZ();
+            });
         }
     }
 

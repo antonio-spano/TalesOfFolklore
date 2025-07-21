@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=0": [
+      { "model": "talesoffolklore:block/pine_needles_0" }
+    ],
+    "variant=1": [
+      { "model": "talesoffolklore:block/pine_needles_1" }
+    ],
+    "variant=2": [
+      { "model": "talesoffolklore:block/pine_needles_2" }
+    ],
+    "variant=3": [
+      { "model": "talesoffolklore:block/pine_needles_3" }
+    ]
+  }
+}

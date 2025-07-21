@@ -32,6 +32,10 @@
       {
         "type": "talesoffolklore:wall_ivy_seed",
         "probability": 0.23
+      },
+      {
+        "type": "talesoffolklore:pine_needles",
+        "probability": 0.3
       }
     ],
     "dirt_provider": {

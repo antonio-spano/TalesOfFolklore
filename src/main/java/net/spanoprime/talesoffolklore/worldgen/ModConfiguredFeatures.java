@@ -27,6 +27,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlac
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
+import net.spanoprime.talesoffolklore.worldgen.decorators.ModPineNeedlesDecorator;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallIvyDecorator;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallMossDecorator;
 import net.spanoprime.talesoffolklore.worldgen.feature.ModFeatures;
@@ -53,6 +54,7 @@ public class ModConfiguredFeatures {
                 )
         ));
         decorators.add(new ModWallIvyDecorator(0.23f));
+        decorators.add(new ModPineNeedlesDecorator(.3f));
 
         TreeConfiguration treeConfig = new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.VIRGINIA_PINE_LOG.get()),

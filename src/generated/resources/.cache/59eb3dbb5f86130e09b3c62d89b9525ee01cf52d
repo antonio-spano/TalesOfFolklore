@@ -1,9 +1,10 @@
-// 1.20.1	2025-07-21T17:19:01.471463	Loot Tables
+// 1.20.1	2025-07-21T17:50:30.106803	Loot Tables
 66c0fe0ce1efe5c4689ff7d8464a04a447d7e975 data/talesoffolklore/loot_tables/blocks/appalachian_dirt.json
 41e852b2a40f6dfebed25e487a8b5f5932cac27e data/talesoffolklore/loot_tables/blocks/appalachian_grass_block.json
 07f0b493f449f82de986a87246152f8870fa4381 data/talesoffolklore/loot_tables/blocks/appalachian_stone.json
 12c4cc590e5ebbe09e0b5fe6740ade3ff5126889 data/talesoffolklore/loot_tables/blocks/lush_dirt.json
 bb508badbdf186c77d7833ff2d5cb806a8fa4d35 data/talesoffolklore/loot_tables/blocks/mossy_streambank_rocks.json
+b005e2b65e027b72e7279c2ab3636d7f34970685 data/talesoffolklore/loot_tables/blocks/pine_needles.json
 b38e262292fb12c79e7a4b4c031daa9b15e755ce data/talesoffolklore/loot_tables/blocks/red_fungus.json
 f82e892fd05e8029894bb9aedc6e81848fcc8390 data/talesoffolklore/loot_tables/blocks/streambed_rocks.json
 bd685005441693cbe3ff81a0b33278f705eb7548 data/talesoffolklore/loot_tables/blocks/stripped_virginia_pine_log.json

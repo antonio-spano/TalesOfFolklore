@@ -150,6 +150,10 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.MOSSY_COBBLESTONE)
                     .sound(SoundType.STONE)));
 
+    public static final RegistryObject<Block> PINE_NEEDLES = registerBlock("pine_needles",
+            () -> new ModPineNeedlesBlock(BlockBehaviour.Properties.copy(Blocks.MOSS_CARPET)
+                    .sound(SoundType.AZALEA_LEAVES)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

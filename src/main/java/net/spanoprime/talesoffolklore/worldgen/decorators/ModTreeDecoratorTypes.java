@@ -17,6 +17,9 @@ public class ModTreeDecoratorTypes {
     public static final RegistryObject<TreeDecoratorType<ModWallIvyDecorator>> WALL_IVY =
             TREE_DECORATORS.register("wall_ivy_seed", () -> new TreeDecoratorType<>(ModWallIvyDecorator.CODEC));
 
+    public static final RegistryObject<TreeDecoratorType<ModPineNeedlesDecorator>> PINE_NEEDLES =
+            TREE_DECORATORS.register("pine_needles", () -> new TreeDecoratorType<>(ModPineNeedlesDecorator.CODEC));
+
     public static void register(IEventBus eventBus) {
         TREE_DECORATORS.register(eventBus);
     }

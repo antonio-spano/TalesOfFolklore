@@ -46,7 +46,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(ModBlocks.VIRGINIA_PINE_LEAVES.get(),
                         ModBlocks.WALL_IVY_SEED.get(),
-                        ModBlocks.WALL_IVY.get());
+                        ModBlocks.WALL_IVY.get(),
+                        ModBlocks.PINE_NEEDLES.get());
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(ModBlocks.APPALACHIAN_GRASS_BLOCK.get(),

@@ -35,11 +35,11 @@ public final class ModSurfaceRules {
 
 // Scegli variante in base al rumore “surface”
         SurfaceRules.RuleSource chooseVariant = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE, -1.0D, 0.33D),
+                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE, -1.0D, 0.66D),
                         SurfaceRules.state(GRASS)),
-                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE, 0.33D, 0.55D),
+                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE, 0.66D, 0.77D),
                         SurfaceRules.state(GRASS0)),
-                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE,  0.55D, 0.77D),
+                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE,  0.77D, 0.88D),
                         SurfaceRules.state(GRASS1)),
                 /* fallback */      SurfaceRules.state(GRASS2)
         );

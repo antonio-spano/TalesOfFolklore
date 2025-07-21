@@ -413,7 +413,7 @@
                     "type": "minecraft:condition",
                     "if_true": {
                       "type": "minecraft:noise_threshold",
-                      "max_threshold": 0.33,
+                      "max_threshold": 0.66,
                       "min_threshold": -1.0,
                       "noise": "talesoffolklore:variant_noise"
                     },
@@ -432,8 +432,8 @@
                     "type": "minecraft:condition",
                     "if_true": {
                       "type": "minecraft:noise_threshold",
-                      "max_threshold": 0.55,
-                      "min_threshold": 0.33,
+                      "max_threshold": 0.77,
+                      "min_threshold": 0.66,
                       "noise": "talesoffolklore:variant_noise"
                     },
                     "then_run": {
@@ -451,8 +451,8 @@
                     "type": "minecraft:condition",
                     "if_true": {
                       "type": "minecraft:noise_threshold",
-                      "max_threshold": 0.77,
-                      "min_threshold": 0.55,
+                      "max_threshold": 0.88,
+                      "min_threshold": 0.77,
                       "noise": "talesoffolklore:variant_noise"
                     },
                     "then_run": {

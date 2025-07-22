@@ -1,10 +1,10 @@
 {
   "variants": {
     "variant=0": [
-      {"model": "talesoffolklore:block/mossy_streambank_rocks_0"}
+      {"model": "talesoffolklore:block/mossy_streambank_rocks"}
     ],
     "variant=1": [
-      {"model": "talesoffolklore:block/mossy_streambank_rocks_1"}
+      {"model": "talesoffolklore:block/mossy_streambank_rocks_0"}
     ]
   }
 }

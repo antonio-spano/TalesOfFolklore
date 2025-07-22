@@ -32,8 +32,8 @@
   "block.talesoffolklore.wall_moss": "Mossy Bark",
   "block.talesoffolklore.wall_ivy": "Wall Ivy",
   "block.talesoffolklore.wall_ivy_seed": "Poisonous Ivy",
-  "block.talesoffolklore.appalachian_dirt": "Damp Dirt",
-  "block.talesoffolklore.appalachian_grass_block": "Damp Grass Block",
+  "block.talesoffolklore.damp_dirt": "Damp Dirt",
+  "block.talesoffolklore.damp_grass_block": "Damp Grass Block",
   "block.talesoffolklore.appalachian_stone": "Appalachian Stone",
   "block.talesoffolklore.lush_dirt": "Lush Dirt",
   "block.talesoffolklore.streambed_rocks": "Stream Rocks",
@@ -42,6 +42,10 @@
   "block.talesoffolklore.yellow_fungus": "Yellow Fungus",
   "block.talesoffolklore.red_fungus": "Red Fungus",
   "block.talesoffolklore.undergrowth": "Undergrowth",
+  "block.talesoffolklore.damp_podzol": "Damp Podzol",
+  "block.talesoffolklore.damp_coarse_dirt": "Damp Coarse Dirt",
+  "block.talesoffolklore.white_fungus": "White Fungus",
+  "block.talesoffolklore.fern": "Fern",
 
   "entity.talesoffolklore.mod_chest_boat": "Boat With Chest",
 

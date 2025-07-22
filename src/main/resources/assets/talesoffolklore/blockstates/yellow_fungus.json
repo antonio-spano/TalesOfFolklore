@@ -1,10 +1,8 @@
 {
   "variants": {
-    "facing=up":    { "model": "talesoffolklore:block/yellow_fungus", "x": 0, "y": 0 },
-    "facing=down":  { "model": "talesoffolklore:block/yellow_fungus", "x": 180, "y": 0 },
-    "facing=north": { "model": "talesoffolklore:block/yellow_fungus", "x": 90, "y": 0 },
+    "facing=north": { "model": "talesoffolklore:block/yellow_fungus", "x": 270, "y": 180 },
     "facing=south": { "model": "talesoffolklore:block/yellow_fungus", "x": 270, "y": 0 },
-    "facing=east":  { "model": "talesoffolklore:block/yellow_fungus", "x": 90, "y": 90 },
-    "facing=west":  { "model": "talesoffolklore:block/yellow_fungus", "x": 90, "y": 270 }
+    "facing=east":  { "model": "talesoffolklore:block/yellow_fungus", "x": 270, "y": 270 },
+    "facing=west":  { "model": "talesoffolklore:block/yellow_fungus", "x": 270, "y": 90 }
   }
 }

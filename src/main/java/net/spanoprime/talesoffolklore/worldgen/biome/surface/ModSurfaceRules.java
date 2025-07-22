@@ -25,21 +25,21 @@ public final class ModSurfaceRules {
     public static SurfaceRules.RuleSource overworldRules() {
         //int rand = (int)(Math.random() * 4);
         // Blocchi custom
-        BlockState GRASS = ModBlocks.APPALACHIAN_GRASS_BLOCK.get().defaultBlockState();
+        BlockState GRASS = ModBlocks.DAMP_GRASS_BLOCK.get().defaultBlockState();
         BlockState GRASS0 = GRASS.setValue(ModAppalachianGrassBlock.VARIANT, 1);
         BlockState GRASS1 = GRASS.setValue(ModAppalachianGrassBlock.VARIANT, 2);
         BlockState GRASS2 = GRASS.setValue(ModAppalachianGrassBlock.VARIANT, 3);
 
-        BlockState DIRT  = ModBlocks.APPALACHIAN_DIRT.get().defaultBlockState();
+        BlockState DIRT  = ModBlocks.DAMP_DIRT.get().defaultBlockState();
         BlockState ROCK  = ModBlocks.APPALACHIAN_STONE.get().defaultBlockState();
 
 // Scegli variante in base al rumore “surface”
         SurfaceRules.RuleSource chooseVariant = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE, -1.0D, 0.66D),
+                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE, -1.0D, 0.5D),
                         SurfaceRules.state(GRASS)),
-                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE, 0.66D, 0.77D),
+                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE, 0.5D, 0.66D),
                         SurfaceRules.state(GRASS0)),
-                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE,  0.77D, 0.88D),
+                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE,  0.66D, 0.82D),
                         SurfaceRules.state(GRASS1)),
                 /* fallback */      SurfaceRules.state(GRASS2)
         );

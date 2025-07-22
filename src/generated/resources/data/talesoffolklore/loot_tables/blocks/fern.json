@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "talesoffolklore:appalachian_dirt"
+          "name": "talesoffolklore:fern"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "talesoffolklore:blocks/appalachian_dirt"
+  "random_sequence": "talesoffolklore:blocks/fern"
 }

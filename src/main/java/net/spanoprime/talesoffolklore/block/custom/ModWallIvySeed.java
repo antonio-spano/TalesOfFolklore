@@ -46,25 +46,6 @@ public class ModWallIvySeed extends Block {
     // You'll also need an UP_AABB if you decide to use the UP property for ceiling vines
     // protected static final VoxelShape UP_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, THICKNESS, 16.0D); // Example for UP
 
-    private static final Set<Block> VALID_WALL_BLOCKS = Set.of(
-            Blocks.STONE_BRICKS, Blocks.MOSSY_STONE_BRICKS, Blocks.CRACKED_STONE_BRICKS, Blocks.CHISELED_STONE_BRICKS,
-            Blocks.BRICKS,
-            Blocks.STONE,
-            Blocks.COBBLESTONE,
-            Blocks.DEEPSLATE,
-            Blocks.DEEPSLATE_BRICKS
-    );
-
-    private static final Set<Block> VALID_GROUND_OR_BRICK_BLOCKS = Set.of(
-            Blocks.DIRT,
-            Blocks.GRASS_BLOCK,
-            Blocks.PODZOL,
-            Blocks.COARSE_DIRT,
-            Blocks.ROOTED_DIRT,
-            Blocks.MOSS_BLOCK,
-            Blocks.BRICKS
-    );
-
     public ModWallIvySeed(Properties pProperties) {
         super(pProperties.sound(SoundType.GRASS).randomTicks().noOcclusion().noCollission());
         // Set default state for the properties you define
@@ -103,14 +84,35 @@ public class ModWallIvySeed extends Block {
 
 
     public static boolean isWall(BlockState state) {
-        if (state.is(BlockTags.LOGS) || state.is(BlockTags.PLANKS)) {
-            return true;
-        }
-        return VALID_WALL_BLOCKS.contains(state.getBlock());
+        Block block = state.getBlock();
+        return state.is(BlockTags.LOGS) ||
+                state.is(BlockTags.PLANKS) ||
+                block == Blocks.STONE_BRICKS ||
+                block == Blocks.MOSSY_STONE_BRICKS ||
+                block == Blocks.CRACKED_STONE_BRICKS ||
+                block == Blocks.CHISELED_STONE_BRICKS ||
+                block == Blocks.BRICKS ||
+                block == Blocks.STONE ||
+                block == Blocks.COBBLESTONE ||
+                block == Blocks.DEEPSLATE ||
+                block == Blocks.DEEPSLATE_BRICKS;
     }
 
     public static boolean isValidGroundOrBrick(BlockState groundState) {
-        return VALID_GROUND_OR_BRICK_BLOCKS.contains(groundState.getBlock());
+        Block block = groundState.getBlock();
+        // Le chiamate .get() qui sono SICURE perché questo metodo viene chiamato
+        // solo quando il gioco è in esecuzione, non durante il caricamento delle classi.
+        return block == Blocks.DIRT ||
+                block == Blocks.GRASS_BLOCK ||
+                block == Blocks.PODZOL ||
+                block == Blocks.COARSE_DIRT ||
+                block == Blocks.ROOTED_DIRT ||
+                block == Blocks.MOSS_BLOCK ||
+                block == Blocks.BRICKS ||
+                block == ModBlocks.DAMP_DIRT.get() ||
+                block == ModBlocks.DAMP_PODZOL.get() ||
+                block == ModBlocks.DAMP_GRASS_BLOCK.get() ||
+                block == ModBlocks.DAMP_COARSE_DIRT.get();
     }
 
     private static boolean canAttachTo(LevelReader pLevel, BlockPos pPos, Direction pDirection) {

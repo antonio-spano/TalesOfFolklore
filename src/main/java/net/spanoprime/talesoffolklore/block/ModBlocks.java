@@ -120,6 +120,12 @@ public class ModBlocks {
                     .instabreak()
                     .sound(SoundType.MOSS_CARPET)));
 
+    public static final RegistryObject<Block> WHITE_FUNGUS = registerBlock("white_fungus",
+            () -> new ModYellowFungusBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.MOSS_CARPET)));
+
     public static final RegistryObject<Block> RED_FUNGUS = registerBlock("red_fungus",
             () -> new ModRedFungusBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)
                     .noCollission()
@@ -130,15 +136,11 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .sound(SoundType.STONE)));
 
-    public static final RegistryObject<Block> APPALACHIAN_GRASS_BLOCK = registerBlock("appalachian_grass_block",
+    public static final RegistryObject<Block> DAMP_GRASS_BLOCK = registerBlock("damp_grass_block",
             () -> new ModAppalachianGrassBlock(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)
                     .sound(SoundType.GRASS)));
 
-    public static final RegistryObject<Block> APPALACHIAN_DIRT = registerBlock("appalachian_dirt",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)
-                    .sound(SoundType.GRASS)));
-
-    public static final RegistryObject<Block> LUSH_DIRT = registerBlock("lush_dirt",
+    public static final RegistryObject<Block> DAMP_DIRT = registerBlock("damp_dirt",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)
                     .sound(SoundType.GRASS)));
 
@@ -157,6 +159,15 @@ public class ModBlocks {
     public static final RegistryObject<Block> UNDERGROWTH = registerBlock("undergrowth",
             () -> new ModUndergrowthBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)
                     .sound(SoundType.SWEET_BERRY_BUSH)));
+
+    public static final RegistryObject<Block> DAMP_PODZOL = registerBlock("damp_podzol",
+            () -> new GrassBlock(BlockBehaviour.Properties.copy(Blocks.PODZOL)));
+
+    public static final RegistryObject<Block> DAMP_COARSE_DIRT = registerBlock("damp_coarse_dirt",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COARSE_DIRT)));
+
+    public static final RegistryObject<Block> FERN = registerBlock("fern",
+            () -> new ModFernBlock(BlockBehaviour.Properties.copy(Blocks.FERN)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {

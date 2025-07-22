@@ -144,11 +144,12 @@ public class TalesOfFolklore
             event.accept(ModBlocks.STRIPPED_VIRGINIA_PINE_LOG);
             event.accept(ModBlocks.VIRGINIA_PINE_SCAFFOLDING);
             event.accept(ModBlocks.APPALACHIAN_STONE);
-            event.accept(ModBlocks.APPALACHIAN_DIRT);
-            event.accept(ModBlocks.APPALACHIAN_GRASS_BLOCK);
-            event.accept(ModBlocks.LUSH_DIRT);
+            event.accept(ModBlocks.DAMP_DIRT);
+            event.accept(ModBlocks.DAMP_GRASS_BLOCK);
             event.accept(ModBlocks.STREAMBED_ROCKS);
             event.accept(ModBlocks.MOSSY_STREAMBANK_ROCKS);
+            event.accept(ModBlocks.DAMP_PODZOL);
+            event.accept(ModBlocks.DAMP_COARSE_DIRT);
         }
 
         if(event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS)
@@ -162,6 +163,8 @@ public class TalesOfFolklore
             event.accept(ModBlocks.WALL_MOSS);
             event.accept(ModBlocks.WALL_IVY);
             event.accept(ModBlocks.PINE_NEEDLES);
+            event.accept(ModBlocks.UNDERGROWTH);
+            event.accept(ModBlocks.FERN);
         }
 
         if(event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES)
@@ -174,6 +177,7 @@ public class TalesOfFolklore
             event.accept(ModBlocks.YELLOW_FUNGUS);
             event.accept(ModBlocks.RED_FUNGUS);
             event.accept(ModBlocks.WALL_IVY_SEED);
+            event.accept(ModBlocks.WHITE_FUNGUS);
         }
     }
 
@@ -227,10 +231,12 @@ public class TalesOfFolklore
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.RED_FUNGUS.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.WALL_IVY_SEED.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.WALL_IVY.get(), RenderType.cutout());
-                ItemBlockRenderTypes.setRenderLayer(ModBlocks.RED_FUNGUS.get(), RenderType.cutout());
-                ItemBlockRenderTypes.setRenderLayer(ModBlocks.APPALACHIAN_GRASS_BLOCK.get(), RenderType.cutoutMipped());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.DAMP_GRASS_BLOCK.get(), RenderType.cutoutMipped());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.UNDERGROWTH.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.FERN.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.PINE_NEEDLES.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.WHITE_FUNGUS.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.FERN.get(), RenderType.cutout());
             });
         }
     }

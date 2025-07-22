@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "talesoffolklore:block/damp_podzol"
+      },
+      {
+        "model": "talesoffolklore:block/damp_podzol",
+        "y": 90
+      },
+      {
+        "model": "talesoffolklore:block/damp_podzol",
+        "y": 180
+      },
+      {
+        "model": "talesoffolklore:block/damp_podzol",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "minecraft:block/grass_block_snow"
+    }
+  }
+}

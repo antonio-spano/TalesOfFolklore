@@ -1,7 +1,8 @@
 {
   "values": [
-    "talesoffolklore:appalachian_grass_block",
-    "talesoffolklore:appalachian_dirt",
-    "talesoffolklore:lush_dirt"
+    "talesoffolklore:damp_grass_block",
+    "talesoffolklore:damp_dirt",
+    "talesoffolklore:damp_podzol",
+    "talesoffolklore:damp_coarse_dirt"
   ]
 }

@@ -13,7 +13,7 @@
           "entries": [
             {
               "data": {
-                "Name": "minecraft:podzol",
+                "Name": "talesoffolklore:damp_podzol",
                 "Properties": {
                   "snowy": "false"
                 }
@@ -22,7 +22,7 @@
             },
             {
               "data": {
-                "Name": "minecraft:coarse_dirt"
+                "Name": "talesoffolklore:damp_coarse_dirt"
               },
               "weight": 1
             }

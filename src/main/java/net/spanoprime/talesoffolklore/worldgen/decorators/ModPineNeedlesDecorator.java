@@ -53,7 +53,7 @@ public class ModPineNeedlesDecorator extends TreeDecorator {
                 // Non usiamo più getBlockState(). Usiamo isStateAtPosition() con un predicato (una lambda)
                 // che controlla se lo stato del blocco è uno dei due che ci interessano.
                 boolean isTargetGround = pContext.level().isStateAtPosition(groundPos, (state) ->
-                        state.is(Blocks.PODZOL) || state.is(Blocks.COARSE_DIRT)
+                        state.is(ModBlocks.DAMP_PODZOL.get()) || state.is(ModBlocks.DAMP_COARSE_DIRT.get())
                 );
 
                 // La condizione ora usa la nuova variabile booleana.

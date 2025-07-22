@@ -41,28 +41,32 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.STRIPPED_VIRGINIA_PINE_WOOD.get(),
                         ModBlocks.STRIPPED_VIRGINIA_PINE_LOG.get(),
                         ModBlocks.YELLOW_FUNGUS.get(),
-                        ModBlocks.RED_FUNGUS.get());
+                        ModBlocks.RED_FUNGUS.get(),
+                        ModBlocks.WHITE_FUNGUS.get());
 
         this.tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(ModBlocks.VIRGINIA_PINE_LEAVES.get(),
                         ModBlocks.WALL_IVY_SEED.get(),
                         ModBlocks.WALL_IVY.get(),
                         ModBlocks.PINE_NEEDLES.get(),
-                        ModBlocks.UNDERGROWTH.get());
+                        ModBlocks.UNDERGROWTH.get(),
+                        ModBlocks.FERN.get());
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .add(ModBlocks.APPALACHIAN_GRASS_BLOCK.get(),
-                        ModBlocks.APPALACHIAN_DIRT.get(),
-                        ModBlocks.LUSH_DIRT.get(),
-                        ModBlocks.STREAMBED_ROCKS.get());
+                .add(ModBlocks.DAMP_GRASS_BLOCK.get(),
+                        ModBlocks.DAMP_DIRT.get(),
+                        ModBlocks.STREAMBED_ROCKS.get(),
+                        ModBlocks.DAMP_PODZOL.get(),
+                        ModBlocks.DAMP_COARSE_DIRT.get());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.APPALACHIAN_STONE.get(),
                         ModBlocks.MOSSY_STREAMBANK_ROCKS.get());
 
         this.tag(BlockTags.DIRT)
-                .add(ModBlocks.APPALACHIAN_GRASS_BLOCK.get(),
-                        ModBlocks.APPALACHIAN_DIRT.get(),
-                        ModBlocks.LUSH_DIRT.get());
+                .add(ModBlocks.DAMP_GRASS_BLOCK.get(),
+                        ModBlocks.DAMP_DIRT.get(),
+                        ModBlocks.DAMP_PODZOL.get(),
+                        ModBlocks.DAMP_COARSE_DIRT.get());
     }
 }

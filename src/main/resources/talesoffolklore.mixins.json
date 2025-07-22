@@ -5,7 +5,6 @@
   "refmap": "talesoffolklore.refmap.json",
   "mixins": [
     "NoExperimentalWarningMixin"
-    //"WorldCreationUiStateMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "talesoffolklore:appalachian_grass_block"
+          "name": "talesoffolklore:white_fungus"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "talesoffolklore:blocks/appalachian_grass_block"
+  "random_sequence": "talesoffolklore:blocks/white_fungus"
 }

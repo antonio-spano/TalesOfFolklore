@@ -8,39 +8,42 @@ import net.minecraft.client.gui.screens.worldselection.WorldOpenFlows;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Salta la ConfirmScreen “experimental settings” aprendo subito il mondo.
+ * Usa @Inject invece di @Redirect per massima compatibilità con OptiFine.
  */
 @Mixin(WorldOpenFlows.class)
 public abstract class NoExperimentalWarningMixin {
 
     /**
-     * In WorldOpenFlows.confirmWorldCreation (…) Mojang chiama
-     *   Minecraft#setScreen(new ConfirmScreen(…))
-     * per mostrare l’avviso.  Con un @Redirect intercettiamo
-     * *quella* singola invocazione e, invece di aprire la GUI,
-     * eseguiamo direttamente il callback che genera il mondo.
+     * Invece di usare un @Redirect fragile, usiamo @Inject all'inizio del metodo.
+     * Eseguiamo subito il callback che crea il mondo e poi cancelliamo l'esecuzione
+     * del metodo originale, impedendo alla schermata di avviso di apparire.
+     * require = 0 è una sicurezza: se un altro mod (o un futuro OptiFine)
+     * rimuove completamente questo metodo, il gioco non crasherà. Semplicemente,
+     * il nostro mixin non verrà applicato.
      */
-    @Redirect(
-            method = "confirmWorldCreation",               // target static method
-            at = @At( value = "INVOKE",
-                    target = "Lnet/minecraft/client/Minecraft;setScreen(Lnet/minecraft/client/gui/screens/Screen;)V" )
+    @Inject(
+            method = "confirmWorldCreation",
+            at = @At("HEAD"),
+            cancellable = true,
+            require = 0 // A prova di proiettile: se non trova il metodo, non crashare.
     )
     private static void tof$skipExperimentalConfirm(
-            Minecraft mc,                       // receiver di setScreen
-            Screen screen,                      // ConfirmScreen che NON vogliamo
-            Minecraft self,                     // ↓ parametri originali di confirmWorldCreation
-            CreateWorldScreen createScreen,
+            Minecraft minecraft,
+            CreateWorldScreen createWorldScreen,
             Lifecycle lifecycle,
-            Runnable createCallback,
-            boolean showPreview) {
+            Runnable runnable,
+            boolean bl,
+            CallbackInfo ci) { // CallbackInfo ci serve per cancellare il metodo originale.
 
-        // Saltiamo la conferma: creiamo subito il mondo
-        createCallback.run();
-        // Se vuoi tornare al menu dopo la creazione, togli questa riga
-        // mc.setScreen(null);
+        // Eseguiamo l'azione che crea il mondo
+        runnable.run();
+
+        // Cancelliamo il resto del metodo vanilla.
+        // La chiamata a Minecraft.setScreen(new ConfirmScreen(...)) non verrà mai eseguita.
+        ci.cancel();
     }
 }

@@ -2,8 +2,8 @@
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "white_fungus",
-		"particle": "white_fungus"
+		"0": "talesoffolklore:block/white_fungus",
+		"particle": "talesoffolklore:block/white_fungus"
 	},
 	"elements": [
 		{

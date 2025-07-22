@@ -34,7 +34,7 @@
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
 
   // Keep this false. This is only for vanilla legacy villages to make it spawn properly. We don't need no hacks here!
-  "use_expansion_hack": false,
+  "use_expansion_hack": true,
 
   "terrain_adaptation": "beard_thin",
 

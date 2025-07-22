@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "talesoffolklore:block/damp_dirt"
+      },
+      {
+        "model": "talesoffolklore:block/damp_dirt",
+        "y": 90
+      },
+      {
+        "model": "talesoffolklore:block/damp_dirt",
+        "y": 180
+      },
+      {
+        "model": "talesoffolklore:block/damp_dirt",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -18,6 +18,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaPineFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.AlterGroundDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlac
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
+import net.spanoprime.talesoffolklore.block.custom.ModFernBlock;
 import net.spanoprime.talesoffolklore.worldgen.decorators.*;
 import net.spanoprime.talesoffolklore.worldgen.feature.ModFeatures;
 
@@ -37,6 +39,7 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> VIRGINIA_PINE_KEY = registerKey("virginia_pine");
     public static final ResourceKey<ConfiguredFeature<?, ?>> STREAM_CARVER_KEY = registerKey("stream_carver");
     public static final ResourceKey<ConfiguredFeature<?, ?>> RED_FUNGUS_KEY = registerKey("red_fungus");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FERN_KEY = registerKey("fern");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         // --- VIRGINIA PINE ---
@@ -45,9 +48,9 @@ public class ModConfiguredFeatures {
         decorators.add(new AlterGroundDecorator(
                 new WeightedStateProvider(
                         SimpleWeightedRandomList.<BlockState>builder()
-                                .add(Blocks.PODZOL.defaultBlockState(), 1)
+                                .add(ModBlocks.DAMP_PODZOL.get().defaultBlockState(), 1)
                                 //.add(ModBlocks.LUSH_DIRT.get().defaultBlockState(), 2)
-                                .add(Blocks.COARSE_DIRT.defaultBlockState(), 1)
+                                .add(ModBlocks.DAMP_COARSE_DIRT.get().defaultBlockState(), 1)
                 )
         ));
         decorators.add(new ModWallIvyDecorator(0.2f));
@@ -74,7 +77,7 @@ public class ModConfiguredFeatures {
         register(context, RED_FUNGUS_KEY, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
                         BlockTags.DIRT, // Cerca solo blocchi di terra
-                        BlockStateProvider.simple(Blocks.GRASS_BLOCK.defaultBlockState()), // La "pezza" è di terra (rimpiazza terra con terra)
+                        BlockStateProvider.simple(ModBlocks.DAMP_GRASS_BLOCK.get().defaultBlockState()), // La "pezza" è di terra (rimpiazza terra con terra)
                         PlacementUtils.inlinePlaced(
                                 Feature.SIMPLE_BLOCK, // La feature da piazzare SOPRA la pezza. Sì, è ancora SIMPLE_BLOCK, ma ora è nel posto giusto.
                                 new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.RED_FUNGUS.get()))
@@ -83,9 +86,33 @@ public class ModConfiguredFeatures {
                         ConstantInt.of(1),      // Profondità della pezza
                         0.8f,                   // extra_bottom_block_chance
                         3,                      // vertical_range
-                        0.06f,                   // vegetation_chance: alta probabilità di piazzare il fungo sulla pezza
-                        UniformInt.of(3, 6),    // raggio xz della pezza (molto piccolo)
+                        0.03f,                   // vegetation_chance: alta probabilità di piazzare il fungo sulla pezza
+                        UniformInt.of(2, 5),    // raggio xz della pezza (molto piccolo)
                         0.3f                    // extra_edge_column_chance
+                ));
+
+        register(context, FERN_KEY, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        BlockTags.DIRT,
+                        BlockStateProvider.simple(ModBlocks.DAMP_GRASS_BLOCK.get().defaultBlockState()),
+                        PlacementUtils.inlinePlaced(
+                                Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        // --- ECCO LA SOLUZIONE ---
+                                        new RandomizedIntStateProvider(
+                                                BlockStateProvider.simple(ModBlocks.FERN.get()), // Il blocco di base
+                                                ModFernBlock.VARIANT,                           // La proprietà da randomizzare
+                                                UniformInt.of(0, 1)                             // Il range di interi (inclusivo) da cui pescare
+                                        )
+                                )
+                        ),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.8f,
+                        3,
+                        0.13f,
+                        UniformInt.of(2, 5),
+                        0.3f
                 ));
     }
 

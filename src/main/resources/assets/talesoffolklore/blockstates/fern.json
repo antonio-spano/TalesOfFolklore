@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "variant=0": [
+      {"model": "talesoffolklore:block/fern"}
+    ],
+    "variant=1": [
+      {"model": "talesoffolklore:block/fern_0"}
+    ]
+  }
+}

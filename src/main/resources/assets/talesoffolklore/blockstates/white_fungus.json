@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "talesoffolklore:block/white_fungus", "x": 270, "y": 180 },
+    "facing=south": { "model": "talesoffolklore:block/white_fungus", "x": 270, "y": 0 },
+    "facing=east":  { "model": "talesoffolklore:block/white_fungus", "x": 270, "y": 270 },
+    "facing=west":  { "model": "talesoffolklore:block/white_fungus", "x": 270, "y": 90 }
+  }
+}

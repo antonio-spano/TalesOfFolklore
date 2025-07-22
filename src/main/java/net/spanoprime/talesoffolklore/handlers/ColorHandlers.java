@@ -19,14 +19,14 @@ public final class ColorHandlers {
             return (world != null && pos != null)
                     ? BiomeColors.getAverageGrassColor(world, pos)       // stesso verde del bioma
                     : GrassColor.getDefaultColor();                      // inventario / world assente
-        }, ModBlocks.APPALACHIAN_GRASS_BLOCK.get());
+        }, ModBlocks.DAMP_GRASS_BLOCK.get());
     }
 
     // item in mano / inventario
     @SubscribeEvent
     public static void items(RegisterColorHandlersEvent.Item e) {
         e.register((stack, tint) -> GrassColor.getDefaultColor(),
-                ModBlocks.APPALACHIAN_GRASS_BLOCK.get());
+                ModBlocks.DAMP_GRASS_BLOCK.get());
     }
 }
 

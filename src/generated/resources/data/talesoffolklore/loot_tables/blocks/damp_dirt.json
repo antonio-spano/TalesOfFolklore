@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "talesoffolklore:lush_dirt"
+          "name": "talesoffolklore:damp_dirt"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "talesoffolklore:blocks/lush_dirt"
+  "random_sequence": "talesoffolklore:blocks/damp_dirt"
 }

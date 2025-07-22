@@ -1,8 +1,10 @@
-// 1.20.1	2025-07-21T23:29:10.021573	Loot Tables
-66c0fe0ce1efe5c4689ff7d8464a04a447d7e975 data/talesoffolklore/loot_tables/blocks/appalachian_dirt.json
-41e852b2a40f6dfebed25e487a8b5f5932cac27e data/talesoffolklore/loot_tables/blocks/appalachian_grass_block.json
+// 1.20.1	2025-07-22T22:31:48.949664	Loot Tables
 07f0b493f449f82de986a87246152f8870fa4381 data/talesoffolklore/loot_tables/blocks/appalachian_stone.json
-12c4cc590e5ebbe09e0b5fe6740ade3ff5126889 data/talesoffolklore/loot_tables/blocks/lush_dirt.json
+e2ad6aa386cf638102902c2ec38454d5b2c638f0 data/talesoffolklore/loot_tables/blocks/damp_coarse_dirt.json
+8f830f5cf3bdd986b35ce9d87231f0299f227a78 data/talesoffolklore/loot_tables/blocks/damp_dirt.json
+4378dc9d7bf3dd4de17df5926ea54c490e16a184 data/talesoffolklore/loot_tables/blocks/damp_grass_block.json
+3233b58702f64658239c3ddab3dc60749d67623d data/talesoffolklore/loot_tables/blocks/damp_podzol.json
+50521bc9a44ec64129208c316bb157dce0f33b61 data/talesoffolklore/loot_tables/blocks/fern.json
 bb508badbdf186c77d7833ff2d5cb806a8fa4d35 data/talesoffolklore/loot_tables/blocks/mossy_streambank_rocks.json
 b005e2b65e027b72e7279c2ab3636d7f34970685 data/talesoffolklore/loot_tables/blocks/pine_needles.json
 b38e262292fb12c79e7a4b4c031daa9b15e755ce data/talesoffolklore/loot_tables/blocks/red_fungus.json
@@ -32,4 +34,5 @@ f0e21fdbf7710065d1347e21bd235dc8b2c7316d data/talesoffolklore/loot_tables/blocks
 b6219ec9e8ee8f94a005d87a3a823a58ee573c3e data/talesoffolklore/loot_tables/blocks/wall_ivy.json
 9c38c6c612208d2480f44515fc512e046924f2e0 data/talesoffolklore/loot_tables/blocks/wall_ivy_seed.json
 09d07460683c01fd035bfc59101ce3616f7046a0 data/talesoffolklore/loot_tables/blocks/wall_moss.json
+7562b8084912298dbb411604c849861bd8e11ba4 data/talesoffolklore/loot_tables/blocks/white_fungus.json
 623eb11e72cfb066f0e4bf3070b8681af6d1c809 data/talesoffolklore/loot_tables/blocks/yellow_fungus.json

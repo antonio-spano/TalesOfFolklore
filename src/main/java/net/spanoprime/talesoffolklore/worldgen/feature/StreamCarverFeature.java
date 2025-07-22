@@ -17,6 +17,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.Fluids;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
+import net.spanoprime.talesoffolklore.block.custom.ModMossyStreambankRocksBlock;
 
 /**
  * Carves a meandering shallow stream and lines its banks with custom cobblestone, ensuring
@@ -127,7 +128,10 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
                 BlockState current = level.getBlockState(mut);
                 if (!current.isAir() && !current.is(Blocks.GRAVEL) && !current.is(Blocks.WATER) &&
                         !current.is(BlockTags.LOGS) && !current.is(BlockTags.LEAVES)) {
-                    level.setBlock(mut, ModBlocks.MOSSY_STREAMBANK_ROCKS.get().defaultBlockState(), 2);
+                    //level.setBlock(mut, ModBlocks.MOSSY_STREAMBANK_ROCKS.get().defaultBlockState(), 2);
+                    level.setBlock(mut,
+                            ModBlocks.MOSSY_STREAMBANK_ROCKS.get().defaultBlockState().setValue(ModMossyStreambankRocksBlock.VARIANT,
+                                    Mth.nextInt(RandomSource.create(), 0, 1)), 2);
                 }
             }
         }

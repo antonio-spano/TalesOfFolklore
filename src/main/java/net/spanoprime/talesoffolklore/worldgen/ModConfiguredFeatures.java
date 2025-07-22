@@ -53,7 +53,7 @@ public class ModConfiguredFeatures {
         decorators.add(new ModWallIvyDecorator(0.2f));
         decorators.add(new ModPineNeedlesDecorator(.3f));
         decorators.add(new ModYellowFungusDecorator(.05f));
-        decorators.add(new ModUndergrowthDecorator(.3f));
+        decorators.add(new ModUndergrowthDecorator(.24f));
 
         TreeConfiguration treeConfig = new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.VIRGINIA_PINE_LOG.get()),
@@ -71,13 +71,21 @@ public class ModConfiguredFeatures {
 
         register(context, STREAM_CARVER_KEY, ModFeatures.STREAM_CARVER.get(), new NoneFeatureConfiguration());
 
-        register(context, RED_FUNGUS_KEY, Feature.RANDOM_PATCH,
-                new RandomPatchConfiguration(
-                        2, // Quanti tentativi per piazzare il fungo in una chiazza.
-                        7,  // Dispersione orizzontale.
-                        0,  // Dispersione verticale.
-                        PlacementUtils.inlinePlaced(Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.RED_FUNGUS.get())))
+        register(context, RED_FUNGUS_KEY, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        BlockTags.DIRT, // Cerca solo blocchi di terra
+                        BlockStateProvider.simple(Blocks.GRASS_BLOCK.defaultBlockState()), // La "pezza" è di terra (rimpiazza terra con terra)
+                        PlacementUtils.inlinePlaced(
+                                Feature.SIMPLE_BLOCK, // La feature da piazzare SOPRA la pezza. Sì, è ancora SIMPLE_BLOCK, ma ora è nel posto giusto.
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.RED_FUNGUS.get()))
+                        ),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),      // Profondità della pezza
+                        0.8f,                   // extra_bottom_block_chance
+                        3,                      // vertical_range
+                        0.06f,                   // vegetation_chance: alta probabilità di piazzare il fungo sulla pezza
+                        UniformInt.of(3, 6),    // raggio xz della pezza (molto piccolo)
+                        0.3f                    // extra_edge_column_chance
                 ));
     }
 

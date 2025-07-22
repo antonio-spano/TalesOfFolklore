@@ -2,9 +2,9 @@
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "talesoffolklore:block/river_stone_block_top",
-		"2": "talesoffolklore:block/river_stone_block_top",
-		"particle": "talesoffolklore:block/river_stones_block"
+		"1": "talesoffolklore:block/river_stone_top_block",
+		"2": "talesoffolklore:block/river_stone_top_block",
+		"particle": "talesoffolklore:block/river_stone_top_block"
 	},
 	"elements": [
 		{

@@ -2,8 +2,8 @@
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"2": "texture/modelli blockbench/fungotext",
-		"particle": "texture/modelli blockbench/fungotext"
+		"2": "talesoffolklore:block/yellow_fungus",
+		"particle": "talesoffolklore:block/yellow_fungus"
 	},
 	"elements": [
 		{

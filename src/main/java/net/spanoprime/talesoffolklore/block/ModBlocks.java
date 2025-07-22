@@ -115,13 +115,13 @@ public class ModBlocks {
             () -> new ModWallIvy(BlockBehaviour.Properties.copy(Blocks.VINE).randomTicks()));
 
     public static final RegistryObject<Block> YELLOW_FUNGUS = registerBlock("yellow_fungus",
-            () -> new ModYellowFungusBlock(BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)
+            () -> new ModYellowFungusBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)
                     .noCollission()
                     .instabreak()
                     .sound(SoundType.MOSS_CARPET)));
 
     public static final RegistryObject<Block> RED_FUNGUS = registerBlock("red_fungus",
-            () -> new BushBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM)
+            () -> new ModRedFungusBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)
                     .noCollission()
                     .instabreak()
                     .sound(SoundType.MOSS_CARPET)));
@@ -147,7 +147,7 @@ public class ModBlocks {
                     .sound(SoundType.GRAVEL)));
 
     public static final RegistryObject<Block> MOSSY_STREAMBANK_ROCKS = registerBlock("mossy_streambank_rocks",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.MOSSY_COBBLESTONE)
+            () -> new ModMossyStreambankRocksBlock(BlockBehaviour.Properties.copy(Blocks.MOSSY_COBBLESTONE)
                     .sound(SoundType.STONE)));
 
     public static final RegistryObject<Block> PINE_NEEDLES = registerBlock("pine_needles",

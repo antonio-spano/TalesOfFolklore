@@ -1,16 +1,28 @@
 {
   "variants": {
     "variant=0": [
-      { "model": "talesoffolklore:block/pine_needles_0" }
+      { "model": "talesoffolklore:block/pine_needles_0" },
+      { "model": "talesoffolklore:block/pine_needles_0", "y": 90 },
+      { "model": "talesoffolklore:block/pine_needles_0", "y": 180 },
+      { "model": "talesoffolklore:block/pine_needles_0", "y": 270 }
     ],
     "variant=1": [
-      { "model": "talesoffolklore:block/pine_needles_1" }
+      { "model": "talesoffolklore:block/pine_needles_1" },
+      { "model": "talesoffolklore:block/pine_needles_1", "y": 90 },
+      { "model": "talesoffolklore:block/pine_needles_1", "y": 180 },
+      { "model": "talesoffolklore:block/pine_needles_1", "y": 270 }
     ],
     "variant=2": [
-      { "model": "talesoffolklore:block/pine_needles_2" }
+      { "model": "talesoffolklore:block/pine_needles_2" },
+      { "model": "talesoffolklore:block/pine_needles_2", "y": 90 },
+      { "model": "talesoffolklore:block/pine_needles_2", "y": 180 },
+      { "model": "talesoffolklore:block/pine_needles_2", "y": 270 }
     ],
     "variant=3": [
-      { "model": "talesoffolklore:block/pine_needles_3" }
+      { "model": "talesoffolklore:block/pine_needles_3" },
+      { "model": "talesoffolklore:block/pine_needles_3", "y": 90 },
+      { "model": "talesoffolklore:block/pine_needles_3", "y": 180 },
+      { "model": "talesoffolklore:block/pine_needles_3", "y": 270 }
     ]
   }
 }

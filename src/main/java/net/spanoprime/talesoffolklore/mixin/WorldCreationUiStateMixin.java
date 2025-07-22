@@ -19,22 +19,28 @@ public abstract class WorldCreationUiStateMixin {
     @Shadow private List<WorldCreationUiState.WorldTypeEntry> normalPresetList;
     @Shadow private List<WorldCreationUiState.WorldTypeEntry> altPresetList;
 
-    // Chiamiamo il setter, non tocchiamo direttamente il campo worldType
+    // Shadow del tuo setter
     @Shadow public abstract void setWorldType(WorldCreationUiState.WorldTypeEntry entry);
 
     private static final ResourceLocation MY_PRESET_ID =
             new ResourceLocation("talesoffolklore", "talesoffolklore");
 
-    @Inject(method = "updatePresetLists", at = @At("TAIL"))
+    // Injectiamo al RETURN di updatePresetLists() con la signature completa
+    @Inject(
+            method = "updatePresetLists()V",
+            at = @At("RETURN")
+    )
     private void tof$moveAndSelectMyPreset(CallbackInfo ci) {
-        // 1) muovi il preset in testa ad entrambe le liste
+        // 1) Sposta il nostro preset in testa
         moveFirst(normalPresetList);
         moveFirst(altPresetList);
 
-        // 2) e selezionalo davvero, usando il setter
-        WorldCreationUiState.WorldTypeEntry first = normalPresetList.get(0);
-        if (isMyPreset(first)) {
-            setWorldType(first);
+        // 2) Se è il primo, selezionalo via setter
+        if (!normalPresetList.isEmpty()) {
+            WorldCreationUiState.WorldTypeEntry candidate = normalPresetList.get(0);
+            if (isMyPreset(candidate)) {
+                setWorldType(candidate);
+            }
         }
     }
 

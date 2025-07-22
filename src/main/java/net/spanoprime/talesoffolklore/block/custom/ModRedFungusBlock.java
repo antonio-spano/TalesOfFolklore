@@ -12,6 +12,7 @@ public class ModRedFungusBlock extends BushBlock {
     // La hitbox di un fiore/fungo
     protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
 
+
     public ModRedFungusBlock(Properties pProperties) {
         super(pProperties);
     }

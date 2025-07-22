@@ -4,8 +4,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "talesoffolklore.refmap.json",
   "mixins": [
-    "NoExperimentalWarningMixin",
-    "WorldCreationUiStateMixin"
+    "NoExperimentalWarningMixin"
+    //"WorldCreationUiStateMixin"
   ],
   "injectors": {
     "defaultRequire": 1

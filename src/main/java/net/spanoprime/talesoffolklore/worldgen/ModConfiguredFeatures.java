@@ -50,7 +50,7 @@ public class ModConfiguredFeatures {
                                 .add(Blocks.COARSE_DIRT.defaultBlockState(), 1)
                 )
         ));
-        decorators.add(new ModWallIvyDecorator(0.23f));
+        decorators.add(new ModWallIvyDecorator(0.2f));
         decorators.add(new ModPineNeedlesDecorator(.3f));
         decorators.add(new ModYellowFungusDecorator(.05f));
         decorators.add(new ModUndergrowthDecorator(.3f));

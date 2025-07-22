@@ -92,9 +92,9 @@ public class FogHandler {
         }
 
         // Colore Nebbia: Grigio pallido desiderato
-        float targetR = 216f / 255f;
-        float targetG = 216f / 255f;
-        float targetB = 216f / 255f;
+        float targetR = 190f / 255f;
+        float targetG = 190f / 255f;
+        float targetB = 190f / 255f;
 
         // Calcola l'intensità del blending basata su quanto è fitta la nebbia
         // Quando currentFogDistance == MAX_FOG_DISTANCE, blendFactor = 0 (nessun colore custom)

@@ -1,5 +1,6 @@
 package net.spanoprime.talesoffolklore.worldgen;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -9,6 +10,7 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
@@ -42,22 +44,16 @@ public class ModPlacedFeatures {
                 ));
 
         // Sostituisci la tua riga con questa:
+        // Sostituisci la tua riga con questa:
         register(context, RED_FUNGUS_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.RED_FUNGUS_KEY),
-                // Invece di usare un pacchetto per l'erba, costruiamo le regole a mano:
                 List.of(
-                        // Regola 1: Frequenza. Quante "chiazze" per chunk.
-                        // Puoi usare CountPlacement.of(X) per un numero fisso,
-                        // o il tuo countExtra per un numero variabile. Usiamo il tuo:
-                        PlacementUtils.countExtra(2, .1f, 1),
+                        // 1. RarityFilter: Tenta di piazzare una patch in media UNA volta ogni 32 chunk.
+                        //    Questo garantisce che la maggior parte dei chunk non abbia funghi. Aumenta per renderli più rari.
+                        RarityFilter.onAverageOnceEvery(2),
 
-                        // Regola 2: Spargili a caso nel chunk.
+                        // 2. I soliti modifier per piazzare la patch in un punto a caso sulla superficie.
                         InSquarePlacement.spread(),
-
-                        // Regola 3: Piazzali sulla superficie del mondo.
-                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-
-                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE),
-
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()
                 ));
     }

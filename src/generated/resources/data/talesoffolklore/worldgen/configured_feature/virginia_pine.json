@@ -43,7 +43,7 @@
       },
       {
         "type": "talesoffolklore:undergrowth",
-        "probability": 0.3
+        "probability": 0.24
       }
     ],
     "dirt_provider": {

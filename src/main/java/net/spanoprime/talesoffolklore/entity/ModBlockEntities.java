@@ -29,6 +29,11 @@ public class ModBlockEntities
                             ModBlocks.VIRGINIA_PINE_HANGING_SIGN.get(),
                             ModBlocks.VIRGINIA_PINE_WALL_HANGING_SIGN.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<ModSpriteBlockEntity>> MOD_SPRITE =
+            BLOCK_ENTITIES.register("mod_sprite",
+                    () -> BlockEntityType.Builder.of(ModSpriteBlockEntity::new,
+                            ModBlocks.SPRITE.get()).build(null));
+
 
 
     public static void register(IEventBus eventBus) { BLOCK_ENTITIES.register(eventBus); }

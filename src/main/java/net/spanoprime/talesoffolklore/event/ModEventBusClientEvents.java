@@ -12,6 +12,7 @@ import net.minecraftforge.fml.loading.moddiscovery.ModMethodVisitor;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.entity.ModBlockEntities;
 import net.spanoprime.talesoffolklore.entity.client.ModModelLayer;
+import net.spanoprime.talesoffolklore.entity.client.ModSpriteBlockRenderer;
 
 @Mod.EventBusSubscriber(modid = TalesOfFolklore.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModEventBusClientEvents
@@ -28,5 +29,6 @@ public class ModEventBusClientEvents
     {
         event.registerBlockEntityRenderer(ModBlockEntities.MOD_SIGN.get(), SignRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.MOD_HANGING_SIGN.get(), HangingSignRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.MOD_SPRITE.get(), ModSpriteBlockRenderer::new);
     }
 }

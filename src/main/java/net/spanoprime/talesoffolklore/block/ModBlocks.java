@@ -169,6 +169,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> FERN = registerBlock("fern",
             () -> new ModFernBlock(BlockBehaviour.Properties.copy(Blocks.FERN)));
 
+    public static final RegistryObject<Block> SPRITE = registerBlock("sprite",
+            () -> new ModSpriteBlock(BlockBehaviour.Properties.copy(Blocks.FERN)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block)
     {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

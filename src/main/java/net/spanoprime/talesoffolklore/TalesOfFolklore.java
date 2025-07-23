@@ -165,6 +165,7 @@ public class TalesOfFolklore
             event.accept(ModBlocks.PINE_NEEDLES);
             event.accept(ModBlocks.UNDERGROWTH);
             event.accept(ModBlocks.FERN);
+            event.accept(ModBlocks.SPRITE);
         }
 
         if(event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES)

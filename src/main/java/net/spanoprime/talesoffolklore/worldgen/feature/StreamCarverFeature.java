@@ -1,5 +1,6 @@
 package net.spanoprime.talesoffolklore.worldgen.feature;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,24 +15,24 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.synth.PerlinNoise;
 import net.minecraft.world.level.material.Fluids;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 import net.spanoprime.talesoffolklore.block.custom.ModMossyStreambankRocksBlock;
 
-import java.util.Random;
-
-/**
- * Carves fiumi lunghi e sinuosi basati su “noise” trigonometriche anziché percorsi random‐walk per‐chunk.
- */
 public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
 
     private static final int MAX_WIDTH        = 3;    // diametro (dispari)
     private static final int CARVE_DEPTH      = 5;    // profondità incisione
     private static final int BANK_THICKNESS   = 1;    // spessore sponde
 
-    // Parametri “noise”
-    private static final double NOISE_SCALE     = 0.1;  // ingrandimento del pattern (più piccolo = fiumi più ampi)
-    private static final double NOISE_THRESHOLD = 0.05;  // soglia per definire il canale
+    // Parametri Perlin
+    private static final double NOISE_SCALE     = 0.01;   // scala: più piccolo → fiumi più larghi
+    private static final double NOISE_THRESHOLD = 0.05;   // soglia "banda" del fiume
+
+    // Generatore di PerlinNoise condiviso per tutto il mondo
+    private static PerlinNoise perlin;
+    private static long        perlinSeed;
 
     public StreamCarverFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
@@ -39,43 +40,52 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
 
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
-        WorldGenLevel level   = context.level();
-        ChunkPos       chunk  = new ChunkPos(context.origin());
-        int            minX   = chunk.getMinBlockX();
-        int            minZ   = chunk.getMinBlockZ();
+        WorldGenLevel level = context.level();
+        long seed = level.getSeed();
 
-        // Per ogni x,z del chunk:
+        if (perlin == null || perlinSeed != seed) {
+            perlinSeed = seed;
+            perlin = PerlinNoise.create(
+                    RandomSource.create(seed),
+                    ImmutableList.of(0,1,2,3)  // 4 ottave
+            );
+        }
+
+        ChunkPos chunk = new ChunkPos(context.origin());
+        int minX = chunk.getMinBlockX();
+        int minZ = chunk.getMinBlockZ();
+
         for (int dx = 0; dx < 16; dx++) {
             for (int dz = 0; dz < 16; dz++) {
                 int worldX = minX + dx;
                 int worldZ = minZ + dz;
 
-                // una “noise” semplice: somma di sin/cos genera curve regolari e continue
-                double fx    = worldX * NOISE_SCALE;
-                double fz    = worldZ * NOISE_SCALE;
-                double noise = (Math.sin(fx + fz) + Math.sin(fx - fz)) * 0.5;
+                // usa tutti e tre gli assi: y=0
+                double nx = worldX * NOISE_SCALE;
+                double nz = worldZ * NOISE_SCALE;
+                double noise = perlin.getValue(nx, 0.0, nz);
 
-                // se siamo abbastanza “vicini” allo zero del pattern, scaviamo il fiume
                 if (Math.abs(noise) > NOISE_THRESHOLD) continue;
 
                 int surfaceY = level.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, worldX, worldZ);
                 if (surfaceY <= level.getMinBuildHeight() + CARVE_DEPTH) continue;
 
-                carveStreamSegment(level, new BlockPos(worldX, surfaceY, worldZ), MAX_WIDTH);
+                carveStreamSegment(level, new BlockPos(worldX, surfaceY, worldZ));
             }
         }
 
         return true;
     }
 
-    private void carveStreamSegment(WorldGenLevel level, BlockPos center, int width) {
-        int radius = (width - 1) / 2;
+
+    private void carveStreamSegment(WorldGenLevel level, BlockPos center) {
+        int radius = (MAX_WIDTH - 1) / 2;
         BlockPos.MutableBlockPos mut = new BlockPos.MutableBlockPos();
 
         // 1. Solco + acqua
         for (int dx = -radius; dx <= radius; dx++) {
             for (int dz = -radius; dz <= radius; dz++) {
-                if (dx*dx + dz*dz > radius*radius) continue;
+                if (dx * dx + dz * dz > radius * radius) continue;
                 mut.set(center.getX() + dx, center.getY(), center.getZ() + dz);
 
                 // evita cave e fuori altezza
@@ -85,7 +95,7 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
                 BlockState here  = level.getBlockState(mut);
                 BlockState above = level.getBlockState(mut.above());
                 if (here.is(BlockTags.LOGS) || here.is(BlockTags.LEAVES)
-                        || above.is(BlockTags.LOGS)  || above.is(BlockTags.LEAVES)) {
+                        || above.is(BlockTags.LOGS) || above.is(BlockTags.LEAVES)) {
                     continue;
                 }
 
@@ -119,8 +129,8 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
         RandomSource rnd = RandomSource.create(center.asLong());
         for (int dx = -bankR; dx <= bankR; dx++) {
             for (int dz = -bankR; dz <= bankR; dz++) {
-                int dist2 = dx*dx + dz*dz;
-                if (dist2 <= radius*radius || dist2 > bankR*bankR) continue;
+                int dist2 = dx * dx + dz * dz;
+                if (dist2 <= radius * radius || dist2 > bankR * bankR) continue;
 
                 mut.set(center.getX() + dx, center.getY() - 1, center.getZ() + dz);
                 if (level.isOutsideBuildHeight(mut)) continue;
@@ -140,7 +150,6 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
     }
 
     private static void updateNeighbours(WorldGenLevel level, BlockPos pos) {
-        // obbliga a ricalcolare flusso e collisioni
         level.neighborShapeChanged(Direction.DOWN,  level.getBlockState(pos.above()), pos, pos.above(), 2, 512);
         level.neighborShapeChanged(Direction.UP,    level.getBlockState(pos.below()), pos, pos.below(), 2, 512);
         level.neighborShapeChanged(Direction.NORTH, level.getBlockState(pos.south()), pos, pos.south(), 2, 512);

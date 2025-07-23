@@ -1,29 +1,19 @@
 package net.spanoprime.talesoffolklore.worldgen.biome.surface;
 
-import com.sun.jna.platform.win32.Variant;
-import net.minecraft.core.Holder;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 import net.spanoprime.talesoffolklore.block.custom.ModAppalachianGrassBlock;
 import net.spanoprime.talesoffolklore.worldgen.ModNoiseParameters;
 import net.spanoprime.talesoffolklore.worldgen.biome.ModBiomes;
 
-/**
- * Surface-rules per il bioma Appalachian Forest.
- *
- *  ┌────────────┐  ON_FLOOR        →  APPALACHIAN_GRASS_BLOCK
- *  │   Suolo    │  UNDER_FLOOR     →  APPALACHIAN_DIRT (profondità 2)
- *  └────────────┘  tutto il resto  →  RIVERBANK_STONE
- */
 public final class ModSurfaceRules {
 
     private ModSurfaceRules() {} // utility class
 
-    /** Restituisce la RuleSource da inserire nel SurfaceRuleData dello Overworld. */
     public static SurfaceRules.RuleSource overworldRules() {
-        //int rand = (int)(Math.random() * 4);
         // Blocchi custom
         BlockState GRASS = ModBlocks.DAMP_GRASS_BLOCK.get().defaultBlockState();
         BlockState GRASS0 = GRASS.setValue(ModAppalachianGrassBlock.VARIANT, 1);
@@ -33,7 +23,7 @@ public final class ModSurfaceRules {
         BlockState DIRT  = ModBlocks.DAMP_DIRT.get().defaultBlockState();
         BlockState ROCK  = ModBlocks.APPALACHIAN_STONE.get().defaultBlockState();
 
-// Scegli variante in base al rumore “surface”
+        // Regola per scegliere la variante di erba in base al noise (questa non cambia)
         SurfaceRules.RuleSource chooseVariant = SurfaceRules.sequence(
                 SurfaceRules.ifTrue(SurfaceRules.noiseCondition(ModNoiseParameters.VARIANT_NOISE, -1.0D, 0.5D),
                         SurfaceRules.state(GRASS)),
@@ -44,10 +34,27 @@ public final class ModSurfaceRules {
                 /* fallback */      SurfaceRules.state(GRASS2)
         );
 
-// Surface-rule finale per il tuo bioma
+        // --- MODIFICA CHIAVE QUI ---
+        // Surface-rule finale per il tuo bioma
         SurfaceRules.RuleSource appalachianSurface = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, chooseVariant),
+                // Regola #1: Gestisce lo strato superficiale (ON_FLOOR)
+                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
+                        SurfaceRules.sequence(
+                                // CASO A: Se siamo sott'acqua, piazza DIRT.
+                                // La condizione SurfaceRules.not(SurfaceRules.waterBlockCheck(0, 0))
+                                // è vera se il blocco si trova A o SOTTO il livello dell'acqua.
+                                SurfaceRules.ifTrue(
+                                        SurfaceRules.not(SurfaceRules.waterBlockCheck(0, 0)),
+                                        SurfaceRules.state(DIRT)
+                                ),
+                                // CASO B (fallback): Se non siamo sott'acqua, usa la logica dell'erba.
+                                chooseVariant
+                        )
+                ),
+                // Regola #2: Lo strato subito sotto la superficie è sempre DIRT.
                 SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, SurfaceRules.state(DIRT)),
+
+                // Regola #3 (fallback): Tutto il resto è ROCK.
                 SurfaceRules.state(ROCK)
         );
 

@@ -5,6 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth; // Import per Mth.lerp
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
@@ -67,7 +68,7 @@ public class FogHandler {
     @SubscribeEvent
     public static void onFogDensity(ViewportEvent.RenderFog event) {
         // Applica solo se il flag è attivo e non siamo in modalità spettatore o acqua
-        if (!renderCustomFog || event.getCamera().isDetached() || event.getCamera().getEntity().isSpectator() || event.getCamera().getFluidInCamera().equals(net.minecraft.tags.FluidTags.WATER)) {
+        if (!renderCustomFog || event.getCamera().getEntity().isSpectator() || event.getCamera().getFluidInCamera().equals(net.minecraft.tags.FluidTags.WATER)) {
             return;
         }
 
@@ -86,28 +87,34 @@ public class FogHandler {
 
     @SubscribeEvent
     public static void onFogColor(ViewportEvent.ComputeFogColor event) {
-        // Applica solo se il flag è attivo e non siamo in modalità spettatore o acqua
-        if (!renderCustomFog || event.getCamera().isDetached() || event.getCamera().getEntity().isSpectator() || event.getCamera().getFluidInCamera().equals(net.minecraft.tags.FluidTags.WATER)) {
+        if (!renderCustomFog
+                || event.getCamera().getEntity().isSpectator()
+                || event.getCamera().getFluidInCamera().equals(net.minecraft.tags.FluidTags.WATER)) {
             return;
         }
 
-        // Colore Nebbia: Grigio pallido desiderato
-        float targetR = 190f / 255f;
-        float targetG = 190f / 255f;
-        float targetB = 190f / 255f;
+        Minecraft mc = Minecraft.getInstance();
+        // Prendiamo il colore del cielo al tick corrente
+        Vec3 skyColor = mc.level.getSkyColor(event.getCamera().getPosition(), mc.getFrameTime());
 
-        // Calcola l'intensità del blending basata su quanto è fitta la nebbia
-        // Quando currentFogDistance == MAX_FOG_DISTANCE, blendFactor = 0 (nessun colore custom)
-        // Quando currentFogDistance == MIN_FOG_DISTANCE, blendFactor = 1 (colore custom pieno)
-        float blendFactor = Mth.clamp(1.0f - (currentFogDistance - MIN_FOG_DISTANCE) / (MAX_FOG_DISTANCE - MIN_FOG_DISTANCE), 0.0f, 1.0f);
+        float targetR = (float) skyColor.x;
+        float targetG = (float) skyColor.y;
+        float targetB = (float) skyColor.z;
 
-        // Interpola il colore attuale verso il colore target usando il blendFactor
-        float finalR = lerp(event.getRed(), targetR, blendFactor);
+        // Calcoliamo il blend factor in base alla densità della nebbia
+        float blendFactor = Mth.clamp(
+                1.0f - (currentFogDistance - MIN_FOG_DISTANCE) / (MAX_FOG_DISTANCE - MIN_FOG_DISTANCE),
+                0.0f, 1.0f
+        );
+
+        // Interpoliamo dolcemente dal colore “vanilla” (event.getX()) al colore del cielo
+        float finalR = lerp(event.getRed(),   targetR, blendFactor);
         float finalG = lerp(event.getGreen(), targetG, blendFactor);
-        float finalB = lerp(event.getBlue(), targetB, blendFactor);
+        float finalB = lerp(event.getBlue(),  targetB, blendFactor);
 
         event.setRed(finalR);
         event.setGreen(finalG);
         event.setBlue(finalB);
     }
+
 }

@@ -12,3 +12,29 @@
 [24Jul2025 16:30:50.768] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, /Users/antoniospano/.gradle/caches/forge_gradle/assets, --assetIndex, 5, --mod, talesoffolklore, --all, --output, /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/generated/resources, --existing, /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/main/resources]
 [24Jul2025 16:30:50.792] [main/WARN] [mixin/]: Reference map 'talesoffolklore.refmap.json' for talesoffolklore.mixins.json could not be read. If this is a development environment you can ignore this message
 [24Jul2025 16:30:51.005] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [talesoffolklore]
+[24Jul2025 16:30:53.730] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.0, for MC 1.20.1 with MCP 20230612.114412
+[24Jul2025 16:30:53.732] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.0 Initialized
+[24Jul2025 16:30:53.989] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/Users/antoniospano/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23184!/assets/.mcassetsroot' uses unexpected schema
+[24Jul2025 16:30:53.989] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/Users/antoniospano/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23184!/data/.mcassetsroot' uses unexpected schema
+[24Jul2025 16:30:53.997] [main/WARN] [net.minecraft.server.packs.PathPackResources/]: Ignored non-lowercase namespace: .DS_Store in /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/main/resources
+[24Jul2025 16:30:54.006] [main/WARN] [net.minecraft.server.packs.PathPackResources/]: Ignored non-lowercase namespace: .DS_Store in /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/main/resources
+[24Jul2025 16:30:54.075] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
+[24Jul2025 16:30:54.076] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 1 ms
+[24Jul2025 16:30:54.077] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
+[24Jul2025 16:30:54.112] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 35 ms
+[24Jul2025 16:30:54.112] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: talesoffolklore
+[24Jul2025 16:30:54.112] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: talesoffolklore finished after 0 ms
+[24Jul2025 16:30:54.112] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: talesoffolklore
+[24Jul2025 16:30:54.116] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: talesoffolklore finished after 3 ms
+[24Jul2025 16:30:54.116] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:block mod id talesoffolklore
+[24Jul2025 16:30:54.196] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:block mod id talesoffolklore finished after 79 ms
+[24Jul2025 16:30:54.196] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:item mod id talesoffolklore
+[24Jul2025 16:30:54.197] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:item mod id talesoffolklore finished after 0 ms
+[24Jul2025 16:30:54.197] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Global Loot Modifiers : talesoffolklore
+[24Jul2025 16:30:54.198] [main/INFO] [net.minecraft.data.DataGenerator/]: Global Loot Modifiers : talesoffolklore finished after 1 ms
+[24Jul2025 16:30:54.198] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:point_of_interest_type mod id talesoffolklore
+[24Jul2025 16:30:54.199] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:point_of_interest_type mod id talesoffolklore finished after 1 ms
+[24Jul2025 16:30:54.199] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Registries
+[24Jul2025 16:30:54.236] [main/INFO] [net.minecraft.data.DataGenerator/]: Registries finished after 36 ms
+[24Jul2025 16:30:54.236] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 161 ms
+[24Jul2025 16:30:54.240] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 60, old count: 60, new count: 61, removed stale: 0, written: 0

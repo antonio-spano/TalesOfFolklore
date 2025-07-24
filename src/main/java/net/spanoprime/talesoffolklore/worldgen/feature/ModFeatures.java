@@ -13,7 +13,7 @@ public class ModFeatures {
             DeferredRegister.create(Registries.FEATURE, TalesOfFolklore.MOD_ID);
 
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> STREAM_CARVER =
-            FEATURES.register("stream_carver", () -> new StreamCarverFeature(NoneFeatureConfiguration.CODEC));
+            FEATURES.register("stream_carver", () -> new ModStreamCarverFeature(NoneFeatureConfiguration.CODEC));
 
     public static void register(IEventBus eventBus) {
         FEATURES.register(eventBus);

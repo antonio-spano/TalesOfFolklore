@@ -20,7 +20,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 import net.spanoprime.talesoffolklore.block.custom.ModMossyStreambankRocksBlock;
 
-public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
+public class ModStreamCarverFeature extends Feature<NoneFeatureConfiguration> {
 
     private static final int MAX_WIDTH        = 5;    // diametro (dispari)
     private static final int CARVE_DEPTH      = 3;    // profondità incisione
@@ -34,7 +34,7 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
     private static PerlinNoise perlin;
     private static long perlinSeed;
 
-    public StreamCarverFeature(Codec<NoneFeatureConfiguration> codec) {
+    public ModStreamCarverFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
     }
 

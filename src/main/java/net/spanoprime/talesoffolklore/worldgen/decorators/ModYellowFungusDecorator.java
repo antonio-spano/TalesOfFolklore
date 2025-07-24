@@ -24,7 +24,7 @@ public class ModYellowFungusDecorator extends TreeDecorator {
 
     private final float probability;
     private int thresholdMinY = 3;
-    private int thresholdMaxY = 2;
+    private int thresholdMaxY = 18;
 
     public ModYellowFungusDecorator(float probability) {
         this.probability = probability;

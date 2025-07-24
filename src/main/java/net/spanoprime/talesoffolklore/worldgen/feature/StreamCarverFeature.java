@@ -94,9 +94,18 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
                 // TREE-SAFE: non passam sotto alberi
                 BlockState here  = level.getBlockState(mut);
                 BlockState above = level.getBlockState(mut.above());
+                BlockState currentAbove = level.getBlockState(mut.above().above());
                 if (here.is(BlockTags.LOGS) || above.is(BlockTags.LOGS)) {
                     continue;
                 }
+
+                if (currentAbove.is(ModBlocks.FIREFLIES_BUSH.get())
+                        || currentAbove.is(ModBlocks.UNDERGROWTH.get())
+                        || currentAbove.is(ModBlocks.FERN.get())
+                        || currentAbove.is(ModBlocks.RED_FUNGUS.get())
+                        || currentAbove.is(Blocks.GRASS)
+                        || currentAbove.is(ModBlocks.PINE_NEEDLES.get()))
+                    level.setBlock(mut.above().above(), Blocks.AIR.defaultBlockState(), 2);
 
                 // scava
                 for (int d = 0; d <= CARVE_DEPTH; d++) {
@@ -141,6 +150,7 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
                 if (level.isOutsideBuildHeight(bankPos)) continue;
 
                 BlockState current = level.getBlockState(bankPos);
+                BlockState currentAbove = level.getBlockState(bankPos.above());
                 if (!current.isAir() && !current.is(Blocks.GRAVEL) && !current.is(Blocks.WATER)
                         && !current.is(BlockTags.LOGS) && !current.is(BlockTags.LEAVES)) {
                     level.setBlock(bankPos,
@@ -150,6 +160,14 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
                             2
                     );
                 }
+
+                if (currentAbove.is(ModBlocks.FIREFLIES_BUSH.get())
+                || currentAbove.is(ModBlocks.UNDERGROWTH.get())
+                || currentAbove.is(ModBlocks.FERN.get())
+                || currentAbove.is(ModBlocks.RED_FUNGUS.get())
+                || currentAbove.is(Blocks.GRASS)
+                || currentAbove.is(ModBlocks.PINE_NEEDLES.get()))
+                    level.setBlock(bankPos.above(), Blocks.AIR.defaultBlockState(), 2);
             }
         }
 

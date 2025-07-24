@@ -170,7 +170,16 @@ public class ModBlocks {
             () -> new ModFernBlock(BlockBehaviour.Properties.copy(Blocks.FERN)));
 
     public static final RegistryObject<Block> FIREFLIES_BUSH = registerBlock("fireflies_bush",
-            () -> new ModFirefliesBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)));
+            () -> new ModFirefliesBushBlock(
+                    BlockBehaviour.Properties
+                            .copy(Blocks.SWEET_BERRY_BUSH)
+                            .instabreak()
+                            .randomTicks()
+                            // ← Qui aggiungi la lightLevel:
+                            .lightLevel(state -> state.getValue(ModFirefliesBushBlock.VARIANT) == 1 ? 7 : 0)
+            )
+    );
+
 
     public static final RegistryObject<Block> SPRITE = registerBlock("sprite",
             () -> new ModSpriteBlock(BlockBehaviour.Properties.copy(Blocks.FERN)));

@@ -22,17 +22,17 @@ import net.spanoprime.talesoffolklore.block.custom.ModMossyStreambankRocksBlock;
 
 public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
 
-    private static final int MAX_WIDTH        = 3;    // diametro (dispari)
-    private static final int CARVE_DEPTH      = 5;    // profondità incisione
+    private static final int MAX_WIDTH        = 5;    // diametro (dispari)
+    private static final int CARVE_DEPTH      = 3;    // profondità incisione
     private static final int BANK_THICKNESS   = 1;    // spessore sponde
 
     // Parametri Perlin
-    private static final double NOISE_SCALE     = 0.01;   // scala: più piccolo → fiumi più larghi
-    private static final double NOISE_THRESHOLD = 0.05;   // soglia "banda" del fiume
+    private static final double NOISE_SCALE     = 0.005  ;   // scala: più piccolo → fiumi più larghi
+    private static final double NOISE_THRESHOLD = 0.0025;   // soglia "banda" del fiume
 
     // Generatore di PerlinNoise condiviso per tutto il mondo
     private static PerlinNoise perlin;
-    private static long        perlinSeed;
+    private static long perlinSeed;
 
     public StreamCarverFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
@@ -47,7 +47,7 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
             perlinSeed = seed;
             perlin = PerlinNoise.create(
                     RandomSource.create(seed),
-                    ImmutableList.of(0,1,2,3)  // 4 ottave
+                    ImmutableList.of(0,1)  // 4 ottave
             );
         }
 
@@ -94,8 +94,7 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
                 // TREE-SAFE: non passam sotto alberi
                 BlockState here  = level.getBlockState(mut);
                 BlockState above = level.getBlockState(mut.above());
-                if (here.is(BlockTags.LOGS) || here.is(BlockTags.LEAVES)
-                        || above.is(BlockTags.LOGS) || above.is(BlockTags.LEAVES)) {
+                if (here.is(BlockTags.LOGS) || above.is(BlockTags.LOGS)) {
                     continue;
                 }
 
@@ -117,7 +116,7 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
                 BlockPos waterPos = mut.move(0, 1, 0).immutable();
                 level.setBlock(waterPos, Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
                 if (level.getRandom().nextInt(3) == 0) {
-                    level.setBlock(waterPos.above(), Blocks.SEAGRASS.defaultBlockState(), 2);
+                    level.setBlock(waterPos, Blocks.SEAGRASS.defaultBlockState(), 2);
                 }
                 level.scheduleTick(waterPos, Fluids.WATER, 0);
                 updateNeighbours(level, waterPos);
@@ -125,20 +124,26 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
         }
 
         // 2. Sponde in pietra/mossy
+        // --- prima: int bankR = radius + BANK_THICKNESS; …
         int bankR = radius + BANK_THICKNESS;
         RandomSource rnd = RandomSource.create(center.asLong());
         for (int dx = -bankR; dx <= bankR; dx++) {
             for (int dz = -bankR; dz <= bankR; dz++) {
-                int dist2 = dx * dx + dz * dz;
-                if (dist2 <= radius * radius || dist2 > bankR * bankR) continue;
+                int dist2 = dx*dx + dz*dz;
+                if (dist2 <= radius*radius || dist2 > bankR*bankR) continue;
 
-                mut.set(center.getX() + dx, center.getY() - 1, center.getZ() + dz);
-                if (level.isOutsideBuildHeight(mut)) continue;
+                // invece di usare center.getY()-1, troviamo qui la Y del terreno
+                int wx = center.getX() + dx;
+                int wz = center.getZ() + dz;
+                int surfaceY = level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, wx, wz) - 1;
+                BlockPos bankPos = new BlockPos(wx, surfaceY, wz);
 
-                BlockState current = level.getBlockState(mut);
+                if (level.isOutsideBuildHeight(bankPos)) continue;
+
+                BlockState current = level.getBlockState(bankPos);
                 if (!current.isAir() && !current.is(Blocks.GRAVEL) && !current.is(Blocks.WATER)
                         && !current.is(BlockTags.LOGS) && !current.is(BlockTags.LEAVES)) {
-                    level.setBlock(mut,
+                    level.setBlock(bankPos,
                             ModBlocks.MOSSY_STREAMBANK_ROCKS.get()
                                     .defaultBlockState()
                                     .setValue(ModMossyStreambankRocksBlock.VARIANT, Mth.nextInt(rnd, 0, 1)),
@@ -147,6 +152,7 @@ public class StreamCarverFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
         }
+
     }
 
     private static void updateNeighbours(WorldGenLevel level, BlockPos pos) {

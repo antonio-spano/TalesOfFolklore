@@ -110,8 +110,8 @@ public class ModConfiguredFeatures {
                         ConstantInt.of(1),
                         0.8f,
                         3,
-                        0.13f,
-                        UniformInt.of(2, 5),
+                        0.16f,
+                        UniformInt.of(3, 6),
                         0.3f
                 ));
     }

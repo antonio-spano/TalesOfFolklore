@@ -38,7 +38,7 @@ public class ModPlacedFeatures {
         register(context, STREAM_CARVER_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.STREAM_CARVER_KEY),
                 List.of(
                         // Prova a generare un torrente ogni 10 chunk. Modifica questo valore per frequenza.
-                        RarityFilter.onAverageOnceEvery(10),
+                        RarityFilter.onAverageOnceEvery(1),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()

@@ -16,7 +16,7 @@
     },
     "replaceable": "#minecraft:dirt",
     "surface": "floor",
-    "vegetation_chance": 0.13,
+    "vegetation_chance": 0.16,
     "vegetation_feature": {
       "feature": {
         "type": "minecraft:simple_block",
@@ -49,8 +49,8 @@
     "xz_radius": {
       "type": "minecraft:uniform",
       "value": {
-        "max_inclusive": 5,
-        "min_inclusive": 2
+        "max_inclusive": 6,
+        "min_inclusive": 3
       }
     }
   }

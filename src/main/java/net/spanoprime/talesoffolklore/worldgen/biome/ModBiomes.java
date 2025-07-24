@@ -37,12 +37,14 @@ public class ModBiomes
         BiomeDefaultFeatures.addForestGrass(biomeBuilder);
 
         //biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.SHALLOW_RIVERBED_PLACED_KEY);
-        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.STREAM_CARVER_PLACED_KEY);
 
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.VIRGINIA_PINE_PLACED_KEY);
 
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.RED_FUNGUS_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.FERN_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.FIREFLIES_BUSH_PLACED_KEY);
+
+        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.STREAM_CARVER_PLACED_KEY);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)

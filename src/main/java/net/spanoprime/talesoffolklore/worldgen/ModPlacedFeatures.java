@@ -26,6 +26,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> STREAM_CARVER_PLACED_KEY = registerKey("stream_carver_placed");
     public static final ResourceKey<PlacedFeature> RED_FUNGUS_PLACED_KEY = registerKey("red_fungus_placed");
     public static final ResourceKey<PlacedFeature> FERN_PLACED_KEY = registerKey("fern_placed");
+    public static final ResourceKey<PlacedFeature> FIREFLIES_BUSH_PLACED_KEY = registerKey("fireflies_bush_placed");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -58,6 +59,18 @@ public class ModPlacedFeatures {
                 ));
 
         register(context, FERN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FERN_KEY),
+                List.of(
+                        // 1. RarityFilter: Tenta di piazzare una patch in media UNA volta ogni 32 chunk.
+                        //    Questo garantisce che la maggior parte dei chunk non abbia funghi. Aumenta per renderli più rari.
+                        RarityFilter.onAverageOnceEvery(1),
+
+                        // 2. I soliti modifier per piazzare la patch in un punto a caso sulla superficie.
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+        register(context, FIREFLIES_BUSH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FIREFLIES_BUSH_KEY),
                 List.of(
                         // 1. RarityFilter: Tenta di piazzare una patch in media UNA volta ogni 32 chunk.
                         //    Questo garantisce che la maggior parte dei chunk non abbia funghi. Aumenta per renderli più rari.

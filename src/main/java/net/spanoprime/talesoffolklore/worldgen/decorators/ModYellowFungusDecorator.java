@@ -23,7 +23,8 @@ public class ModYellowFungusDecorator extends TreeDecorator {
     );
 
     private final float probability;
-    private int threshold = 3;
+    private int thresholdMinY = 3;
+    private int thresholdMaxY = 2;
 
     public ModYellowFungusDecorator(float probability) {
         this.probability = probability;
@@ -40,9 +41,10 @@ public class ModYellowFungusDecorator extends TreeDecorator {
         BlockState fungus = ModBlocks.YELLOW_FUNGUS.get().defaultBlockState();
 
         int minY = context.logs().stream().mapToInt(BlockPos::getY).min().orElse(Integer.MAX_VALUE);
+        int maxY = context.logs().stream().mapToInt(BlockPos::getY).max().orElse(Integer.MIN_VALUE);
 
         for (BlockPos logPos : context.logs()) {
-            if (logPos.getY() >= minY + threshold) {
+            if (logPos.getY() >= minY + thresholdMinY && logPos.getY() <= maxY - thresholdMaxY) {
                 // Questo ciclo usa Direction.Plane.HORIZONTAL, quindi "direction" sarà sempre N, S, W, o E. Perfetto.
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
                     if (random.nextFloat() < this.probability) {

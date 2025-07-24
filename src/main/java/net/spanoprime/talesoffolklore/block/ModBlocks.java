@@ -169,6 +169,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> FERN = registerBlock("fern",
             () -> new ModFernBlock(BlockBehaviour.Properties.copy(Blocks.FERN)));
 
+    public static final RegistryObject<Block> FIREFLIES_BUSH = registerBlock("fireflies_bush",
+            () -> new ModFirefliesBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)));
+
     public static final RegistryObject<Block> SPRITE = registerBlock("sprite",
             () -> new ModSpriteBlock(BlockBehaviour.Properties.copy(Blocks.FERN)));
 

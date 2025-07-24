@@ -8,6 +8,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
+import net.spanoprime.talesoffolklore.block.custom.ModLeavesBlock;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -50,7 +51,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.WALL_IVY.get(),
                         ModBlocks.PINE_NEEDLES.get(),
                         ModBlocks.UNDERGROWTH.get(),
-                        ModBlocks.FERN.get());
+                        ModBlocks.FERN.get(),
+                        ModBlocks.FIREFLIES_BUSH.get());
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(ModBlocks.DAMP_GRASS_BLOCK.get(),

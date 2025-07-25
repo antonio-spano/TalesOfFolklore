@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "type": "minecraft:overworld",
   "generator": {
     "type": "minecraft:noise",
@@ -13,7 +14,6 @@
         "preset": "talesoffolklore:overworld"
       },
       "biome": "talesoffolklore:appalachian_forest"
-      //"appalachian_stream_biome": "talesoffolklore:appalachian_stream"
     }
   }
 }

@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "preset": "minecraft:overworld",
   "biomes": [
     {

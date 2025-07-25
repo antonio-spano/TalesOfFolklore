@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "dimensions": {
     "minecraft:overworld": {
       "type": "talesoffolklore:overworld",

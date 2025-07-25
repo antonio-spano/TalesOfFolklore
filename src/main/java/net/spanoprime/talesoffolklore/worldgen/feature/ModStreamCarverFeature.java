@@ -165,8 +165,7 @@ public class ModStreamCarverFeature extends Feature<NoneFeatureConfiguration> {
                 || currentAbove.is(ModBlocks.UNDERGROWTH.get())
                 || currentAbove.is(ModBlocks.FERN.get())
                 || currentAbove.is(ModBlocks.RED_FUNGUS.get())
-                || currentAbove.is(Blocks.GRASS)
-                || currentAbove.is(ModBlocks.PINE_NEEDLES.get()))
+                || currentAbove.is(Blocks.GRASS))
                     level.setBlock(bankPos.above(), Blocks.AIR.defaultBlockState(), 2);
             }
         }

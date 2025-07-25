@@ -2,6 +2,11 @@ package net.spanoprime.talesoffolklore;
 
 import com.mojang.datafixers.util.Pair;
 import com.mojang.logging.LogUtils;
+import com.terraformersmc.biolith.api.biome.BiomePlacement;
+import com.terraformersmc.biolith.api.biome.SubBiomeMatcher;
+import com.terraformersmc.biolith.api.compat.ModernBetaBiomeKeys;
+import com.terraformersmc.biolith.impl.Biolith;
+import com.terraformersmc.biolith.impl.biomeperimeters.BiomePerimetersImpl;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
@@ -17,6 +22,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.LevelEvent;
@@ -69,6 +76,14 @@ public class TalesOfFolklore
 
     public TalesOfFolklore(FMLJavaModLoadingContext context)
     {
+
+// Inserisci nell'overworld
+        //BiomePlacement.replaceOverworld(Biomes.MUSHROOM_FIELDS, ModBiomes.APPALACHIAN_FOREST, .1);
+        //BiomePlacement.replaceOverworld(Biomes.MUSHROOM_FIELDS, ModBiomes.APPALACHIAN_FOREST, .5);
+        BiomePlacement.replaceOverworld(Biomes.WOODED_BADLANDS, ModBiomes.APPALACHIAN_FOREST, .2D);
+
+        // Esempio: un matcher che accetta solo condizioni climatiche estreme (bioma rarissimo)
+
         IEventBus modEventBus = context.getModEventBus();
 
         modEventBus.register(DataGenerators.class);

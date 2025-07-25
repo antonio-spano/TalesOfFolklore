@@ -27,7 +27,6 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> RED_FUNGUS_PLACED_KEY = registerKey("red_fungus_placed");
     public static final ResourceKey<PlacedFeature> FERN_PLACED_KEY = registerKey("fern_placed");
     public static final ResourceKey<PlacedFeature> FIREFLIES_BUSH_PLACED_KEY = registerKey("fireflies_bush_placed");
-    public static final ResourceKey<PlacedFeature> FALLEN_VIRGINIA_PINE_PLACED_KEY = registerKey("fallen_virginia_pine_placed");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -82,17 +81,6 @@ public class ModPlacedFeatures {
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()
                 ));
-
-        HolderGetter<ConfiguredFeature<?,?>> cf = context.lookup(Registries.CONFIGURED_FEATURE);
-        register(context, FALLEN_VIRGINIA_PINE_PLACED_KEY, cf.getOrThrow(ModConfiguredFeatures.FALLEN_VIRGINIA_PINE_KEY),
-                List.of(
-                        RarityFilter.onAverageOnceEvery(10),          // una “chiazza” ogni ~20 chunk
-                        InSquarePlacement.spread(),
-                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                        BiomeFilter.biome()
-                )
-        );
-
     }
 
     public static ResourceKey<PlacedFeature> registerKey(String name) {

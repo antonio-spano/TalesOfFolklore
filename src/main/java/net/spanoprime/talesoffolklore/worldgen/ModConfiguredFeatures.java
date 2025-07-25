@@ -27,8 +27,6 @@ import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
 import net.spanoprime.talesoffolklore.block.custom.ModFernBlock;
 import net.spanoprime.talesoffolklore.worldgen.decorators.*;
-import net.spanoprime.talesoffolklore.worldgen.feature.ModFallenLogConfiguration;
-import net.spanoprime.talesoffolklore.worldgen.feature.ModFallenLogFeature;
 import net.spanoprime.talesoffolklore.worldgen.feature.ModFeatures;
 
 import java.util.ArrayList;
@@ -42,7 +40,6 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> RED_FUNGUS_KEY = registerKey("red_fungus");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERN_KEY = registerKey("fern");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FIREFLIES_BUSH_KEY = registerKey("fireflies_bush");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_VIRGINIA_PINE_KEY = registerKey("fallen_virginia_pine");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         // --- VIRGINIA PINE ---
@@ -134,21 +131,6 @@ public class ModConfiguredFeatures {
                         UniformInt.of(2, 5),    // raggio xz della pezza (molto piccolo)
                         0.3f                    // extra_edge_column_chance
                 ));
-
-        ModFallenLogConfiguration cfg = new ModFallenLogConfiguration(
-                BlockStateProvider.simple(ModBlocks.VIRGINIA_PINE_LOG.get()),
-                UniformInt.of(3, 4),   // lunghezza tra 3 e 4
-                UniformInt.of(1, 1),   // sempre uno “stump” di altezza 1
-                1.0F,                  // scala = nessuna modifica
-                new WeightedStateProvider(
-                        SimpleWeightedRandomList.<BlockState>builder()
-                                .add(ModBlocks.VIRGINIA_PINE_LEAVES.get().defaultBlockState(), 1)
-                                .add(ModBlocks.WALL_MOSS.get().defaultBlockState(), 1)
-                                .add(ModBlocks.WHITE_FUNGUS.get().defaultBlockState(), 1)
-                )
-        );
-
-        register(context, FALLEN_VIRGINIA_PINE_KEY, new ModFallenLogFeature(ModFallenLogConfiguration.CODEC), cfg);
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

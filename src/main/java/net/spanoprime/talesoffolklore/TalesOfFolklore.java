@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.logging.LogUtils;
 import com.terraformersmc.biolith.api.biome.BiomePlacement;
 import com.terraformersmc.biolith.api.biome.SubBiomeMatcher;
+import com.terraformersmc.biolith.api.biomeperimeters.BiomePerimeters;
 import com.terraformersmc.biolith.api.compat.ModernBetaBiomeKeys;
 import com.terraformersmc.biolith.impl.Biolith;
 import com.terraformersmc.biolith.impl.biomeperimeters.BiomePerimetersImpl;
@@ -80,7 +81,7 @@ public class TalesOfFolklore
 // Inserisci nell'overworld
         //BiomePlacement.replaceOverworld(Biomes.MUSHROOM_FIELDS, ModBiomes.APPALACHIAN_FOREST, .1);
         //BiomePlacement.replaceOverworld(Biomes.MUSHROOM_FIELDS, ModBiomes.APPALACHIAN_FOREST, .5);
-        BiomePlacement.replaceOverworld(Biomes.WOODED_BADLANDS, ModBiomes.APPALACHIAN_FOREST, .2D);
+        //BiomePlacement.replaceOverworld(Biomes.WOODED_BADLANDS, ModBiomes.APPALACHIAN_FOREST, .2D);
 
         // Esempio: un matcher che accetta solo condizioni climatiche estreme (bioma rarissimo)
 

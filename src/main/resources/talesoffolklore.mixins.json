@@ -1,12 +1,11 @@
 {
   "required": true,
+  "minVersion": "0.8",
   "package": "net.spanoprime.talesoffolklore.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "talesoffolklore.refmap.json",
   "mixins": [
-    "MultiNoiseBiomeSourceMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+    "MultiNoiseBiomeSourceMixin",
+    "RegistrySetBuilderMixin"
+  ]
 }

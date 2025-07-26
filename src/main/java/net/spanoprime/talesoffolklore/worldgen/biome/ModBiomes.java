@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
+import net.spanoprime.talesoffolklore.holder.ModBiomeHolder;
 import net.spanoprime.talesoffolklore.worldgen.ModPlacedFeatures;
 
 public class ModBiomes

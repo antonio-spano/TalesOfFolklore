@@ -53,6 +53,7 @@ import net.spanoprime.talesoffolklore.item.ModItems;
 import net.spanoprime.talesoffolklore.item.custom.AppalachianMapItem;
 import net.spanoprime.talesoffolklore.loot.ModLootTables;
 import net.spanoprime.talesoffolklore.util.ModWoodTypes;
+import net.spanoprime.talesoffolklore.worldgen.AppalachianMatcher;
 import net.spanoprime.talesoffolklore.worldgen.ModConfiguredFeatures;
 import net.spanoprime.talesoffolklore.worldgen.ModPlacedFeatures;
 import net.spanoprime.talesoffolklore.worldgen.ModWorldGen;
@@ -81,9 +82,17 @@ public class TalesOfFolklore
 // Inserisci nell'overworld
         //BiomePlacement.replaceOverworld(Biomes.MUSHROOM_FIELDS, ModBiomes.APPALACHIAN_FOREST, .1);
         //BiomePlacement.replaceOverworld(Biomes.MUSHROOM_FIELDS, ModBiomes.APPALACHIAN_FOREST, .5);
-        //BiomePlacement.replaceOverworld(Biomes.WOODED_BADLANDS, ModBiomes.APPALACHIAN_FOREST, .2D);
+        //BiomePlacement.replaceOverworld(Biomes.JUNGLE, ModBiomes.APPALACHIAN_FOREST, 1f);
+
+        BiomePlacement.addSubOverworld(
+                Biomes.JUNGLE, // o qualunque tu voglia sovrascrivere
+                ModBiomes.APPALACHIAN_FOREST,
+                new AppalachianMatcher(3000,  1000) // Esempio: almeno 2000 blocchi dallo spawn, patch da almeno 400 blocchi
+        );
+
 
         // Esempio: un matcher che accetta solo condizioni climatiche estreme (bioma rarissimo)
+
 
         IEventBus modEventBus = context.getModEventBus();
 

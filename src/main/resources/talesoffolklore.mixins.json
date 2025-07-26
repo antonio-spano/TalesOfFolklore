@@ -4,9 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "talesoffolklore.refmap.json",
   "mixins": [
-    "NoiseBasedChunkGeneratorMixin",
-    "NoiseBasedChunkGeneratorAccessor",
-    "NoiseChunkAccessor"
+
   ],
   "injectors": {
     "defaultRequire": 1

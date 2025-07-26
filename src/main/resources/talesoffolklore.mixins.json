@@ -6,5 +6,7 @@
   "refmap": "talesoffolklore.refmap.json",
   "mixins": [
     "BiomeSourceMixin",
+    "ChunkStatusMixin",
+    "MultiNoiseBiomeSourceMixin"
   ]
 }

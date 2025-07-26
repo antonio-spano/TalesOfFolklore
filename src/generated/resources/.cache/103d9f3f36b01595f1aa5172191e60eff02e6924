@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-25T14:42:31.369367	Registries
+// 1.20.1	2025-07-26T23:39:29.588887	Registries
 9303ef9ad3f201bdfe1d1f910d549e58b27a971b data/talesoffolklore/worldgen/biome/appalachian_forest.json
 de3be6cc1f76ebcf6aa3bf4b7ff07aac95a4c2ab data/talesoffolklore/worldgen/configured_feature/fern.json
 ee09d036d39875b35da5cd49bfcb55a6f6a30d34 data/talesoffolklore/worldgen/configured_feature/fireflies_bush.json
@@ -6,7 +6,7 @@ e7c144eb301d66788fa53708604c7389d41f260a data/talesoffolklore/worldgen/configure
 6ffe128a2a9821397a220b4878e6b102a75c7ad6 data/talesoffolklore/worldgen/configured_feature/stream_carver.json
 163e0bf1c85206b01febdf4e34471d1fb0aca9ef data/talesoffolklore/worldgen/configured_feature/virginia_pine.json
 466ed65252573f7370bf0a23ddf9acc8e3653cd7 data/talesoffolklore/worldgen/noise/variant_noise.json
-85566ffc5cfddf07c1e5c5f136ac141d1c380bf6 data/talesoffolklore/worldgen/noise_settings/appalachian_noise_settings.json
+227a83b1fb6b04487be3127f22678c0324d085f5 data/talesoffolklore/worldgen/noise_settings/appalachian_noise_settings.json
 0dbefcd15fd2688d09d9dce175d1a8532aa99ebe data/talesoffolklore/worldgen/placed_feature/fern_placed.json
 1c8b86ca0b4daa388d0c95f2d14a205cf408eb87 data/talesoffolklore/worldgen/placed_feature/fireflies_bush_placed.json
 19eb6c26b53c2f965ae4ce9be6832f10e35769c3 data/talesoffolklore/worldgen/placed_feature/red_fungus_placed.json

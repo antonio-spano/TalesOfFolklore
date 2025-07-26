@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.stream.Stream;
 
-@Mixin(value = MultiNoiseBiomeSource.class, priority = 1001)
+@Mixin(value = MultiNoiseBiomeSource.class, priority = -69420)
 public abstract class MultiNoiseBiomeSourceMixin {
     @Unique
     private static final int talesoffolklore$CENTER_X = 4000;

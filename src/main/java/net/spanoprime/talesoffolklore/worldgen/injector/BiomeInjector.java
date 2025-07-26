@@ -25,7 +25,6 @@ public class BiomeInjector {
     public static void onServerAboutToStart(ServerAboutToStartEvent event) {
         Registry<Biome> biomeRegistry = event.getServer().registryAccess().registryOrThrow(Registries.BIOME);
         APPALACHIAN_FOREST_HOLDER = biomeRegistry.getHolderOrThrow(ModBiomes.APPALACHIAN_FOREST);
-        ExpandedBiomes.addExpandedBiome(ModBiomes.APPALACHIAN_FOREST, LevelStem.OVERWORLD);
 
         System.out.println("[TALES OF FOLKLORE] BIOME INJECTOR ARMED. Holder captured: " + APPALACHIAN_FOREST_HOLDER.unwrapKey());
     }

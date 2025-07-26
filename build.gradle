@@ -137,7 +137,7 @@ dependencies {
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    implementation fg.deobf("com.terraformersmc:biolith-forge:1.0.1-alpha.1")
+    //implementation fg.deobf("com.terraformersmc:biolith-forge:1.0.1-alpha.1")
 
     //implementation fg.deobf("com.github.glitchfiend:TerraBlender-forge:${minecraft_version}-${terrablender_version}")
 

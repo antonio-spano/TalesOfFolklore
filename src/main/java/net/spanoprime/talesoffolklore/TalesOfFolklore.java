@@ -2,12 +2,6 @@ package net.spanoprime.talesoffolklore;
 
 import com.mojang.datafixers.util.Pair;
 import com.mojang.logging.LogUtils;
-import com.terraformersmc.biolith.api.biome.BiomePlacement;
-import com.terraformersmc.biolith.api.biome.SubBiomeMatcher;
-import com.terraformersmc.biolith.api.biomeperimeters.BiomePerimeters;
-import com.terraformersmc.biolith.api.compat.ModernBetaBiomeKeys;
-import com.terraformersmc.biolith.impl.Biolith;
-import com.terraformersmc.biolith.impl.biomeperimeters.BiomePerimetersImpl;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
@@ -53,10 +47,8 @@ import net.spanoprime.talesoffolklore.item.ModItems;
 import net.spanoprime.talesoffolklore.item.custom.AppalachianMapItem;
 import net.spanoprime.talesoffolklore.loot.ModLootTables;
 import net.spanoprime.talesoffolklore.util.ModWoodTypes;
-import net.spanoprime.talesoffolklore.worldgen.AppalachianMatcher;
 import net.spanoprime.talesoffolklore.worldgen.ModConfiguredFeatures;
 import net.spanoprime.talesoffolklore.worldgen.ModPlacedFeatures;
-import net.spanoprime.talesoffolklore.worldgen.ModWorldGen;
 import net.spanoprime.talesoffolklore.worldgen.biome.ModBiomes;
 import net.spanoprime.talesoffolklore.worldgen.biome.surface.ModSurfaceRules;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModTreeDecoratorTypes;
@@ -84,17 +76,6 @@ public class TalesOfFolklore
         //BiomePlacement.replaceOverworld(Biomes.MUSHROOM_FIELDS, ModBiomes.APPALACHIAN_FOREST, .5);
         //BiomePlacement.replaceOverworld(Biomes.JUNGLE, ModBiomes.APPALACHIAN_FOREST, 1f);
 
-        BiomePlacement.addSubOverworld(
-                Biomes.JUNGLE, // o qualunque tu voglia sovrascrivere
-                ModBiomes.APPALACHIAN_FOREST,
-                new AppalachianMatcher(3000,  1000) // Esempio: almeno 2000 blocchi dallo spawn, patch da almeno 400 blocchi
-        );
-        BiomePlacement.addSubOverworld(
-                Biomes.BAMBOO_JUNGLE, // o qualunque tu voglia sovrascrivere
-                ModBiomes.APPALACHIAN_FOREST,
-                new AppalachianMatcher(3000,  500) // Esempio: almeno 2000 blocchi dallo spawn, patch da almeno 400 blocchi
-        );
-
         // Esempio: un matcher che accetta solo condizioni climatiche estreme (bioma rarissimo)
 
 
@@ -114,7 +95,6 @@ public class TalesOfFolklore
         //ModTreeDecoratorTypes.TREE_DECORATORS.register(modEventBus);
         //ModTerrablender.registerBiomes();
 
-        ModWorldGen.register(modEventBus);
         ModFeatures.register(modEventBus);
 
         // Register the commonSetup method for modloading

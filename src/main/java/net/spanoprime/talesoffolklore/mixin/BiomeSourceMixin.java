@@ -7,35 +7,29 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.spanoprime.talesoffolklore.accessor.ModBiomeSourceAccessor;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
-
+import org.spongepowered.asm.mixin.Unique;
 import java.util.Set;
 import java.util.function.Supplier;
 
 @Mixin(BiomeSource.class)
 public class BiomeSourceMixin implements ModBiomeSourceAccessor {
-    // Shadow del supplier privato finale in BiomeSource
-    @Shadow
+    @Shadow @Mutable
     private Supplier<Set<Holder<Biome>>> possibleBiomes;
 
-    // Flag per non espandere più volte
-    private boolean expanded = false;
+    @Unique
+    private boolean talesoffolklore$isExpanded = false;
 
-    /**
-     * Questo metodo viene invocato dal tuo ChunkStatusMixin,
-     * e aggiunge il tuo BiomeHolder alla lista dei possibili biomi.
-     */
     @Override
     public void letsVinoCryptids$modExpandBiome(Holder<Biome> biomeHolder) {
-        if (!expanded) {
-            // Ricostruisci il set: originali + nostro
+        if (!this.talesoffolklore$isExpanded && biomeHolder != null) {
             ImmutableSet.Builder<Holder<Biome>> builder = ImmutableSet.builder();
-            builder.addAll(possibleBiomes.get());
+            builder.addAll(this.possibleBiomes.get());
             builder.add(biomeHolder);
-
-            // Sovrascrivi il supplier con la nuova istanza memoizzata
             this.possibleBiomes = Suppliers.memoize(builder::build);
-            expanded = true;
+            this.talesoffolklore$isExpanded = true;
+            System.out.println("[TALES OF FOLKLORE] BIOME REGISTRAR: Appalachian Forest is now officially in the BiomeSource list.");
         }
     }
 }

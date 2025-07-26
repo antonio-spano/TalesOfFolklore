@@ -89,7 +89,11 @@ public class TalesOfFolklore
                 ModBiomes.APPALACHIAN_FOREST,
                 new AppalachianMatcher(3000,  1000) // Esempio: almeno 2000 blocchi dallo spawn, patch da almeno 400 blocchi
         );
-
+        BiomePlacement.addSubOverworld(
+                Biomes.BAMBOO_JUNGLE, // o qualunque tu voglia sovrascrivere
+                ModBiomes.APPALACHIAN_FOREST,
+                new AppalachianMatcher(3000,  500) // Esempio: almeno 2000 blocchi dallo spawn, patch da almeno 400 blocchi
+        );
 
         // Esempio: un matcher che accetta solo condizioni climatiche estreme (bioma rarissimo)
 

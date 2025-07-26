@@ -4,6 +4,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
 import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.biome.Biome;
+import net.spanoprime.talesoffolklore.worldgen.injector.BiomeInjector; // Importa la cassaforte
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,11 +16,11 @@ import java.util.stream.Stream;
 @Mixin(value = MultiNoiseBiomeSource.class, priority = 1001)
 public abstract class MultiNoiseBiomeSourceMixin {
     @Unique
-    private static final int talesoffolklore$CENTER_X = 1000;
+    private static final int talesoffolklore$CENTER_X = 4000;
     @Unique
-    private static final int talesoffolklore$CENTER_Z = 1000;
+    private static final int talesoffolklore$CENTER_Z = -4000;
     @Unique
-    private static final int talesoffolklore$RADIUS   = 6000;
+    private static final int talesoffolklore$RADIUS   = 250;
     @Unique
     private static final long talesoffolklore$RADIUS_SQ = (long) talesoffolklore$RADIUS * talesoffolklore$RADIUS;
 
@@ -29,8 +30,8 @@ public abstract class MultiNoiseBiomeSourceMixin {
             cancellable = true
     )
     private void talesoffolklore$forceBiomeInCircle(int xQuart, int yQuart, int zQuart, Climate.Sampler sampler, CallbackInfoReturnable<Holder<Biome>> cir) {
-        // Ora usiamo l'Holder catturato dall'altro Mixin.
-        if (RegistrySetBuilderMixin.talesoffolklore$appalachianHolder == null) return;
+        // Se la cassaforte è vuota, non fare nulla.
+        if (BiomeInjector.APPALACHIAN_FOREST_HOLDER == null) return;
 
         int blockX = xQuart << 2;
         int blockZ = zQuart << 2;
@@ -38,7 +39,7 @@ public abstract class MultiNoiseBiomeSourceMixin {
         long dz = (long) blockZ - talesoffolklore$CENTER_Z;
 
         if (dx * dx + dz * dz <= talesoffolklore$RADIUS_SQ) {
-            cir.setReturnValue(RegistrySetBuilderMixin.talesoffolklore$appalachianHolder);
+            cir.setReturnValue(BiomeInjector.APPALACHIAN_FOREST_HOLDER);
         }
     }
 
@@ -48,10 +49,11 @@ public abstract class MultiNoiseBiomeSourceMixin {
             cancellable = true
     )
     private void talesoffolklore$addBiomeToOfficialList(CallbackInfoReturnable<Stream<Holder<Biome>>> cir) {
-        if (RegistrySetBuilderMixin.talesoffolklore$appalachianHolder == null) return;
+        // Se la cassaforte è vuota, non fare nulla.
+        if (BiomeInjector.APPALACHIAN_FOREST_HOLDER == null) return;
 
         Stream<Holder<Biome>> originalStream = cir.getReturnValue();
-        Stream<Holder<Biome>> modifiedStream = Stream.concat(originalStream, Stream.of(RegistrySetBuilderMixin.talesoffolklore$appalachianHolder)).distinct();
+        Stream<Holder<Biome>> modifiedStream = Stream.concat(originalStream, Stream.of(BiomeInjector.APPALACHIAN_FOREST_HOLDER)).distinct();
 
         cir.setReturnValue(modifiedStream);
     }

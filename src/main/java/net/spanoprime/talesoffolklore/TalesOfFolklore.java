@@ -54,6 +54,7 @@ import net.spanoprime.talesoffolklore.worldgen.biome.surface.ModSurfaceRules;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModTreeDecoratorTypes;
 import net.spanoprime.talesoffolklore.worldgen.decorators.ModWallMossDecorator;
 import net.spanoprime.talesoffolklore.worldgen.feature.ModFeatures;
+import net.spanoprime.talesoffolklore.worldgen.injector.BiomeInjector;
 import org.slf4j.Logger;
 
 import java.awt.*;
@@ -96,6 +97,8 @@ public class TalesOfFolklore
         //ModTerrablender.registerBiomes();
 
         ModFeatures.register(modEventBus);
+        // Dentro il costruttore di TalesOfFolklore
+        MinecraftForge.EVENT_BUS.register(BiomeInjector.class);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);

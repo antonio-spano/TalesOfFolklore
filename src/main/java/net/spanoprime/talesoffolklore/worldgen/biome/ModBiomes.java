@@ -14,7 +14,6 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
-import net.spanoprime.talesoffolklore.holder.ModBiomeHolder;
 import net.spanoprime.talesoffolklore.worldgen.ModPlacedFeatures;
 
 public class ModBiomes
@@ -22,11 +21,15 @@ public class ModBiomes
     public static final ResourceKey<Biome> APPALACHIAN_FOREST = ResourceKey.create(Registries.BIOME,
             new ResourceLocation(TalesOfFolklore.MOD_ID, "appalachian_forest"));
 
+    //public static Holder<Biome> APPALACHIAN_FOREST_HOLDER;
+
     public static void bootstrap(BootstapContext<Biome> context)
     {
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers = context.lookup(Registries.CONFIGURED_CARVER);
         context.register(APPALACHIAN_FOREST, appalachianForest(context, placedFeatures, configuredCarvers));
+
+        //APPALACHIAN_FOREST_HOLDER = context.register(APPALACHIAN_FOREST, appalachianForest(context, placedFeatures, configuredCarvers));
     }
 
     public static Biome appalachianForest(BootstapContext<Biome> context, HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers) {

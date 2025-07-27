@@ -1,6 +1,5 @@
 package net.spanoprime.talesoffolklore.worldgen.biome;
 
-import com.github.alexthe666.citadel.server.world.ExpandedBiomes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -30,7 +29,7 @@ public class ModBiomes
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers = context.lookup(Registries.CONFIGURED_CARVER);
         context.register(APPALACHIAN_FOREST, appalachianForest(context, placedFeatures, configuredCarvers));
-        ExpandedBiomes.addExpandedBiome(ModBiomes.APPALACHIAN_FOREST, LevelStem.OVERWORLD);
+        //ExpandedBiomes.addExpandedBiome(ModBiomes.APPALACHIAN_FOREST, LevelStem.OVERWORLD);
         //APPALACHIAN_FOREST_HOLDER = context.register(APPALACHIAN_FOREST, appalachianForest(context, placedFeatures, configuredCarvers));
     }
 

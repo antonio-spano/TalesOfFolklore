@@ -1,6 +1,5 @@
 package net.spanoprime.talesoffolklore.worldgen.injector;
 
-import com.github.alexthe666.citadel.server.world.ExpandedBiomes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;

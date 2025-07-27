@@ -1,40 +1,39 @@
-[27Jul2025 00:42:08.296] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, /Users/antoniospano/.gradle/caches/forge_gradle/assets, --gameDir, ., --fml.forgeVersion, 47.4.0, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, talesoffolklore, --all, --output, /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/generated/resources, --existing, /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/main/resources, --mixin.config, talesoffolklore.mixins.json]
-[27Jul2025 00:42:08.298] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.14 by Eclipse Adoptium; OS Mac OS X arch aarch64 version 15.1
-[27Jul2025 00:42:08.374] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
-[27Jul2025 00:42:08.405] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/Users/antoniospano/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23121!/ Service=ModLauncher Env=CLIENT
-[27Jul2025 00:42:08.617] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/antoniospano/.gradle/caches/modules-2/files-2.1/net.minecraftforge/javafmllanguage/1.20.1-47.4.0/f0c0b352173d0a378cbdcec9cfc4ba65899a721/javafmllanguage-1.20.1-47.4.0.jar is missing mods.toml file
-[27Jul2025 00:42:08.618] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/antoniospano/.gradle/caches/modules-2/files-2.1/net.minecraftforge/lowcodelanguage/1.20.1-47.4.0/e862740d8c84d08dbfedea412bef88fe42e727c5/lowcodelanguage-1.20.1-47.4.0.jar is missing mods.toml file
-[27Jul2025 00:42:08.618] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/antoniospano/.gradle/caches/modules-2/files-2.1/net.minecraftforge/mclanguage/1.20.1-47.4.0/5719b3a297a33f877ed5dde4cb4bd75c859096af/mclanguage-1.20.1-47.4.0.jar is missing mods.toml file
-[27Jul2025 00:42:08.619] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/antoniospano/.gradle/caches/modules-2/files-2.1/net.minecraftforge/fmlcore/1.20.1-47.4.0/235975dafa4309945b59c56b53f31dc5b65a6051/fmlcore-1.20.1-47.4.0.jar is missing mods.toml file
-[27Jul2025 00:42:08.674] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
-[27Jul2025 00:42:09.709] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
-[27Jul2025 00:42:09.713] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, /Users/antoniospano/.gradle/caches/forge_gradle/assets, --assetIndex, 5, --mod, talesoffolklore, --all, --output, /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/generated/resources, --existing, /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/main/resources]
-[27Jul2025 00:42:09.732] [main/WARN] [mixin/]: Reference map 'talesoffolklore.refmap.json' for talesoffolklore.mixins.json could not be read. If this is a development environment you can ignore this message
-[27Jul2025 00:42:10.037] [main/INFO] [mixin/]: Remapping refMap citadel.refmap.json using /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/build/createSrgToMcp/output.srg
-[27Jul2025 00:42:10.318] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [talesoffolklore]
-[27Jul2025 00:42:13.464] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.0, for MC 1.20.1 with MCP 20230612.114412
-[27Jul2025 00:42:13.465] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.0 Initialized
-[27Jul2025 00:42:13.810] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/Users/antoniospano/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23184!/assets/.mcassetsroot' uses unexpected schema
-[27Jul2025 00:42:13.811] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/Users/antoniospano/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23184!/data/.mcassetsroot' uses unexpected schema
-[27Jul2025 00:42:13.819] [main/WARN] [net.minecraft.server.packs.PathPackResources/]: Ignored non-lowercase namespace: .DS_Store in /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/main/resources
-[27Jul2025 00:42:13.826] [main/WARN] [net.minecraft.server.packs.PathPackResources/]: Ignored non-lowercase namespace: .DS_Store in /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/main/resources
-[27Jul2025 00:42:13.885] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
-[27Jul2025 00:42:13.886] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 1 ms
-[27Jul2025 00:42:13.886] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
-[27Jul2025 00:42:13.914] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 27 ms
-[27Jul2025 00:42:13.914] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: talesoffolklore
-[27Jul2025 00:42:13.914] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: talesoffolklore finished after 0 ms
-[27Jul2025 00:42:13.914] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: talesoffolklore
-[27Jul2025 00:42:13.918] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: talesoffolklore finished after 3 ms
-[27Jul2025 00:42:13.918] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:block mod id talesoffolklore
-[27Jul2025 00:42:14.084] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:block mod id talesoffolklore finished after 165 ms
-[27Jul2025 00:42:14.084] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:item mod id talesoffolklore
-[27Jul2025 00:42:14.085] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:item mod id talesoffolklore finished after 0 ms
-[27Jul2025 00:42:14.085] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Global Loot Modifiers : talesoffolklore
-[27Jul2025 00:42:14.086] [main/INFO] [net.minecraft.data.DataGenerator/]: Global Loot Modifiers : talesoffolklore finished after 0 ms
-[27Jul2025 00:42:14.086] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:point_of_interest_type mod id talesoffolklore
-[27Jul2025 00:42:14.087] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:point_of_interest_type mod id talesoffolklore finished after 1 ms
-[27Jul2025 00:42:14.087] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Registries
-[27Jul2025 00:42:14.128] [main/INFO] [net.minecraft.data.DataGenerator/]: Registries finished after 40 ms
-[27Jul2025 00:42:14.128] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 243 ms
-[27Jul2025 00:42:14.131] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 60, old count: 60, new count: 61, removed stale: 0, written: 0
+[27Jul2025 11:37:28.915] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, /Users/antoniospano/.gradle/caches/forge_gradle/assets, --gameDir, ., --fml.forgeVersion, 47.4.0, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, talesoffolklore, --all, --output, /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/generated/resources, --existing, /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/main/resources, --mixin.config, talesoffolklore.mixins.json]
+[27Jul2025 11:37:28.917] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.14 by Eclipse Adoptium; OS Mac OS X arch aarch64 version 15.1
+[27Jul2025 11:37:28.989] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
+[27Jul2025 11:37:29.022] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/Users/antoniospano/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23121!/ Service=ModLauncher Env=CLIENT
+[27Jul2025 11:37:29.236] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/antoniospano/.gradle/caches/modules-2/files-2.1/net.minecraftforge/javafmllanguage/1.20.1-47.4.0/f0c0b352173d0a378cbdcec9cfc4ba65899a721/javafmllanguage-1.20.1-47.4.0.jar is missing mods.toml file
+[27Jul2025 11:37:29.237] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/antoniospano/.gradle/caches/modules-2/files-2.1/net.minecraftforge/lowcodelanguage/1.20.1-47.4.0/e862740d8c84d08dbfedea412bef88fe42e727c5/lowcodelanguage-1.20.1-47.4.0.jar is missing mods.toml file
+[27Jul2025 11:37:29.238] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/antoniospano/.gradle/caches/modules-2/files-2.1/net.minecraftforge/mclanguage/1.20.1-47.4.0/5719b3a297a33f877ed5dde4cb4bd75c859096af/mclanguage-1.20.1-47.4.0.jar is missing mods.toml file
+[27Jul2025 11:37:29.239] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /Users/antoniospano/.gradle/caches/modules-2/files-2.1/net.minecraftforge/fmlcore/1.20.1-47.4.0/235975dafa4309945b59c56b53f31dc5b65a6051/fmlcore-1.20.1-47.4.0.jar is missing mods.toml file
+[27Jul2025 11:37:29.279] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[27Jul2025 11:37:30.185] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[27Jul2025 11:37:30.191] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, /Users/antoniospano/.gradle/caches/forge_gradle/assets, --assetIndex, 5, --mod, talesoffolklore, --all, --output, /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/generated/resources, --existing, /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/main/resources]
+[27Jul2025 11:37:30.213] [main/WARN] [mixin/]: Reference map 'talesoffolklore.refmap.json' for talesoffolklore.mixins.json could not be read. If this is a development environment you can ignore this message
+[27Jul2025 11:37:30.423] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [talesoffolklore]
+[27Jul2025 11:37:33.469] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.0, for MC 1.20.1 with MCP 20230612.114412
+[27Jul2025 11:37:33.472] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.0 Initialized
+[27Jul2025 11:37:33.730] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/Users/antoniospano/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23184!/assets/.mcassetsroot' uses unexpected schema
+[27Jul2025 11:37:33.730] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/Users/antoniospano/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23184!/data/.mcassetsroot' uses unexpected schema
+[27Jul2025 11:37:33.741] [main/WARN] [net.minecraft.server.packs.PathPackResources/]: Ignored non-lowercase namespace: .DS_Store in /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/main/resources
+[27Jul2025 11:37:33.750] [main/WARN] [net.minecraft.server.packs.PathPackResources/]: Ignored non-lowercase namespace: .DS_Store in /Users/antoniospano/Documents/Forge Dev/LetsVinoCryptids/src/main/resources
+[27Jul2025 11:37:33.832] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
+[27Jul2025 11:37:33.833] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 1 ms
+[27Jul2025 11:37:33.834] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
+[27Jul2025 11:37:33.867] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 33 ms
+[27Jul2025 11:37:33.867] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: talesoffolklore
+[27Jul2025 11:37:33.867] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: talesoffolklore finished after 0 ms
+[27Jul2025 11:37:33.867] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: talesoffolklore
+[27Jul2025 11:37:33.872] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: talesoffolklore finished after 4 ms
+[27Jul2025 11:37:33.872] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:block mod id talesoffolklore
+[27Jul2025 11:37:34.014] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:block mod id talesoffolklore finished after 142 ms
+[27Jul2025 11:37:34.014] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:item mod id talesoffolklore
+[27Jul2025 11:37:34.015] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:item mod id talesoffolklore finished after 0 ms
+[27Jul2025 11:37:34.015] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Global Loot Modifiers : talesoffolklore
+[27Jul2025 11:37:34.016] [main/INFO] [net.minecraft.data.DataGenerator/]: Global Loot Modifiers : talesoffolklore finished after 0 ms
+[27Jul2025 11:37:34.016] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:point_of_interest_type mod id talesoffolklore
+[27Jul2025 11:37:34.018] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:point_of_interest_type mod id talesoffolklore finished after 1 ms
+[27Jul2025 11:37:34.018] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Registries
+[27Jul2025 11:37:34.050] [main/INFO] [net.minecraft.data.DataGenerator/]: Registries finished after 32 ms
+[27Jul2025 11:37:34.051] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 218 ms
+[27Jul2025 11:37:34.054] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 60, old count: 60, new count: 61, removed stale: 0, written: 1

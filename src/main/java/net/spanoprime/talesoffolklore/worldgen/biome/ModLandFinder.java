@@ -26,7 +26,7 @@ public class ModLandFinder {
         for (int y = maxY - 1; y >= minY; --y) {
             double density = initialDensity.compute(new DensityFunction.SinglePointContext(blockX, y, blockZ));
             if (density > 0.390625D) {
-                return y > seaLevel; // >62 di solito
+                return y > seaLevel + 1; // just to be safe
             }
         }
         return false; // Ocean/trench

@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
 import net.minecraft.world.level.biome.Climate;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.*;
 import net.spanoprime.talesoffolklore.accessor.MultiNoiseBiomeSourceAccessor;
 import net.spanoprime.talesoffolklore.util.VoronoiGenerator;
+import net.spanoprime.talesoffolklore.worldgen.biome.ModLandFinder;
 import net.spanoprime.talesoffolklore.worldgen.injector.BiomeInjector; // Importa la cassaforte
 import net.spanoprime.talesoffolklore.worldgen.noise.ModBiomeRarity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -53,7 +55,6 @@ public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourc
 
         if (BiomeInjector.appalachianCenter == BlockPos.ZERO && !letsVinoCryptids$once)
         {
-
             letsVinoCryptids$once = true;
             BiomeInjector.appalachianCenter = BiomeInjector.findLandCenter(getServerLevel(),
                     yQuart,
@@ -66,9 +67,11 @@ public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourc
         long dx = (long) blockX - BiomeInjector.appalachianCenter.getX();
         long dz = (long) blockZ - BiomeInjector.appalachianCenter.getZ();
 
-        if (dx * dx + dz * dz <= talesoffolklore$RADIUS_SQ) {
+        if (dx * dx + dz * dz <= talesoffolklore$RADIUS_SQ)
+        {
             cir.setReturnValue(BiomeInjector.APPALACHIAN_FOREST_HOLDER);
         }
+        //cir.setReturnValue(cir.getReturnValue());
     }
 
     @Inject(

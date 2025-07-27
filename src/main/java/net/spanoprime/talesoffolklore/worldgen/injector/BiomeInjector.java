@@ -15,6 +15,7 @@ import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.worldgen.biome.ModBiomes;
 
@@ -27,23 +28,16 @@ public class BiomeInjector {
     public static int maxDistanceOffset = 2000;
     public static BlockPos appalachianCenter = BlockPos.ZERO;
 
-    public static BlockPos findLandCenter(ServerLevel level, int maxTries, RandomSource random, int minDistance_, int maxDistanceOffset_) {
-        for (int tries = 0; tries < maxTries; tries++) {
-            int distanceOffset = (int) (Math.random() * maxDistanceOffset_);
-            float angle = (float) (Math.random() * (2 * Math.PI));
+    public static BlockPos findLandCenter(int yQuart, int minDistance_, int maxDistanceOffset_) {
+        int distanceOffset = (int) (Math.random() * maxDistanceOffset_);
+        float angle = (float) (Math.random() * (2 * Math.PI));
 
-            int centerX = (int) (Math.cos(angle) * (minDistance_ + distanceOffset));
-            int centerZ = (int) (Math.sin(angle) * (minDistance_ + distanceOffset));
+        int centerX = (int) (Math.cos(angle) * (minDistance_ + distanceOffset));
+        int centerZ = (int) (Math.sin(angle) * (minDistance_ + distanceOffset));
 
-            BlockPos pos = new BlockPos(centerX, level.getSeaLevel(), centerZ);
-            Holder<Biome> biome = level.getBiome(pos);
+        BlockPos pos = new BlockPos(centerX, yQuart, centerZ);
 
-            if (!isAquaticBiome(biome) && !isBeachBiome(biome) && !isExcludedBiome(biome)) {
-                return pos;
-            }
-        }
-        // fallback se non trovato (raro)
-        return new BlockPos(0, level.getSeaLevel(), 0);
+        return pos;
     }
 
     public static boolean isAquaticBiome(Holder<Biome> biome)
@@ -61,13 +55,6 @@ public class BiomeInjector {
     public static void onServerAboutToStart(ServerAboutToStartEvent event) {
         Registry<Biome> biomeRegistry = event.getServer().registryAccess().registryOrThrow(Registries.BIOME);
         APPALACHIAN_FOREST_HOLDER = biomeRegistry.getHolderOrThrow(ModBiomes.APPALACHIAN_FOREST);
-
-        ServerLevel overworld = event.getServer().overworld();
-        if (overworld != null) {
-            RandomSource random = overworld.getRandom();
-            appalachianCenter = findLandCenter(overworld, 150, random, minDistance, maxDistanceOffset);
-            System.out.println("[TALES OF FOLKLORE] Land center for Appalachian Forest: " + appalachianCenter);
-        }
 
         System.out.println("[TALES OF FOLKLORE] BIOME INJECTOR ARMED. Holder captured: " + APPALACHIAN_FOREST_HOLDER.unwrapKey());
     }

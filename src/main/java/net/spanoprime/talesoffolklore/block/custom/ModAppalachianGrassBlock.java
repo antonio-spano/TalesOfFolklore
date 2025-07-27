@@ -38,7 +38,7 @@ public class ModAppalachianGrassBlock extends GrassBlock {
      */
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        int randomVariant = pContext.getLevel().getRandom().nextInt(5); // 0-4
+        int randomVariant = pContext.getLevel().getRandom().nextInt(4); // 0-4
         return this.defaultBlockState().setValue(VARIANT, randomVariant);
     }
 

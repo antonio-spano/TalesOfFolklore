@@ -42,6 +42,7 @@ public class ModBiomes
 
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
         BiomeDefaultFeatures.addForestGrass(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultSeagrass(biomeBuilder);
 
         //biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.SHALLOW_RIVERBED_PLACED_KEY);
 

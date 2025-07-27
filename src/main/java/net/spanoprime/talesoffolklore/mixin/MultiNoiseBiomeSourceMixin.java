@@ -16,10 +16,6 @@ import java.util.stream.Stream;
 @Mixin(value = MultiNoiseBiomeSource.class, priority = -69420)
 public abstract class MultiNoiseBiomeSourceMixin {
     @Unique
-    private static final int talesoffolklore$CENTER_X = 4000;
-    @Unique
-    private static final int talesoffolklore$CENTER_Z = -4000;
-    @Unique
     private static final int talesoffolklore$RADIUS   = 700;
     @Unique
     private static final long talesoffolklore$RADIUS_SQ = (long) talesoffolklore$RADIUS * talesoffolklore$RADIUS;
@@ -31,12 +27,12 @@ public abstract class MultiNoiseBiomeSourceMixin {
     )
     private void talesoffolklore$forceBiomeInCircle(int xQuart, int yQuart, int zQuart, Climate.Sampler sampler, CallbackInfoReturnable<Holder<Biome>> cir) {
         // Se la cassaforte è vuota, non fare nulla.
-        if (BiomeInjector.APPALACHIAN_FOREST_HOLDER == null) return;
+        if (BiomeInjector.APPALACHIAN_FOREST_HOLDER == null ) return;
 
         int blockX = xQuart << 2;
         int blockZ = zQuart << 2;
-        long dx = (long) blockX - talesoffolklore$CENTER_X;
-        long dz = (long) blockZ - talesoffolklore$CENTER_Z;
+        long dx = (long) blockX - BiomeInjector.appalachianCenter.getX();
+        long dz = (long) blockZ - BiomeInjector.appalachianCenter.getY();
 
         if (dx * dx + dz * dz <= talesoffolklore$RADIUS_SQ) {
             cir.setReturnValue(BiomeInjector.APPALACHIAN_FOREST_HOLDER);

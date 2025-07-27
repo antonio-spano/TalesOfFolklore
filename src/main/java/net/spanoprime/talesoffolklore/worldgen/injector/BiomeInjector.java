@@ -25,15 +25,15 @@ public class BiomeInjector {
     public static Holder<Biome> APPALACHIAN_FOREST_HOLDER = null;
     public static int minDistance = 4000;
     public static int maxDistanceOffset = 2000;
-    public static BlockPos appalachianCenter = null;
+    public static BlockPos appalachianCenter = BlockPos.ZERO;
 
-    public static BlockPos findLandCenter(ServerLevel level, int maxTries, int minDistance_, int maxDistanceOffset_) {
+    public static BlockPos findLandCenter(ServerLevel level, int maxTries, RandomSource random, int minDistance_, int maxDistanceOffset_) {
         for (int tries = 0; tries < maxTries; tries++) {
             int distanceOffset = (int) (Math.random() * maxDistanceOffset_);
             float angle = (float) (Math.random() * (2 * Math.PI));
 
-            int centerX = (int) Math.cos(angle) * (minDistance_ + distanceOffset);
-            int centerZ = (int) Math.sin(angle) * (minDistance_ + distanceOffset);
+            int centerX = (int) (Math.cos(angle) * (minDistance_ + distanceOffset));
+            int centerZ = (int) (Math.sin(angle) * (minDistance_ + distanceOffset));
 
             BlockPos pos = new BlockPos(centerX, level.getSeaLevel(), centerZ);
             Holder<Biome> biome = level.getBiome(pos);
@@ -65,7 +65,7 @@ public class BiomeInjector {
         ServerLevel overworld = event.getServer().overworld();
         if (overworld != null) {
             RandomSource random = overworld.getRandom();
-            appalachianCenter = findLandCenter(overworld, 150, minDistance, maxDistanceOffset);
+            appalachianCenter = findLandCenter(overworld, 150, random, minDistance, maxDistanceOffset);
             System.out.println("[TALES OF FOLKLORE] Land center for Appalachian Forest: " + appalachianCenter);
         }
 

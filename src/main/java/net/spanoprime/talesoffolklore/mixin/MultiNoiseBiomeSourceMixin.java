@@ -2,11 +2,16 @@ package net.spanoprime.talesoffolklore.mixin;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
 import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.*;
+import net.spanoprime.talesoffolklore.accessor.MultiNoiseBiomeSourceAccessor;
+import net.spanoprime.talesoffolklore.util.VoronoiGenerator;
 import net.spanoprime.talesoffolklore.worldgen.injector.BiomeInjector; // Importa la cassaforte
+import net.spanoprime.talesoffolklore.worldgen.noise.ModBiomeRarity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -17,8 +22,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.stream.Stream;
 
 @Mixin(value = MultiNoiseBiomeSource.class, priority = -69420)
-public abstract class MultiNoiseBiomeSourceMixin {
-    @Shadow protected abstract Stream<Holder<Biome>> collectPossibleBiomes();
+public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourceAccessor {
+
+    @Unique
+    private long talesoffolklore$lastSampledSeed = 0L;
+    @Unique
+    private ResourceKey<Level> talesoffolklore$lastSampledDimension = null;
 
     @Unique
     private static final int talesoffolklore$RADIUS   = 700;
@@ -35,6 +44,8 @@ public abstract class MultiNoiseBiomeSourceMixin {
     private void talesoffolklore$forceBiomeInCircle(int xQuart, int yQuart, int zQuart, Climate.Sampler sampler, CallbackInfoReturnable<Holder<Biome>> cir) {
         // Se la cassaforte è vuota, non fare nulla.
         if (BiomeInjector.APPALACHIAN_FOREST_HOLDER == null ) return;
+
+        VoronoiGenerator.VoronoiInfo voronoiInfo = ModBiomeRarity.getMythicBiomeInfo(talesoffolklore$lastSampledSeed, xQuart, zQuart);
 
         if (BiomeInjector.appalachianCenter == BlockPos.ZERO && !letsVinoCryptids$once)
         {
@@ -68,5 +79,25 @@ public abstract class MultiNoiseBiomeSourceMixin {
         Stream<Holder<Biome>> modifiedStream = Stream.concat(originalStream, Stream.of(BiomeInjector.APPALACHIAN_FOREST_HOLDER)).distinct();
 
         cir.setReturnValue(modifiedStream);
+    }
+
+    @Override
+    public void setLastSampledSeed(long seed) {
+        this.talesoffolklore$lastSampledSeed = seed;
+    }
+
+    @Override
+    public void setLastSampledDimension(ResourceKey<Level> dimension) {
+        this.talesoffolklore$lastSampledDimension = dimension;
+    }
+
+    @Override
+    public long getLastSampledSeed() {
+        return this.talesoffolklore$lastSampledSeed;
+    }
+
+    @Override
+    public ResourceKey<Level> getLastSampledDimension() {
+        return this.talesoffolklore$lastSampledDimension;
     }
 }

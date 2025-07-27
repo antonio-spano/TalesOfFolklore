@@ -10,6 +10,7 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 import net.spanoprime.talesoffolklore.accessor.ModBiomeSourceAccessor;
+import net.spanoprime.talesoffolklore.accessor.MultiNoiseBiomeSourceAccessor;
 import net.spanoprime.talesoffolklore.worldgen.injector.BiomeInjector;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -49,6 +50,12 @@ public class ChunkStatusMixin {
         // se il BiomeSource implementa il nostro accessor, espandi con il nostro bioma
         if (source instanceof ModBiomeSourceAccessor accessor) {
             accessor.letsVinoCryptids$modExpandBiome(BiomeInjector.APPALACHIAN_FOREST_HOLDER);
+        }
+
+        if (source instanceof MultiNoiseBiomeSourceAccessor accessor)
+        {
+            accessor.setLastSampledDimension(serverLevel.getLevel().dimension());
+            accessor.setLastSampledSeed(serverLevel.getSeed());
         }
     }
 }

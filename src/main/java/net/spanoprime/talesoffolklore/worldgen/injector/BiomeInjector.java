@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.worldgen.biome.ModBiomes;
+import net.spanoprime.talesoffolklore.worldgen.biome.ModLandFinder;
 
 import java.util.stream.Stream;
 
@@ -28,14 +29,18 @@ public class BiomeInjector {
     public static int maxDistanceOffset = 2000;
     public static BlockPos appalachianCenter = BlockPos.ZERO;
 
-    public static BlockPos findLandCenter(int yQuart, int minDistance_, int maxDistanceOffset_) {
-        int distanceOffset = (int) (Math.random() * maxDistanceOffset_);
-        float angle = (float) (Math.random() * (2 * Math.PI));
+    public static BlockPos findLandCenter(ServerLevel level, int yQuart, int minDistance_, int maxDistanceOffset_) {
+        BlockPos pos = BlockPos.ZERO;
+        int centerX, centerZ;
+        do {
+            int distanceOffset = (int) (Math.random() * maxDistanceOffset_);
+            float angle = (float) (Math.random() * (2 * Math.PI));
 
-        int centerX = (int) (Math.cos(angle) * (minDistance_ + distanceOffset));
-        int centerZ = (int) (Math.sin(angle) * (minDistance_ + distanceOffset));
+            centerX = (int) (Math.cos(angle) * (minDistance_ + distanceOffset));
+            centerZ = (int) (Math.sin(angle) * (minDistance_ + distanceOffset));
 
-        BlockPos pos = new BlockPos(centerX, yQuart, centerZ);
+            pos = new BlockPos(centerX, yQuart, centerZ);
+        } while (ModLandFinder.isLand(level, centerX, centerZ));
 
         return pos;
     }

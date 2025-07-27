@@ -3,6 +3,7 @@ package net.spanoprime.talesoffolklore.mixin;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
 import net.minecraft.world.level.biome.Climate;
@@ -28,6 +29,8 @@ public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourc
     private long talesoffolklore$lastSampledSeed = 0L;
     @Unique
     private ResourceKey<Level> talesoffolklore$lastSampledDimension = null;
+    @Unique
+    private ServerLevel talesoffolklore$serverLevel = null;
 
     @Unique
     private static final int talesoffolklore$RADIUS   = 700;
@@ -44,16 +47,18 @@ public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourc
     private void talesoffolklore$forceBiomeInCircle(int xQuart, int yQuart, int zQuart, Climate.Sampler sampler, CallbackInfoReturnable<Holder<Biome>> cir) {
         // Se la cassaforte è vuota, non fare nulla.
         if (BiomeInjector.APPALACHIAN_FOREST_HOLDER == null ) return;
+        if (getServerLevel() == null) return;
 
-        VoronoiGenerator.VoronoiInfo voronoiInfo = ModBiomeRarity.getMythicBiomeInfo(talesoffolklore$lastSampledSeed, xQuart, zQuart);
+        //VoronoiGenerator.VoronoiInfo voronoiInfo = ModBiomeRarity.getMythicBiomeInfo(talesoffolklore$lastSampledSeed, xQuart, zQuart);
 
         if (BiomeInjector.appalachianCenter == BlockPos.ZERO && !letsVinoCryptids$once)
         {
 
             letsVinoCryptids$once = true;
-            BiomeInjector.appalachianCenter = BiomeInjector.findLandCenter(yQuart,
-                            BiomeInjector.minDistance,
-                            BiomeInjector.maxDistanceOffset);
+            BiomeInjector.appalachianCenter = BiomeInjector.findLandCenter(getServerLevel(),
+                    yQuart,
+                    BiomeInjector.minDistance,
+                    BiomeInjector.maxDistanceOffset);
         }
 
         int blockX = xQuart << 2;
@@ -92,6 +97,12 @@ public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourc
     }
 
     @Override
+    public void setServerLevel(ServerLevel level)
+    {
+        this.talesoffolklore$serverLevel = level;
+    }
+
+    @Override
     public long getLastSampledSeed() {
         return this.talesoffolklore$lastSampledSeed;
     }
@@ -99,5 +110,11 @@ public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourc
     @Override
     public ResourceKey<Level> getLastSampledDimension() {
         return this.talesoffolklore$lastSampledDimension;
+    }
+
+    @Override
+    public ServerLevel getServerLevel()
+    {
+        return this.talesoffolklore$serverLevel;
     }
 }

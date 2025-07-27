@@ -56,6 +56,7 @@ public class ChunkStatusMixin {
         {
             accessor.setLastSampledDimension(serverLevel.getLevel().dimension());
             accessor.setLastSampledSeed(serverLevel.getSeed());
+            accessor.setServerLevel(serverLevel);
         }
     }
 }

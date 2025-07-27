@@ -20,7 +20,7 @@ public abstract class MultiNoiseBiomeSourceMixin {
     @Unique
     private static final int talesoffolklore$CENTER_Z = -4000;
     @Unique
-    private static final int talesoffolklore$RADIUS   = 250;
+    private static final int talesoffolklore$RADIUS   = 700;
     @Unique
     private static final long talesoffolklore$RADIUS_SQ = (long) talesoffolklore$RADIUS * talesoffolklore$RADIUS;
 

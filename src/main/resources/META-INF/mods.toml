@@ -37,12 +37,12 @@ versionRange="[1.20.1,1.21)" #mandatory - Supports Minecraft 1.20.1 up to (but n
 ordering="NONE"
 side="BOTH"
 
-#[[dependencies.talesoffolklore]]
-#modId="citadel" #mandatory
-#mandatory=true #mandatory
-#versionRange="[2.6.0,)" #mandatory
-#ordering="AFTER"
-#side="BOTH"
+[[dependencies.talesoffolklore]]
+modId="citadel" #mandatory
+mandatory=true #mandatory
+versionRange="[2.6.0,)" #mandatory
+ordering="AFTER"
+side="BOTH"
 
 #dependencies.talesoffolklore.must_contain = [ "biolith@[{biolith_version},)" ]
 

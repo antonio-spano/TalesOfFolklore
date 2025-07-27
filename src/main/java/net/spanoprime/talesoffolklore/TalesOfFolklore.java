@@ -1,5 +1,6 @@
 package net.spanoprime.talesoffolklore;
 
+import com.github.alexthe666.citadel.server.generation.SurfaceRulesManager;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -71,7 +72,6 @@ public class TalesOfFolklore
 
     public TalesOfFolklore(FMLJavaModLoadingContext context)
     {
-
 // Inserisci nell'overworld
         //BiomePlacement.replaceOverworld(Biomes.MUSHROOM_FIELDS, ModBiomes.APPALACHIAN_FOREST, .1);
         //BiomePlacement.replaceOverworld(Biomes.MUSHROOM_FIELDS, ModBiomes.APPALACHIAN_FOREST, .5);
@@ -119,6 +119,7 @@ public class TalesOfFolklore
         event.enqueueWork(() -> {
             //((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.VIRGINIA_PINE_SAPLING.getId(), ModBlocks.);
             //SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, ModSurfaceRules.makeRules());
+            SurfaceRulesManager.registerOverworldSurfaceRule(ModSurfaceRules.overworldRules());
         });
     }
 

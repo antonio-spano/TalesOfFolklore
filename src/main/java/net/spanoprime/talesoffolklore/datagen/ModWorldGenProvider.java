@@ -22,7 +22,7 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider
             .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
 
             .add(Registries.BIOME, ModBiomes::bootstrap)
-            .add(Registries.NOISE_SETTINGS, ModNoiseGeneratorSettingsProvider::bootstrap)
+            //.add(Registries.NOISE_SETTINGS, ModNoiseGeneratorSettingsProvider::bootstrap)
             .add(Registries.NOISE, ModNoiseParameters::bootstrap);
 
     public ModWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

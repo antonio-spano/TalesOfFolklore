@@ -33,40 +33,39 @@ public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourc
             at = @At("HEAD"),
             cancellable = true
     )
-    private void talesoffolklore$forceBiomeInCircle(int xQuart, int yQuart, int zQuart, Climate.Sampler sampler, CallbackInfoReturnable<Holder<Biome>> cir) {
-        if (BiomeInjector.APPALACHIAN_FOREST_HOLDER == null || getServerLevel() == null) {
-            return;
-        }
+    private void talesoffolklore$forceBiomeInCircle(
+            int xQuart, int yQuart, int zQuart,
+            Climate.Sampler sampler,
+            CallbackInfoReturnable<Holder<Biome>> cir
+    ) {
+        if (BiomeInjector.APPALACHIAN_FOREST_HOLDER == null || getServerLevel() == null) return;
 
-        long currentSeed = getLastSampledSeed();
-        if (currentSeed != talesoffolklore$lastCalculatedSeed) {
-            talesoffolklore$lastCalculatedSeed = currentSeed;
-            ServerLevel level = getServerLevel();
+        long seed = getServerLevel().getSeed();
+        if (seed != talesoffolklore$lastCalculatedSeed) {
+            talesoffolklore$lastCalculatedSeed = seed;
+            ServerLevel lvl = getServerLevel();
 
-            BlockPos center;
-                // calcola un candidato
-            center = BiomeInjector.findLandCenter(
-                    yQuart,
+            // USIAMO seaLevel in blocchi, non yQuart!
+            int seaY = lvl.getSeaLevel();
+            BiomeInjector.appalachianCenter = BiomeInjector.findLandCenter(
+                    seaY,
                     BiomeInjector.minDistance,
                     BiomeInjector.maxDistanceOffset,
-                    currentSeed,
-                    level
+                    seed,
+                    lvl
             );
-                // verifica che cada su terreno emerso
-
-            // tek: ora assegniamo finalmente l'offset valido
-            BiomeInjector.appalachianCenter = center;
+            System.out.println("[TOF] APPALACHIAN CENTER: " + BiomeInjector.appalachianCenter);
         }
 
         int blockX = xQuart << 2;
         int blockZ = zQuart << 2;
-        long dx = (long) blockX - BiomeInjector.appalachianCenter.getX();
-        long dz = (long) blockZ - BiomeInjector.appalachianCenter.getZ();
-
+        long dx = blockX - BiomeInjector.appalachianCenter.getX();
+        long dz = blockZ - BiomeInjector.appalachianCenter.getZ();
         if (dx*dx + dz*dz <= R2) {
             cir.setReturnValue(BiomeInjector.APPALACHIAN_FOREST_HOLDER);
         }
     }
+
 
     @Inject(
             method = "collectPossibleBiomes",

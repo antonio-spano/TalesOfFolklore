@@ -29,21 +29,24 @@ public class BiomeInjector {
     public static int minDistance = 4000;
     public static int maxDistanceOffset = 2000;
     public static BlockPos appalachianCenter = BlockPos.ZERO;
-    public static int appalachianRadius = 350;
+    public static int appalachianRadius = 300;
 
     public static BlockPos findLandCenter(int yQuart, int minDistance_, int maxDistanceOffset_, long seed, ServerLevel level) {
         RandomSource random = RandomSource.create(seed);
+        int centerX, centerZ;
+        Holder<Biome> candidateBiome;
         BlockPos pos;
 
-        int distanceOffset = (random.nextInt(maxDistanceOffset_));
-        float angle = (float) (random.nextFloat() * (2 * Math.PI));
+        do {
+            int distanceOffset = (random.nextInt(maxDistanceOffset_));
+            float angle = (float) (random.nextFloat() * (2 * Math.PI));
 
-        int centerX = (int) (Math.cos(angle) * (minDistance_ + distanceOffset));
-        int centerZ = (int) (Math.sin(angle) * (minDistance_ + distanceOffset));
+            centerX = (int) (Math.cos(angle) * (minDistance_ + distanceOffset));
+            centerZ = (int) (Math.sin(angle) * (minDistance_ + distanceOffset));
 
-        pos = new BlockPos(centerX, yQuart, centerZ);
-
-        System.out.println("[TOF] APPALACHIAN CENTER: " + BiomeInjector.appalachianCenter);
+            pos = new BlockPos(centerX, yQuart, centerZ);
+            candidateBiome = level.getBiome(pos);
+        } while (isAquaticBiome(candidateBiome) || isBeachBiome(candidateBiome));
         return pos;
     }
 

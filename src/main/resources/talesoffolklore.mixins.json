@@ -8,7 +8,7 @@
     "BiomeSourceMixin",
     "ChunkStatusMixin",
     "MultiNoiseBiomeSourceMixin",
-    "OverworldBiomeSourceMixin"
+    "NoiseBasedChunkGeneratorMixin",
   ],
   "injectors": {
     "defaultRequire": 1

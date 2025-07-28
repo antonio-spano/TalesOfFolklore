@@ -37,9 +37,7 @@ public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourc
     private ServerLevel talesoffolklore$serverLevel = null;
 
     @Unique
-    private static final int talesoffolklore$RADIUS   = 700;
-    @Unique
-    private static final long talesoffolklore$RADIUS_SQ = (long) talesoffolklore$RADIUS * talesoffolklore$RADIUS;
+    private static final long talesoffolklore$RADIUS_SQ = (long) BiomeInjector.appalachianRadius * BiomeInjector.appalachianRadius;
 
     @Inject(
             method = "getNoiseBiome(IIILnet/minecraft/world/level/biome/Climate$Sampler;)Lnet/minecraft/core/Holder;",
@@ -72,7 +70,7 @@ public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourc
         long dx = (long) blockX - BiomeInjector.appalachianCenter.getX();
         long dz = (long) blockZ - BiomeInjector.appalachianCenter.getZ();
 
-        if (dx * dx + dz * dz <= talesoffolklore$RADIUS_SQ && !BiomeInjector.isAquaticBiome(original))
+        if (dx * dx + dz * dz <= talesoffolklore$RADIUS_SQ /*&& !BiomeInjector.isAquaticBiome(original)*/)
         {
             cir.setReturnValue(BiomeInjector.APPALACHIAN_FOREST_HOLDER);
         }

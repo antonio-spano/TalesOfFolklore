@@ -154,11 +154,13 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PINE_NEEDLES = registerBlock("pine_needles",
             () -> new ModPineNeedlesBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)
-                    .sound(SoundType.SWEET_BERRY_BUSH)));
+                    .sound(SoundType.SWEET_BERRY_BUSH)
+                    .instabreak()));
     
     public static final RegistryObject<Block> UNDERGROWTH = registerBlock("undergrowth",
             () -> new ModUndergrowthBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)
-                    .sound(SoundType.SWEET_BERRY_BUSH)));
+                    .sound(SoundType.SWEET_BERRY_BUSH)
+                    .instabreak()));
 
     public static final RegistryObject<Block> DAMP_PODZOL = registerBlock("damp_podzol",
             () -> new GrassBlock(BlockBehaviour.Properties.copy(Blocks.PODZOL)));
@@ -167,7 +169,8 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.COARSE_DIRT)));
 
     public static final RegistryObject<Block> FERN = registerBlock("fern",
-            () -> new ModFernBlock(BlockBehaviour.Properties.copy(Blocks.FERN)));
+            () -> new ModFernBlock(BlockBehaviour.Properties.copy(Blocks.FERN)
+                    .instabreak()));
 
     public static final RegistryObject<Block> FIREFLIES_BUSH = registerBlock("fireflies_bush",
             () -> new ModFirefliesBushBlock(
@@ -180,6 +183,9 @@ public class ModBlocks {
             )
     );
 
+    public static final RegistryObject<Block> CATTAIL = registerBlock("cattail",
+            () -> new SeagrassBlock(BlockBehaviour.Properties.copy(Blocks.TALL_SEAGRASS)
+                    .instabreak()));
 
     public static final RegistryObject<Block> SPRITE = registerBlock("sprite",
             () -> new ModSpriteBlock(BlockBehaviour.Properties.copy(Blocks.FERN)));

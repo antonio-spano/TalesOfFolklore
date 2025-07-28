@@ -124,9 +124,11 @@ public class ModStreamCarverFeature extends Feature<NoneFeatureConfiguration> {
                 // acqua e piante acquatiche
                 BlockPos waterPos = mut.move(0, 1, 0).immutable();
                 level.setBlock(waterPos, Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
-                if (level.getRandom().nextInt(3) == 0) {
-                    level.setBlock(waterPos, Blocks.SEAGRASS.defaultBlockState(), 2);
-                }
+                int rand = level.getRandom().nextInt(6);
+
+                if (rand == 0) level.setBlock(waterPos, Blocks.SEAGRASS.defaultBlockState(), 2);
+                else if (rand == 1) level.setBlock(waterPos, ModBlocks.CATTAIL.get().defaultBlockState(), 2);
+
                 level.scheduleTick(waterPos, Fluids.WATER, 0);
                 updateNeighbours(level, waterPos);
             }

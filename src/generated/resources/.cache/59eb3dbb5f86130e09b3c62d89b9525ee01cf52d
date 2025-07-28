@@ -1,5 +1,6 @@
-// 1.20.1	2025-07-24T15:34:34.598388	Loot Tables
+// 1.20.1	2025-07-28T22:43:00.705624	Loot Tables
 07f0b493f449f82de986a87246152f8870fa4381 data/talesoffolklore/loot_tables/blocks/appalachian_stone.json
+66c49a809148cca01776e99a7eabe07928bd5591 data/talesoffolklore/loot_tables/blocks/cattail.json
 e2ad6aa386cf638102902c2ec38454d5b2c638f0 data/talesoffolklore/loot_tables/blocks/damp_coarse_dirt.json
 8f830f5cf3bdd986b35ce9d87231f0299f227a78 data/talesoffolklore/loot_tables/blocks/damp_dirt.json
 4378dc9d7bf3dd4de17df5926ea54c490e16a184 data/talesoffolklore/loot_tables/blocks/damp_grass_block.json

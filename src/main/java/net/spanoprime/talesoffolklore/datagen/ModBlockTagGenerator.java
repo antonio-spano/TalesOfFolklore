@@ -52,7 +52,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.PINE_NEEDLES.get(),
                         ModBlocks.UNDERGROWTH.get(),
                         ModBlocks.FERN.get(),
-                        ModBlocks.FIREFLIES_BUSH.get());
+                        ModBlocks.FIREFLIES_BUSH.get(),
+                        ModBlocks.CATTAIL.get());
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(ModBlocks.DAMP_GRASS_BLOCK.get(),

@@ -1,6 +1,6 @@
-// 1.20.1	2025-07-24T15:34:34.597086	Tags for minecraft:block mod id talesoffolklore
+// 1.20.1	2025-07-28T22:43:00.704676	Tags for minecraft:block mod id talesoffolklore
 de9c99eeb33ba3a2415fdd115503166b5dc72989 data/minecraft/tags/blocks/dirt.json
 c529706e0ba4711832aa46a5a910f3b599188154 data/minecraft/tags/blocks/mineable/axe.json
-eb092af51270991b625bbfec0e9c8260ab78a629 data/minecraft/tags/blocks/mineable/hoe.json
+01811def12f96e1914e9156e2678796bd5e8f9d5 data/minecraft/tags/blocks/mineable/hoe.json
 9ea9863b2187106f3d5ea3a1ebb316d21ce8aa00 data/minecraft/tags/blocks/mineable/pickaxe.json
 314ed29712b696f8b1d39b5e719e7e84f19c05a2 data/minecraft/tags/blocks/mineable/shovel.json

@@ -178,8 +178,9 @@ public class TalesOfFolklore
             event.accept(ModBlocks.PINE_NEEDLES);
             event.accept(ModBlocks.UNDERGROWTH);
             event.accept(ModBlocks.FERN);
-            event.accept(ModBlocks.SPRITE);
+            //event.accept(ModBlocks.SPRITE);
             event.accept(ModBlocks.FIREFLIES_BUSH);
+            event.accept(ModBlocks.CATTAIL);
         }
 
         if(event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES)
@@ -252,6 +253,7 @@ public class TalesOfFolklore
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.PINE_NEEDLES.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.WHITE_FUNGUS.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.FIREFLIES_BUSH.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.CATTAIL.get(), RenderType.cutout());
             });
         }
     }

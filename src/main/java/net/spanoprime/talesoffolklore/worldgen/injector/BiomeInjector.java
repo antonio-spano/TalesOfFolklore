@@ -29,7 +29,7 @@ public class BiomeInjector {
     public static int minDistance = 4000;
     public static int maxDistanceOffset = 2000;
     public static BlockPos appalachianCenter = BlockPos.ZERO;
-    public static int appalachianRadius = 300;
+    public static int appalachianRadius = 400;
 
     public static BlockPos findLandCenter(int yQuart, int minDistance_, int maxDistanceOffset_, long seed, ServerLevel level) {
         RandomSource random = RandomSource.create(seed);

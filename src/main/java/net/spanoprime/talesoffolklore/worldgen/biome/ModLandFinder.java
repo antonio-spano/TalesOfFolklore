@@ -2,33 +2,31 @@ package net.spanoprime.talesoffolklore.worldgen.biome;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.levelgen.DensityFunction;
-import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.NoiseRouter;
+import net.minecraft.world.level.levelgen.RandomState;
 
 public class ModLandFinder {
 
-    // Ritorna true se la height vanilla qui è sopra il livello mare
-    public static boolean isLand(ServerLevel level, int blockX, int blockZ) {
-        // Ottieni stato della worldgen random
+    /**
+     * Restituisce true se, a partire dalla y massima fino al livello del mare,
+     * c’è almeno un punto “solido” secondo il noise router vanilla.
+     */
+    public static boolean isLandByNoise(ServerLevel level, int blockX, int blockZ) {
         RandomState state = level.getChunkSource().randomState();
-
-        // Ricava il router per il noise (usato per l'altezza)
         NoiseRouter router = state.router();
-        DensityFunction initialDensity = router.initialDensityWithoutJaggedness();
+        DensityFunction df = router.initialDensityWithoutJaggedness();
 
-        // MinY e MaxY della world dalla dimensione
-        int minY = level.getMinBuildHeight();
+        int sea = level.getSeaLevel();
         int maxY = level.getMaxBuildHeight();
 
-        int seaLevel = level.getSeaLevel();
-
-        // Cerchiamo da su verso giù la prima Y "solida"
-        for (int y = maxY - 1; y >= minY; --y) {
-            double density = initialDensity.compute(new DensityFunction.SinglePointContext(blockX, y, blockZ));
-            if (density > 0.390625D) {
-                return y > seaLevel + 1; // just to be safe
+        // scendiamo da maxY-1 fino a sea+1
+        for (int y = maxY - 1; y > sea; y--) {
+            double d = df.compute(new DensityFunction.SinglePointContext(blockX, y, blockZ));
+            if (d > 0.0) {
+                return true;
             }
         }
-        return false; // Ocean/trench
+        return false;
     }
+
 }

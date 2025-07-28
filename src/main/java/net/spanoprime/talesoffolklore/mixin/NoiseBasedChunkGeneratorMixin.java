@@ -24,9 +24,8 @@ import net.spanoprime.talesoffolklore.worldgen.injector.BiomeInjector;
 @Mixin(NoiseBasedChunkGenerator.class)
 public abstract class NoiseBasedChunkGeneratorMixin {
     @Unique private static final double R_BASE    = BiomeInjector.appalachianRadius;
-    @Unique private static final double AMPLITUDE = 2.0;
+    @Unique private static final double AMPLITUDE = 4.0;
     @Unique private static final double FREQ      = 0.05;
-    // PerlinSimplexNoise pubblico, 4 ottave
     @Unique private static final PerlinSimplexNoise NOISE = new PerlinSimplexNoise(
             RandomSource.create(1234567L),
             IntList.of(0,1,2,3)
@@ -62,23 +61,25 @@ public abstract class NoiseBasedChunkGeneratorMixin {
                 int wz = baseZ + dz;
                 double offZ = wz - cz;
 
-                // Norna PerlinSimplexNoise 2D
+                // calcola il raggio ondulato base
                 double perlin = NOISE.getValue(wx * FREQ, wz * FREQ, false);
-                double rLoc   = R_BASE + perlin * AMPLITUDE;
-                double thresh = rLoc * rLoc;
-                if (offX*offX + offZ*offZ > thresh) continue;
+                double baseRadius = R_BASE + perlin * AMPLITUDE;
 
-                // Riempie tutta l'acqua da superficie fino a minY
+                // per ogni y scendiamo e allarghiamo di 1
                 for (int y = seaLevel; y >= minY; y--) {
+                    double depth = seaLevel - y;
+                    double rLoc   = baseRadius + depth;    // allarghiamo di 'depth' blocchi
+                    double thresh = rLoc * rLoc;
+                    if (offX*offX + offZ*offZ > thresh) continue;
+
                     pos.set(wx, y, wz);
                     if (chunk.getBlockState(pos).getBlock() != Blocks.WATER) continue;
 
-                    int depth = seaLevel - y;
                     BlockState newState;
                     if (depth == 0) {
-                        // 90% variante 0, 10% diviso tra 1,2,3
+                        // 90% variante 0, 10% le altre
                         double r = Math.random();
-                        int variant = r < .90 ? 0
+                        int variant = r < .9 ? 0
                                 : r < .9333 ? 1
                                 : r < .9666 ? 2
                                 : 3;
@@ -90,6 +91,7 @@ public abstract class NoiseBasedChunkGeneratorMixin {
                     } else {
                         newState = ModBlocks.APPALACHIAN_STONE.get().defaultBlockState();
                     }
+
                     chunk.setBlockState(pos, newState, false);
                 }
             }

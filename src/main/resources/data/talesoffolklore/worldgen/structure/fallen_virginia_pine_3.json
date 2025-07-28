@@ -3,7 +3,7 @@
   "type": "minecraft:jigsaw",
 
   // the path to the template pool json file to use
-  "start_pool": "talesoffolklore:lookout_tower_0/start_pool",
+  "start_pool": "talesoffolklore:fallen_virginia_pine_3/start_pool",
 
   // This is how many pieces away from the starting piece a piece of the structure can spawn
   // Think of it like the length of the branch of the structure
@@ -13,7 +13,7 @@
   "max_distance_from_center": 80,
 
   // The biome tag to use for what biomes that this structure can spawn in"
-  "biomes": "#talesoffolklore:has_structure/lookout_tower_0",
+  "biomes": "#talesoffolklore:has_structure/fallen_virginia_pine_3",
 
   // The generation step for when to generate the structure. there are 10 stages you can pick from!
   // This surface structure stage places the structure before plants and ores are generated

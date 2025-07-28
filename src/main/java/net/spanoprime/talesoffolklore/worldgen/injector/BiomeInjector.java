@@ -20,6 +20,7 @@ import net.spanoprime.talesoffolklore.TalesOfFolklore;
 import net.spanoprime.talesoffolklore.worldgen.biome.ModBiomes;
 import net.spanoprime.talesoffolklore.worldgen.biome.ModLandFinder;
 
+import java.util.Random;
 import java.util.stream.Stream;
 
 @Mod.EventBusSubscriber(modid = TalesOfFolklore.MOD_ID)
@@ -29,19 +30,24 @@ public class BiomeInjector {
     public static int maxDistanceOffset = 2000;
     public static BlockPos appalachianCenter = BlockPos.ZERO;
 
-    public static BlockPos findLandCenter(ServerLevel level, int yQuart, int minDistance_, int maxDistanceOffset_) {
-        BlockPos pos = BlockPos.ZERO;
+    public static BlockPos findLandCenter(int yQuart, int minDistance_, int maxDistanceOffset_, long seed, ServerLevel level) {
+        RandomSource random = RandomSource.create(seed);
         int centerX, centerZ;
+        Holder<Biome> candidateBiome;
+        BlockPos pos;
+
         do {
-            int distanceOffset = (int) (Math.random() * maxDistanceOffset_);
-            float angle = (float) (Math.random() * (2 * Math.PI));
+            int distanceOffset = (random.nextInt(maxDistanceOffset_));
+            float angle = (float) (random.nextFloat() * (2 * Math.PI));
 
             centerX = (int) (Math.cos(angle) * (minDistance_ + distanceOffset));
             centerZ = (int) (Math.sin(angle) * (minDistance_ + distanceOffset));
 
             pos = new BlockPos(centerX, yQuart, centerZ);
-        } while (ModLandFinder.isLand(level, centerX, centerZ));
+            candidateBiome = level.getBiome(pos);
+        } while (isAquaticBiome(candidateBiome) || isBeachBiome(candidateBiome));
 
+        System.out.println("[TOF] APPALACHIAN CENTER: " + BiomeInjector.appalachianCenter);
         return pos;
     }
 

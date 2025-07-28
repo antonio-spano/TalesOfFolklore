@@ -7,7 +7,8 @@
   "mixins": [
     "BiomeSourceMixin",
     "ChunkStatusMixin",
-    "MultiNoiseBiomeSourceMixin"
+    "MultiNoiseBiomeSourceMixin",
+    "OverworldBiomeSourceMixin"
   ],
   "injectors": {
     "defaultRequire": 1

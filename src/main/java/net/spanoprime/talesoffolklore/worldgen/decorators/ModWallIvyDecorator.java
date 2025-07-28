@@ -39,10 +39,10 @@ public class ModWallIvyDecorator extends TreeDecorator {
     public void place(Context context) {
         RandomSource random = context.random();
         BlockState ivySeedState = ModBlocks.WALL_IVY_SEED.get().defaultBlockState();
-
+/*
         context.logs().stream().findFirst().ifPresent(bp ->
                 LOGGER.info("[TOF IvyDecorator] Attempting decoration for tree near {}", bp)
-        );
+        ); */
 
         int minY = context.logs().stream()
                 .mapToInt(BlockPos::getY)
@@ -50,13 +50,13 @@ public class ModWallIvyDecorator extends TreeDecorator {
                 .orElse(Integer.MAX_VALUE);
 
         if (minY == Integer.MAX_VALUE) {
-            LOGGER.warn("[TOF IvyDecorator] Could not determine minY for tree.");
+            //LOGGER.warn("[TOF IvyDecorator] Could not determine minY for tree.");
             return;
         }
 
         Object rawLevel = context.level();
         if (!(rawLevel instanceof BlockGetter)) {
-            LOGGER.error("[TOF IvyDecorator] context.level() is not a BlockGetter! Actual type: {}. Cannot check block below.", rawLevel.getClass().getName());
+            //LOGGER.error("[TOF IvyDecorator] context.level() is not a BlockGetter! Actual type: {}. Cannot check block below.", rawLevel.getClass().getName());
             return;
         }
         BlockGetter blockGetter = (BlockGetter) rawLevel;
@@ -66,10 +66,10 @@ public class ModWallIvyDecorator extends TreeDecorator {
         for (BlockPos logPos : context.logs()) {
             // Considera SOLO il blocco di tronco alla base esatta
             if (logPos.getY() == finalMinY) {
-                LOGGER.debug("[TOF IvyDecorator] Checking base log at {}", logPos);
+                //LOGGER.debug("[TOF IvyDecorator] Checking base log at {}", logPos);
 
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
-                    LOGGER.debug("[TOF IvyDecorator]  - Checking direction: {}", direction);
+                    //LOGGER.debug("[TOF IvyDecorator]  - Checking direction: {}", direction);
 
                     // Applica la probabilità
                     if (random.nextFloat() < this.probability) {
@@ -96,16 +96,16 @@ public class ModWallIvyDecorator extends TreeDecorator {
                         boolean leafConflictAboveTarget = context.leaves().contains(aboveTargetPos);
 
                         // Logga le condizioni per debug
-                        LOGGER.debug("[TOF IvyDecorator]    - Target: {} (State: {}, isAir: {})", targetPos, targetState, isTargetAir);
+                        /*LOGGER.debug("[TOF IvyDecorator]    - Target: {} (State: {}, isAir: {})", targetPos, targetState, isTargetAir);
                         LOGGER.debug("[TOF IvyDecorator]    - BelowTarget: {} (State: {}, isValidGround: {})", belowTargetPos, belowState, isGroundBelowTargetValid);
                         LOGGER.debug("[TOF IvyDecorator]    - AboveTarget: {} (isAir: {})", aboveTargetPos, isAboveTargetAir);
-                        LOGGER.debug("[TOF IvyDecorator]    - TargetBlock itself valid ground? {}", isTargetBlockValidGround);
+                        LOGGER.debug("[TOF IvyDecorator]    - TargetBlock itself valid ground? {}", isTargetBlockValidGround);*/
 
                         // --- Logica di Piazzamento Aggiornata ---
 
                         // 1. Prova a piazzare a livello base (targetPos) se è aria e ha terreno valido sotto
                         if (isTargetAir && isGroundBelowTargetValid && !logConflictAtTarget && !leafConflictAtTarget) {
-                            LOGGER.info("[TOF IvyDecorator]      Scenario 1: PLACING IVY SEED at {} (Standard - target is air)", targetPos);
+                            //LOGGER.info("[TOF IvyDecorator]      Scenario 1: PLACING IVY SEED at {} (Standard - target is air)", targetPos);
                             context.setBlock(targetPos, ivySeedState);
                         }
                         // 2. ALTRIMENTI, se il livello base NON è aria, MA lo spazio SOPRA è aria,
@@ -113,11 +113,11 @@ public class ModWallIvyDecorator extends TreeDecorator {
                         else if (!isTargetAir && isAboveTargetAir && isTargetBlockValidGround && !logConflictAboveTarget && !leafConflictAboveTarget) {
                             // Aggiungiamo un controllo extra: assicuriamoci che targetPos (che non è aria) non sia esso stesso un log/foglia
                             if (!logConflictAtTarget && !leafConflictAtTarget) {
-                                LOGGER.info("[TOF IvyDecorator]      Scenario 2: Target not air, PLACING IVY SEED at {} (Higher - on top of target)", aboveTargetPos);
+                                //LOGGER.info("[TOF IvyDecorator]      Scenario 2: Target not air, PLACING IVY SEED at {} (Higher - on top of target)", aboveTargetPos);
                                 context.setBlock(aboveTargetPos, ivySeedState);
                             } else {
                                 // Se targetPos non era aria MA era un log/foglia, non possiamo piazzarci sopra
-                                LOGGER.debug("[TOF IvyDecorator]      -> Scenario 2 Failed: Target was not air but was log/leaf conflict.");
+                                //LOGGER.debug("[TOF IvyDecorator]      -> Scenario 2 Failed: Target was not air but was log/leaf conflict.");
                             }
                         }
                         // 3. Se nessuna delle due condizioni precedenti è soddisfatta, non piazzare nulla.
@@ -131,18 +131,18 @@ public class ModWallIvyDecorator extends TreeDecorator {
                             if (logConflictAboveTarget) reason.append("LogConflict@Above ");
                             if (leafConflictAboveTarget) reason.append("LeafConflict@Above ");
                             if (reason.length() == "-> Placement Failed: ".length()) reason.append("Unknown combination"); // Fallback
-                            LOGGER.debug("[TOF IvyDecorator]      {}", reason.toString().trim());
+                            //LOGGER.debug("[TOF IvyDecorator]      {}", reason.toString().trim());
                         }
 
                     } else {
-                        LOGGER.debug("[TOF IvyDecorator]    - Probability check failed.");
+                        //LOGGER.debug("[TOF IvyDecorator]    - Probability check failed.");
                     }
                 }
             }
         }
-
+/*
         context.logs().stream().findFirst().ifPresent(bp ->
                 LOGGER.info("[TOF IvyDecorator] Finished decoration attempt for tree near {}", bp)
-        );
+        ); */
     }
 }

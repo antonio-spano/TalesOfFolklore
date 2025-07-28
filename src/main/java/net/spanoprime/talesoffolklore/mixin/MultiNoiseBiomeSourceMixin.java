@@ -30,6 +30,8 @@ public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourc
     @Unique
     private long talesoffolklore$lastSampledSeed = 0L;
     @Unique
+    long talesoffolklore$lastCalculatedSeed = 0L;
+    @Unique
     private ResourceKey<Level> talesoffolklore$lastSampledDimension = null;
     @Unique
     private ServerLevel talesoffolklore$serverLevel = null;
@@ -38,12 +40,10 @@ public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourc
     private static final int talesoffolklore$RADIUS   = 700;
     @Unique
     private static final long talesoffolklore$RADIUS_SQ = (long) talesoffolklore$RADIUS * talesoffolklore$RADIUS;
-    @Unique
-    private static boolean letsVinoCryptids$once = false;
 
     @Inject(
             method = "getNoiseBiome(IIILnet/minecraft/world/level/biome/Climate$Sampler;)Lnet/minecraft/core/Holder;",
-            at = @At("HEAD"),
+            at = @At("RETURN"),
             cancellable = true
     )
     private void talesoffolklore$forceBiomeInCircle(int xQuart, int yQuart, int zQuart, Climate.Sampler sampler, CallbackInfoReturnable<Holder<Biome>> cir) {
@@ -51,15 +51,20 @@ public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourc
         if (BiomeInjector.APPALACHIAN_FOREST_HOLDER == null ) return;
         if (getServerLevel() == null) return;
 
+        Holder<Biome> original = cir.getReturnValue();
+        if (original == null) return;
+
         //VoronoiGenerator.VoronoiInfo voronoiInfo = ModBiomeRarity.getMythicBiomeInfo(talesoffolklore$lastSampledSeed, xQuart, zQuart);
 
-        if (BiomeInjector.appalachianCenter == BlockPos.ZERO && !letsVinoCryptids$once)
+        if (talesoffolklore$lastSampledSeed != talesoffolklore$lastCalculatedSeed)
         {
-            letsVinoCryptids$once = true;
-            BiomeInjector.appalachianCenter = BiomeInjector.findLandCenter(getServerLevel(),
+            talesoffolklore$lastCalculatedSeed = talesoffolklore$lastSampledSeed;
+            BiomeInjector.appalachianCenter = BiomeInjector.findLandCenter(
                     yQuart,
                     BiomeInjector.minDistance,
-                    BiomeInjector.maxDistanceOffset);
+                    BiomeInjector.maxDistanceOffset,
+                    talesoffolklore$lastSampledSeed,
+                    getServerLevel());
         }
 
         int blockX = xQuart << 2;
@@ -67,7 +72,7 @@ public abstract class MultiNoiseBiomeSourceMixin implements MultiNoiseBiomeSourc
         long dx = (long) blockX - BiomeInjector.appalachianCenter.getX();
         long dz = (long) blockZ - BiomeInjector.appalachianCenter.getZ();
 
-        if (dx * dx + dz * dz <= talesoffolklore$RADIUS_SQ)
+        if (dx * dx + dz * dz <= talesoffolklore$RADIUS_SQ && !BiomeInjector.isAquaticBiome(original))
         {
             cir.setReturnValue(BiomeInjector.APPALACHIAN_FOREST_HOLDER);
         }

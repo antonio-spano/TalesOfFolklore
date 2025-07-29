@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.spanoprime.talesoffolklore.block.ModBlocks;
-import net.spanoprime.talesoffolklore.block.custom.ModWallIvySeed; // Importa per usare isValidGroundOrBrick
+import net.spanoprime.talesoffolklore.block.custom.ModWallIvySeed;
 import org.slf4j.Logger;
 
 public class ModWallIvyDecorator extends TreeDecorator {
@@ -32,17 +32,12 @@ public class ModWallIvyDecorator extends TreeDecorator {
 
     @Override
     protected TreeDecoratorType<?> type() {
-        return ModTreeDecoratorTypes.WALL_IVY.get();
+        return ModTreeDecoratorTypes.WALL_IVY.get(); // Assicurati che questo sia corretto
     }
 
     @Override
     public void place(Context context) {
         RandomSource random = context.random();
-        BlockState ivySeedState = ModBlocks.WALL_IVY_SEED.get().defaultBlockState();
-/*
-        context.logs().stream().findFirst().ifPresent(bp ->
-                LOGGER.info("[TOF IvyDecorator] Attempting decoration for tree near {}", bp)
-        ); */
 
         int minY = context.logs().stream()
                 .mapToInt(BlockPos::getY)
@@ -50,99 +45,72 @@ public class ModWallIvyDecorator extends TreeDecorator {
                 .orElse(Integer.MAX_VALUE);
 
         if (minY == Integer.MAX_VALUE) {
-            //LOGGER.warn("[TOF IvyDecorator] Could not determine minY for tree.");
             return;
         }
 
-        Object rawLevel = context.level();
-        if (!(rawLevel instanceof BlockGetter)) {
-            //LOGGER.error("[TOF IvyDecorator] context.level() is not a BlockGetter! Actual type: {}. Cannot check block below.", rawLevel.getClass().getName());
-            return;
-        }
-        BlockGetter blockGetter = (BlockGetter) rawLevel;
-
+        BlockGetter blockGetter = (BlockGetter) context.level();
         final int finalMinY = minY;
 
         for (BlockPos logPos : context.logs()) {
-            // Considera SOLO il blocco di tronco alla base esatta
             if (logPos.getY() == finalMinY) {
-                //LOGGER.debug("[TOF IvyDecorator] Checking base log at {}", logPos);
-
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
-                    //LOGGER.debug("[TOF IvyDecorator]  - Checking direction: {}", direction);
-
-                    // Applica la probabilità
                     if (random.nextFloat() < this.probability) {
-                        BlockPos targetPos = logPos.relative(direction); // Posizione accanto al tronco base
-                        BlockPos belowTargetPos = targetPos.below();     // Posizione sotto quella accanto
-                        BlockPos aboveTargetPos = targetPos.above();     // Posizione sopra quella accanto
+                        BlockPos targetPos = logPos.relative(direction);
+                        BlockPos belowTargetPos = targetPos.below();
+                        BlockPos aboveTargetPos = targetPos.above();
 
-                        // Ottieni gli stati dei blocchi rilevanti
                         BlockState targetState = blockGetter.getBlockState(targetPos);
                         BlockState belowState = blockGetter.getBlockState(belowTargetPos);
 
-                        // Controlla le condizioni
                         boolean isTargetAir = context.isAir(targetPos);
                         boolean isAboveTargetAir = context.isAir(aboveTargetPos);
+                        boolean isGroundBelowTargetValid = ModWallIvySeed.isValidGroundOrBrick(belowState);
+                        boolean isTargetBlockValidGround = ModWallIvySeed.isValidGroundOrBrick(targetState);
 
-                        // Condizione terreno: Sotto il *potenziale* piazzamento
-                        boolean isGroundBelowTargetValid = ModWallIvySeed.isValidGroundOrBrick(belowState); // Se piazzo a targetPos
-                        boolean isTargetBlockValidGround = ModWallIvySeed.isValidGroundOrBrick(targetState); // Se piazzo a aboveTargetPos (il terreno è targetPos)
-
-                        // Controlla conflitti con l'albero
                         boolean logConflictAtTarget = context.logs().contains(targetPos);
                         boolean leafConflictAtTarget = context.leaves().contains(targetPos);
                         boolean logConflictAboveTarget = context.logs().contains(aboveTargetPos);
                         boolean leafConflictAboveTarget = context.leaves().contains(aboveTargetPos);
 
-                        // Logga le condizioni per debug
-                        /*LOGGER.debug("[TOF IvyDecorator]    - Target: {} (State: {}, isAir: {})", targetPos, targetState, isTargetAir);
-                        LOGGER.debug("[TOF IvyDecorator]    - BelowTarget: {} (State: {}, isValidGround: {})", belowTargetPos, belowState, isGroundBelowTargetValid);
-                        LOGGER.debug("[TOF IvyDecorator]    - AboveTarget: {} (isAir: {})", aboveTargetPos, isAboveTargetAir);
-                        LOGGER.debug("[TOF IvyDecorator]    - TargetBlock itself valid ground? {}", isTargetBlockValidGround);*/
+                        BlockPos finalPlacementPos = null;
 
-                        // --- Logica di Piazzamento Aggiornata ---
-
-                        // 1. Prova a piazzare a livello base (targetPos) se è aria e ha terreno valido sotto
                         if (isTargetAir && isGroundBelowTargetValid && !logConflictAtTarget && !leafConflictAtTarget) {
-                            //LOGGER.info("[TOF IvyDecorator]      Scenario 1: PLACING IVY SEED at {} (Standard - target is air)", targetPos);
-                            context.setBlock(targetPos, ivySeedState);
+                            finalPlacementPos = targetPos;
                         }
-                        // 2. ALTRIMENTI, se il livello base NON è aria, MA lo spazio SOPRA è aria,
-                        //    E il blocco al livello base (targetPos) è considerato terreno valido su cui il seme può stare...
                         else if (!isTargetAir && isAboveTargetAir && isTargetBlockValidGround && !logConflictAboveTarget && !leafConflictAboveTarget) {
-                            // Aggiungiamo un controllo extra: assicuriamoci che targetPos (che non è aria) non sia esso stesso un log/foglia
                             if (!logConflictAtTarget && !leafConflictAtTarget) {
-                                //LOGGER.info("[TOF IvyDecorator]      Scenario 2: Target not air, PLACING IVY SEED at {} (Higher - on top of target)", aboveTargetPos);
-                                context.setBlock(aboveTargetPos, ivySeedState);
-                            } else {
-                                // Se targetPos non era aria MA era un log/foglia, non possiamo piazzarci sopra
-                                //LOGGER.debug("[TOF IvyDecorator]      -> Scenario 2 Failed: Target was not air but was log/leaf conflict.");
+                                finalPlacementPos = aboveTargetPos;
                             }
                         }
-                        // 3. Se nessuna delle due condizioni precedenti è soddisfatta, non piazzare nulla.
-                        else {
-                            StringBuilder reason = new StringBuilder("-> Placement Failed: ");
-                            if (isTargetAir && !isGroundBelowTargetValid) reason.append("TargetAirButInvalidGroundBelow ");
-                            if (!isTargetAir && !isAboveTargetAir) reason.append("TargetAndAboveNotEmpty ");
-                            if (!isTargetAir && isAboveTargetAir && !isTargetBlockValidGround) reason.append("TargetNotEmptyAboveAirButTargetNotValidGround ");
-                            if (logConflictAtTarget) reason.append("LogConflict@Target ");
-                            if (leafConflictAtTarget) reason.append("LeafConflict@Target ");
-                            if (logConflictAboveTarget) reason.append("LogConflict@Above ");
-                            if (leafConflictAboveTarget) reason.append("LeafConflict@Above ");
-                            if (reason.length() == "-> Placement Failed: ".length()) reason.append("Unknown combination"); // Fallback
-                            //LOGGER.debug("[TOF IvyDecorator]      {}", reason.toString().trim());
-                        }
 
-                    } else {
-                        //LOGGER.debug("[TOF IvyDecorator]    - Probability check failed.");
+                        // --- ECCO IL FIX ---
+                        if (finalPlacementPos != null) {
+                            // Non piazziamo più lo stato di default.
+                            // Chiediamo al blocco ModWallIvySeed di calcolare il suo stato corretto
+                            // in base ai muri adiacenti ALLA POSIZIONE FINALE.
+                            // Usiamo il suo metodo getStateForPlacement, che è perfetto per questo.
+                            BlockState defaultSeedState = ModBlocks.WALL_IVY_SEED.get().defaultBlockState();
+
+                            // getStateForPlacement in realtà non usa il contesto, ma per sicurezza...
+                            // La cosa importante è che calcola le facce.
+                            // Lo adattiamo un po' per il nostro contesto.
+                            boolean north = ModWallIvySeed.isWall(((BlockGetter) context.level()).getBlockState(finalPlacementPos.north()));
+                            boolean east = ModWallIvySeed.isWall(((BlockGetter) context.level()).getBlockState(finalPlacementPos.east()));
+                            boolean south = ModWallIvySeed.isWall(((BlockGetter) context.level()).getBlockState(finalPlacementPos.south()));
+                            boolean west = ModWallIvySeed.isWall(((BlockGetter) context.level()).getBlockState(finalPlacementPos.west()));
+
+                            BlockState correctState = defaultSeedState
+                                    .setValue(ModWallIvySeed.NORTH, north)
+                                    .setValue(ModWallIvySeed.EAST, east)
+                                    .setValue(ModWallIvySeed.SOUTH, south)
+                                    .setValue(ModWallIvySeed.WEST, west);
+
+                            // Piazziamo lo stato corretto, non quello di default.
+                            context.setBlock(finalPlacementPos, correctState);
+                        }
                     }
                 }
             }
         }
-/*
-        context.logs().stream().findFirst().ifPresent(bp ->
-                LOGGER.info("[TOF IvyDecorator] Finished decoration attempt for tree near {}", bp)
-        ); */
     }
 }

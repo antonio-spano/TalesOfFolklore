@@ -112,7 +112,7 @@ public class ModBlocks {
             () -> new ModWallIvySeed(BlockBehaviour.Properties.copy(Blocks.VINE).randomTicks().instabreak()));
 
     public static final RegistryObject<Block> WALL_IVY = registerBlock("wall_ivy",
-            () -> new ModWallIvy(BlockBehaviour.Properties.copy(Blocks.VINE).randomTicks()));
+            () -> new ModWallIvy(BlockBehaviour.Properties.copy(Blocks.VINE).randomTicks().instabreak()));
 
     public static final RegistryObject<Block> YELLOW_FUNGUS = registerBlock("yellow_fungus",
             () -> new ModYellowFungusBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)
